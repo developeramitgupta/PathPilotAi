@@ -196,6 +196,33 @@ body {
   contain-intrinsic-size: 0 360px;
 }
 
+:root.dark .student-dashboard h1,
+:root.dark .student-dashboard h2,
+:root.dark .student-dashboard h3,
+:root.dark .student-dashboard strong {
+  color: #f4f7ff;
+}
+
+:root.dark .student-dashboard p,
+:root.dark .student-dashboard li,
+:root.dark .student-dashboard span {
+  color: #bdc8dc;
+}
+
+:root.dark .student-dashboard a {
+  color: #73b8ff;
+}
+
+:root.dark .student-dashboard .student-surface {
+  border-color: rgba(148, 177, 218, 0.24);
+  background: #151a27;
+}
+
+:root.dark .student-dashboard .student-soft-surface {
+  border-color: rgba(148, 177, 218, 0.2);
+  background: #111d2e;
+}
+
 [data-slot="dialog-overlay"][data-state="open"] {
   animation: overlay-in 160ms ease-out;
 }

@@ -1,25 +1,15 @@
 import {
   BookOpenCheck,
-  BrainCircuit,
-  BriefcaseBusiness,
   ClipboardCheck,
   Compass,
-  FileCheck2,
   Flag,
-  FolderGit2,
   GraduationCap,
   HeartPulse,
   LayoutDashboard,
-  Map,
-  MessageSquareText,
   Radar,
   Route,
   Scale,
-  Search,
   Settings,
-  Target,
-  Telescope,
-  WalletCards,
   type LucideIcon,
 } from "lucide-react";
 
@@ -36,7 +26,7 @@ export interface NavigationGroup {
 
 export const navigationGroups: NavigationGroup[] = [
   {
-    label: "Discover",
+    label: "Explore",
     items: [
       { label: "Career Discovery", href: "/career-discovery", icon: Compass },
       { label: "College Finder", href: "/colleges", icon: GraduationCap },
@@ -45,41 +35,19 @@ export const navigationGroups: NavigationGroup[] = [
     ],
   },
   {
-    label: "Build",
+    label: "Plan",
     items: [
       { label: "Roadmap", href: "/roadmap", icon: Route },
       { label: "Learning Coach", href: "/learning", icon: BookOpenCheck },
-      { label: "Project Mentor", href: "/projects", icon: FolderGit2 },
     ],
   },
   {
-    label: "Prove",
-    items: [
-      { label: "Resume Analyzer", href: "/resume", icon: FileCheck2 },
-      { label: "GitHub Analyzer", href: "/github", icon: FolderGit2 },
-      { label: "Interview Coach", href: "/interview", icon: MessageSquareText },
-      { label: "Portfolio", href: "/portfolio/demo", icon: BriefcaseBusiness },
-    ],
-  },
-  {
-    label: "Grow",
-    items: [
-      { label: "Career Simulator", href: "/simulator", icon: Target },
-      { label: "What-If Simulator", href: "/what-if", icon: Scale },
-      { label: "Future Twin", href: "/future-twin", icon: Telescope },
-      { label: "Opportunity Finder", href: "/opportunities", icon: Search },
-      { label: "Opportunity Radar", href: "/radar", icon: Radar },
-      { label: "Financial Planner", href: "/financial-planner", icon: WalletCards },
-      { label: "Confidence Journal", href: "/journal", icon: BrainCircuit },
-    ],
-  },
-  {
-    label: "You",
+    label: "Your path",
     items: [
       { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
       { label: "Mission Mode", href: "/mission", icon: Flag },
-      { label: "Timeline", href: "/timeline", icon: Map },
       { label: "Health Score", href: "/health-score", icon: HeartPulse },
+      { label: "Opportunity Radar", href: "/radar", icon: Radar },
       { label: "Settings", href: "/settings", icon: Settings },
     ],
   },
