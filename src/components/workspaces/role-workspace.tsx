@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, BriefcaseBusiness, Building2, CheckCircle2, ChevronRight, ClipboardPlus, GraduationCap, Handshake, Landmark, MapPin, Plus, Search, SlidersHorizontal, UsersRound } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, CheckCircle2, ChevronRight, Handshake, Landmark, MapPin, Plus, Search, SlidersHorizontal, UsersRound } from "lucide-react";
 import { type FormEvent, useMemo, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";

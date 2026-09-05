@@ -18,7 +18,7 @@ type PathStep = {
 };
 
 export function ProgressDashboardScreen() {
-  const { profileState, profile, career, roadmap, mission, health, progress } = usePathPilotProgressModel();
+  const { profileState, career, roadmap, mission, health, progress } = usePathPilotProgressModel();
   const journey = usePathPilotStore((state) => state.studentJourney);
   const stagePlan = usePathPilotStore((state) => state.stagePlan);
   const currentJourney = getStudentJourney(journey);
