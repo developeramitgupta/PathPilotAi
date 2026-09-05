@@ -1,7 +1,7 @@
 **Source visual truth**
 
 - Selected source: `C:\Users\amitg\AppData\Local\Temp\codex-clipboard-85a8d490-d8cc-41db-86ea-e5a2e9b02505.png` — the detailed Industry onboarding frame supplied by the user.
-- Implementation capture: `C:\Users\amitg\OneDrive\Documents\ChatGPT\PathPilotAI\tmp\qa\onboarding-industry-detailed-reference.png`.
+- Implementation capture: `C:\Users\amitg\OneDrive\Documents\ChatGPT\PathPilotAI\tmp\qa\onboarding-icon-refresh.png`.
 - Side-by-side comparison: `C:\Users\amitg\OneDrive\Documents\ChatGPT\PathPilotAI\tmp\qa\onboarding-industry-comparison.png`.
 - State: Industry (step three) after selecting `Continue` on Student and College.
 - Source pixels: 1487 × 1058 at 72 dpi. Implementation: 1280 × 720 CSS px at browser density 1×. For the full-view comparison, the source was normalized to 1012 × 720 and positioned beside the unscaled 1280 × 720 implementation; this accounts for the source's taller 1.41:1 canvas versus the responsive 16:9 browser viewport.
@@ -13,7 +13,7 @@
 - Fonts and typography: the navy display heading, compact body copy, uppercase-free Industry state, and restrained progress labels preserve the reference's editorial hierarchy. The responsive implementation uses the project's Geist stack rather than rasterized text, while preserving the source's three-line headline and two-line body measure.
 - Spacing and layout rhythm: the PathPilot mark remains at the upper left, the progress tracker is centered, and the left copy / right evidence-scene balance matches the reference after viewport normalization. The responsive 16:9 frame has intentionally more horizontal breathing room than the taller source capture.
 - Colors and visual tokens: the off-white canvas, deep navy copy, cobalt action/progress treatment, muted blue-gray profile surface, and mint verification ticks match the source palette.
-- Image quality and asset fidelity: the Industry image now carries the exact detailed candidate snapshot from the selected source—avatar, verification chips, skills, project, readiness ring, evidence organizations, location, laptop, and recruiter—rather than an approximate floating card. The PathPilot P mark is a dedicated raster asset reused in the splash, header, and browser icon; no CSS or handwritten SVG approximation replaces source imagery.
+- Image quality and asset fidelity: the Industry image now carries the exact detailed candidate snapshot from the selected source—avatar, verification chips, skills, project, readiness ring, evidence organizations, location, laptop, and recruiter—rather than an approximate floating card. The PathPilot P mark is a purpose-built transparent 512 px asset reused in the splash, header, and browser icon; the previous low-resolution crop has been removed.
 - Copy and content: Industry now reads `Find candidates through verified skills, projects and readiness.`, matching the selected frame. Its screen contains only `Continue` and `Skip intro` as requested.
 - Accessibility and interaction: controls remain native buttons with visible focus styling, images retain descriptive alt text, the tracker has an accessible label, and reduced-motion support remains enabled.
 
@@ -22,11 +22,12 @@
 1. [P1] The previous Industry screen used a simplified recruiter illustration and an unrelated sparkle application mark. Fixed by replacing it with the detailed user-selected recruiter/profile scene and by introducing the PathPilot P asset for all entry-flow branding and the favicon.
 2. [P2] The Industry copy and tracker did not mirror the selected source hierarchy. Fixed by centering the tracker, removing the extra eyebrow/status note for Industry, constraining the copy to the source's two-line measure, and keeping the reference's single-purpose action row.
 3. Post-fix evidence: the current side-by-side comparison preserves the original candidate-profile details and recruiter-at-desk composition without an overlapping independent evidence card.
+4. [P2] The original app icon was a soft crop and lost clarity at navigation size. Fixed with a minimal route-shaped PathPilot P monogram with a waypoint dot, verified in the live header at 1280 × 720 without browser-console errors.
 
 **Implementation Checklist**
 
 - [x] Detailed Industry candidate profile and recruiter scene.
-- [x] PathPilot P mark in header, splash, and browser icon.
+- [x] New PathPilot P monogram in header, splash, and browser icon.
 - [x] Student → College → Industry flow and final role-selection navigation retained.
 - [x] Fixed-height canvas with no horizontal or vertical overflow at the verified desktop viewport.
 - [x] TypeScript, lint, and production build verification.

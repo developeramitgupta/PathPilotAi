@@ -99,7 +99,7 @@ function LaunchScreen() {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-h-screen place-items-center bg-[#f8fafc] p-6">
       <motion.div initial={{ opacity: 0, scale: 0.85, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} className="flex flex-col items-center gap-5">
         <span className="grid size-20 place-items-center" aria-hidden="true">
-          <Image src="/images/brand-pathpilot-p.png" alt="" width={82} height={90} className="size-full object-contain" priority />
+          <Image src="/images/brand-pathpilot-p-v2.png" alt="" width={512} height={512} className="size-full object-contain" priority />
         </span>
         <div className="text-center">
           <p className="text-2xl font-semibold tracking-[-0.04em] text-[#10284a]">PathPilot</p>

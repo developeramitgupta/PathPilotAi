@@ -19,7 +19,7 @@ export function Logo({
       aria-label="PathPilot AI home"
     >
       <span className="grid size-9 shrink-0 place-items-center" aria-hidden="true">
-        <Image src="/images/brand-pathpilot-p.png" alt="" width={41} height={45} className="size-full object-contain" priority />
+        <Image src="/images/brand-pathpilot-p-v2.png" alt="" width={512} height={512} className="size-full object-contain" priority />
       </span>
       {compact ? null : (
         <span className="text-[15px] font-semibold tracking-[-0.03em]">PathPilot</span>
