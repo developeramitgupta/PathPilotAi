@@ -1,4 +1,4 @@
-# Frontend
+# App
 
 The deployable PathPilot web application.
 
@@ -11,4 +11,4 @@ The deployable PathPilot web application.
 
 Run it from the workspace root with `npm run dev`, or from this directory with `npm run dev`.
 
-For Vercel, configure `frontend` as the project Root Directory.
+For Vercel, configure `app` as the project Root Directory.

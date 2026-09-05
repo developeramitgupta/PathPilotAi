@@ -1,6 +1,6 @@
-# Backend and data
+# Database and verified data
 
-PathPilot currently uses Next.js route handlers inside `frontend/src/app/api` as its application API. This directory holds the systems those routes depend on:
+PathPilot uses Next.js route handlers inside `app/src/app/api` as its application API. This directory holds the database and source-verified data it depends on:
 
 - `drizzle` — generated Drizzle migrations
 - `drizzle.config.ts` — database migration configuration

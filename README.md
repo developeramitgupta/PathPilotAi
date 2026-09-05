@@ -6,11 +6,9 @@ An Indian student guidance platform connecting students, institutions, and indus
 
 ```text
 PathPilotAI/
-├── frontend/       Next.js web application, pages, components, API routes, and UI state
-├── backend/        Database schema, Supabase migrations, official-data seeds, and datasets
-├── docs/           Product requirements, roadmap, API, and database documentation
-├── model-server/   Reserved boundary for future dedicated AI/model services
-├── training/       Reserved for approved model-evaluation and training assets
+├── app/            The full PathPilot web app: pages, UI, API routes, and product logic
+├── database/       Database migrations, Supabase configuration, import scripts, and verified datasets
+├── docs/           Product requirements, architecture notes, and implementation guides
 ├── .env.example    Environment-variable template
 └── README.md       Workspace guide
 ```
@@ -18,12 +16,12 @@ PathPilotAI/
 ## Run locally
 
 ```bash
-npm --prefix frontend install
+npm --prefix app install
 copy .env.example .env.local
 npm run dev
 ```
 
-The root commands are simple shortcuts for the frontend application. For a Vercel deployment, set the project’s **Root Directory** to `frontend`.
+The root commands are shortcuts for the PathPilot app. For a Vercel deployment, set the project’s **Root Directory** to `app`.
 
 ## Useful commands
 
@@ -34,4 +32,4 @@ npm run db:generate
 npm run db:seed:official
 ```
 
-See [frontend/README.md](./frontend/README.md) for application details and [backend/README.md](./backend/README.md) for data and database operations.
+See [app/README.md](./app/README.md) for product code and [database/README.md](./database/README.md) for database and verified-data operations.

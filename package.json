@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm --prefix frontend run dev",
-    "build": "npm --prefix frontend run build",
-    "lint": "npm --prefix frontend run lint",
-    "typecheck": "npm --prefix frontend run typecheck",
-    "check": "npm --prefix frontend run check",
-    "db:generate": "npm --prefix frontend run db:generate",
-    "db:check": "npm --prefix frontend run db:check",
-    "db:migrate": "npm --prefix frontend run db:migrate",
-    "db:seed:official": "npm --prefix frontend run db:seed:official",
-    "db:studio": "npm --prefix frontend run db:studio"
+    "dev": "npm --prefix app run dev",
+    "build": "npm --prefix app run build",
+    "lint": "npm --prefix app run lint",
+    "typecheck": "npm --prefix app run typecheck",
+    "check": "npm --prefix app run check",
+    "db:generate": "npm --prefix app run db:generate",
+    "db:check": "npm --prefix app run db:check",
+    "db:migrate": "npm --prefix app run db:migrate",
+    "db:seed:official": "npm --prefix app run db:seed:official",
+    "db:studio": "npm --prefix app run db:studio"
   }
 }

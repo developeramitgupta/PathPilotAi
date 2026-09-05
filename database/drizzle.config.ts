@@ -12,7 +12,7 @@ const migrationUrl =
 export default defineConfig({
   dialect: "postgresql",
   schema: "./src/lib/db/schema.ts",
-  out: "../backend/drizzle",
+  out: "../database/drizzle",
   dbCredentials: {
     url: migrationUrl,
   },
