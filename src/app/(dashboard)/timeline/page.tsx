@@ -1,3 +1,3 @@
-import { PlannedModulePage } from "@/components/modules/module-placeholder";
+import { StudentTimelineScreen } from "@/components/timeline/student-timeline-screen";
 
-export default function Page() { return <PlannedModulePage slug="timeline" />; }
+export default function Page() { return <StudentTimelineScreen />; }

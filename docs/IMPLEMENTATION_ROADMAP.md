@@ -38,11 +38,13 @@ Status: complete and browser-verified.
 - Deterministic Career Health Score with all seven category weights visible, weekly delta, evidence provenance, and optional fallback narration
 - Opportunity Radar over clearly labeled static program patterns, profile-driven ranking, filters, search, why-relevant explanations, and saved/tracked state
 - Existing versioned Career Roadmap connected directly to Mission Mode and the shared progress model
+- Student Timeline with deterministic, stage-aware deep links and evidence-based progress states
 
 ## Milestone 4 — Simulation and timeline
 
-- Student Timeline with deterministic stage deep links
-- Career Simulator gaps, static salary bands, transparent likelihood bands, Convert to Mission flow
+Status: complete.
+
+- Career Simulator with visible skill gaps, static salary-band context, transparent readiness bands, adjustable weekly capacity, and Convert to Mission handoff
 
 ## Milestone 5 — Proof-of-readiness modules
 

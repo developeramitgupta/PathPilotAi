@@ -9,12 +9,12 @@ This is the implementation backlog after Milestones 1–3. Feature IDs and order
 - [ ] **FR-9 GitHub Analyzer** — analyze unauthenticated public profiles, score visible evidence deterministically, explain strengths/gaps, and feed project and health signals.
 - [ ] **FR-10 Internship & Job Finder** — rank clearly labeled demo listings against the student profile and roadmap; never present fixture listings as live opportunities.
 - [ ] **FR-11 Interview Coach** — ship text interview modes, selectable personas, adaptive questions, per-answer feedback, and scorecards. Keep voice as a prototype and coding as review-only with no execution.
-- [ ] **FR-13 Career Simulator** — combine static salary bands and deterministic success bands with an AI narrative, gap analysis, timeframe, and “Convert to Mission” handoff.
+- [x] **FR-13 Career Simulator** — static salary bands, deterministic readiness bands, gap analysis, timeframe, and “Convert to Mission” handoff.
 
 ## Remaining deterministic and scenario modules
 
 - [ ] **FR-14 What-If Simulator** — compare two or three paths using the Degree Advisor and Career Simulator data with transparent, zero-AI formulas.
-- [ ] **FR-17 Student Timeline** — turn the dashboard journey preview into a complete education-to-career timeline with deterministic stage deep links.
+- [x] **FR-17 Student Timeline** — complete education-to-career timeline with deterministic stage-aware deep links.
 - [ ] **FR-18 AI Future Twin** — generate 2-, 5-, and 10-year scenarios with a persistent, non-dismissible component-level disclaimer.
 - [ ] **FR-20 Multi-Agent System completion** — replace the current LangGraph-ready contracts and deterministic orchestrator with a real LangGraph supervisor graph, specialist nodes, shared state, structured traces, and last-known-good fallbacks.
 

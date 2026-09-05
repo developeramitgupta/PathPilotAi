@@ -1,3 +1,3 @@
-import { CareerSimulatorTool } from "@/components/planning/planning-tools";
+import { CareerSimulatorScreen } from "@/components/simulator/career-simulator-screen";
 
-export default function Page() { return <CareerSimulatorTool />; }
+export default function Page() { return <CareerSimulatorScreen />; }
