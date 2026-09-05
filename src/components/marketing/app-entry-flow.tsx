@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { ArrowRight, BriefcaseBusiness, Check, GraduationCap, Sparkles, UserRound } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, Check, GraduationCap, UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
@@ -41,12 +41,12 @@ const stories: Array<{
   },
   {
     role: "industry",
-    eyebrow: "For industry",
+    eyebrow: "",
     title: "Industry sees potential — with proof.",
-    copy: "Find candidates through verified skills, projects, and readiness—not just another static resume.",
-    image: "/images/onboarding/industry-network.png",
+    copy: "Find candidates through verified skills, projects and readiness.",
+    image: "/images/onboarding/industry-profile-scene.png",
     imageAlt: "Recruiter viewing a verified candidate profile at a desk.",
-    note: "Open opportunities with more confidence.",
+    note: "",
   },
 ];
 
@@ -98,8 +98,8 @@ function LaunchScreen() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid min-h-screen place-items-center bg-[#f8fafc] p-6">
       <motion.div initial={{ opacity: 0, scale: 0.85, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} className="flex flex-col items-center gap-5">
-        <span className="grid size-20 place-items-center rounded-[1.6rem] bg-[#1264c4] shadow-[0_20px_50px_rgba(18,100,196,0.25)]">
-          <Sparkles className="size-9 text-white" aria-hidden="true" />
+        <span className="grid size-20 place-items-center" aria-hidden="true">
+          <Image src="/images/brand-pathpilot-p.png" alt="" width={82} height={90} className="size-full object-contain" priority />
         </span>
         <div className="text-center">
           <p className="text-2xl font-semibold tracking-[-0.04em] text-[#10284a]">PathPilot</p>
@@ -113,7 +113,7 @@ function LaunchScreen() {
 function RoleSelection({ onReplay }: { onReplay: () => void }) {
   return (
     <motion.main initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }} className="min-h-screen bg-[#f8fafc] px-4 py-6 text-[#10284a] sm:px-8 sm:py-9">
-      <header className="mx-auto flex max-w-6xl items-center justify-between"><Logo className="text-[#10284a] [&_span:first-child]:bg-[#1264c4]" /><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={onReplay}>Replay intro</Button></header>
+      <header className="mx-auto flex max-w-6xl items-center justify-between"><Logo className="text-[#10284a]" /><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={onReplay}>Replay intro</Button></header>
       <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-6xl flex-col justify-center py-12">
         <p className="text-center text-xs font-bold uppercase tracking-[0.17em] text-[#1264c4]">Welcome to the network</p>
         <h1 className="mx-auto mt-4 max-w-3xl text-center text-4xl font-semibold tracking-[-0.055em] text-[#10284a] sm:text-6xl">Choose the role that brings you here.</h1>
@@ -167,14 +167,14 @@ export function AppEntryFlow() {
         {screen === "roles" ? <RoleSelection key="roles" onReplay={replay} /> : null}
         {screen === "story" ? (
           <motion.main key="story" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-[100dvh] overflow-hidden bg-[#f8fafc] px-5 py-6 text-[#10284a] sm:px-8 sm:py-9">
-            <header className="mx-auto flex max-w-7xl items-center justify-between gap-5"><Logo className="text-[#10284a] [&_span:first-child]:bg-[#1264c4]" /><Progress activeStep={step} /></header>
+            <header className="relative mx-auto flex max-w-7xl items-center"><Logo className="text-[#10284a] [&_span:last-child]:text-lg" /><div className="absolute left-1/2 -translate-x-1/2"><Progress activeStep={step} /></div></header>
             <section className="mx-auto grid h-[calc(100dvh-6.5rem)] max-w-7xl items-center gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14">
               <AnimatePresence mode="wait">
-                <motion.div key={current.role} initial={{ opacity: 0, x: reduceMotion ? 0 : -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: reduceMotion ? 0 : 18 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }} className="max-w-[34rem]">
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1264c4]">{current.eyebrow}</p>
+                <motion.div key={current.role} initial={{ opacity: 0, x: reduceMotion ? 0 : -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: reduceMotion ? 0 : 18 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }} className={cn("max-w-[34rem]", current.role === "industry" && "max-w-[29rem] lg:translate-y-6")}>
+                  {current.eyebrow ? <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1264c4]">{current.eyebrow}</p> : null}
                   <h1 className="mt-5 text-[clamp(2.75rem,5.6vw,5.4rem)] font-semibold leading-[0.96] tracking-[-0.07em] text-[#10284a]">{current.title}</h1>
-                  <p className="mt-6 max-w-md text-base leading-7 text-[#526174] sm:text-lg sm:leading-8">{current.copy}</p>
-                  <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[#385c82]"><span className="size-2 rounded-full bg-[#69b99d]" aria-hidden="true" /> {current.note}</p>
+                  <p className={cn("mt-6 max-w-md text-base leading-7 text-[#526174] sm:text-lg sm:leading-8", current.role === "industry" && "max-w-[24rem]")}>{current.copy}</p>
+                  {current.note ? <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[#385c82]"><span className="size-2 rounded-full bg-[#69b99d]" aria-hidden="true" /> {current.note}</p> : null}
                   <div className="mt-9 flex flex-wrap items-center gap-3"><Button size="lg" className="bg-[#1264c4] px-7 shadow-[0_12px_28px_rgba(18,100,196,0.24)] hover:bg-[#0d55aa]" onClick={next}>Continue <ArrowRight aria-hidden="true" /></Button><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={() => setScreen("roles")}>Skip intro</Button></div>
                 </motion.div>
               </AnimatePresence>
@@ -189,7 +189,7 @@ export function AppEntryFlow() {
                     priority
                     className={cn(
                       "absolute inset-0 z-10 h-full w-full object-contain",
-                      current.role === "industry" ? "" : "mix-blend-multiply",
+                      current.role === "industry" ? "scale-[1.2] -translate-x-[18%] translate-y-[8%]" : "mix-blend-multiply",
                     )}
                   />
                 </motion.div>
