@@ -13,7 +13,13 @@ export function ClerkLogoutButton({ onLocalLogout }: { onLocalLogout: () => void
   async function logout() {
     setPending(true);
     onLocalLogout();
-    await signOut({ redirectUrl: "/" });
+    try {
+      await signOut({ redirectUrl: "/" });
+    } finally {
+      // A failed network request must not leave the control permanently
+      // disabled. The local workspace has already been cleared safely.
+      setPending(false);
+    }
   }
 
   return <Button type="button" variant="outline" className="border-destructive/35 text-destructive hover:bg-destructive/10 hover:text-destructive" disabled={pending} onClick={logout}>{pending ? "Signing out…" : "Log out"}<LogOut aria-hidden="true" /></Button>;
