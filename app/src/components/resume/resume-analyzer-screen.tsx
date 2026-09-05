@@ -8,11 +8,19 @@ import type { ResumeAnalysis } from "@/features/resume/schema";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { usePathPilotStore } from "@/stores/pathpilot-store";
 
 type AnalysisResponse = { resumeId: string; filename: string; mode: "ai" | "needs-ai-key"; analysis: ResumeAnalysis };
 type SavedAnalysisResponse = { resume: { id: string; mode: "ai" | "needs-ai-key"; analysis: ResumeAnalysis | null } | null };
 
 const allowed = ["application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "image/jpeg", "image/png", "image/webp"];
+const allowedExtensions = new Set(["pdf", "docx", "jpg", "jpeg", "png", "webp"]);
+
+function hasSupportedResumeType(file: File) {
+  if (allowed.includes(file.type)) return true;
+  const extension = file.name.split(".").pop()?.toLowerCase();
+  return Boolean(extension && allowedExtensions.has(extension));
+}
 
 function Score({ label, value }: { label: string; value: number }) {
   return <div><div className="mb-2 flex justify-between text-sm"><span>{label}</span><span className="font-data font-semibold">{value}/100</span></div><div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full rounded-full bg-primary transition-all" style={{ width: `${value}%` }} /></div></div>;
@@ -29,6 +37,8 @@ export function ResumeAnalyzerScreen() {
   const [error, setError] = useState("");
   const [result, setResult] = useState<AnalysisResponse | null>(null);
   const [profileSaved, setProfileSaved] = useState(false);
+  const profile = usePathPilotStore((state) => state.profile);
+  const updateProfile = usePathPilotStore((state) => state.updateProfile);
 
   useEffect(() => () => {
     const stream = videoRef.current?.srcObject as MediaStream | null;
@@ -61,7 +71,7 @@ export function ResumeAnalyzerScreen() {
   function chooseFile(candidate: File | undefined) {
     setError("");
     if (!candidate) return;
-    if (!allowed.includes(candidate.type) || candidate.size > 5 * 1024 * 1024) {
+    if (!hasSupportedResumeType(candidate) || candidate.size > 5 * 1024 * 1024) {
       setError("Use a PDF, DOCX, JPG, PNG, or WEBP file up to 5 MB.");
       return;
     }
@@ -125,6 +135,9 @@ export function ResumeAnalyzerScreen() {
       const response = await fetch("/api/resume/apply-profile", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ resumeId: result.resumeId, skills: result.analysis.suggestedProfileSkills }) });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Could not update your profile.");
+      if (profile && Array.isArray(payload.strengths)) {
+        updateProfile({ ...profile, strengths: payload.strengths });
+      }
       setProfileSaved(true);
     } catch (cause) { setError(cause instanceof Error ? cause.message : "Could not update your profile."); }
   }
