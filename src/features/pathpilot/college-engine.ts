@@ -3,6 +3,7 @@ import { z } from "zod";
 import type { AgentOutput } from "@/lib/ai/schemas";
 import { generateStructured, isAiConfigured } from "@/lib/ai/openai";
 import { collegeCatalog, type CollegeCatalogEntry } from "@/lib/static-data/colleges";
+import { getVerifiedCollegeMatches } from "@/features/verified-data/server/live-catalogue";
 import {
   collegeFinderResultSchema,
   type CollegeFinderInput,
@@ -73,6 +74,11 @@ function toMatch(college: CollegeCatalogEntry, compatibility: number, why: strin
     medianPackageDemo: college.medianPackageDemo,
     cultureTags: college.cultureTags,
     overview: college.overview,
+    sourceUrl: null,
+    lastVerifiedAt: null,
+    officialRank: null,
+    rankingYear: null,
+    dataMode: "demo",
   };
 }
 
@@ -94,6 +100,14 @@ function fallbackResult(input: CollegeFinderInput, candidates: ReturnType<typeof
 }
 
 export async function generateCollegeMatches(input: CollegeFinderInput): Promise<AgentOutput<CollegeFinderResult>> {
+  const verified = await getVerifiedCollegeMatches(input);
+  if (verified) {
+    return {
+      result: verified,
+      reasoningRefs: ["annualBudget", "state", "branch", "officialRanking"],
+      confidenceBand: "high",
+    };
+  }
   const candidates = candidatesFor(input);
   const fallback = fallbackResult(input, candidates);
   if (!isAiConfigured() || candidates.length === 0) {

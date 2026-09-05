@@ -45,6 +45,12 @@ export const OFFICIAL_SOURCE_REGISTRY: readonly OfficialSourceDefinition[] = [
     websiteUrl: "https://www.nta.ac.in/",
   },
   {
+    key: "aicte-internships",
+    name: "AICTE National Internship Portal",
+    kind: "official_website",
+    websiteUrl: "https://internship.aicte-india.org/internships",
+  },
+  {
     key: "github-public-api",
     name: "GitHub REST API",
     kind: "github",

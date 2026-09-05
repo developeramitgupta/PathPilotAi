@@ -6,6 +6,7 @@ import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-
 import {
   Bookmark,
   BookmarkCheck,
+  BriefcaseBusiness,
   CalendarClock,
   ChevronDown,
   Code2,
@@ -38,6 +39,7 @@ import { usePathPilotStore } from "@/stores/pathpilot-store";
 
 const categories = [
   ["all", "All"],
+  ["internship", "Internships"],
   ["hackathon", "Hackathons"],
   ["scholarship", "Scholarships"],
   ["competition", "Competitions"],
@@ -46,6 +48,7 @@ const categories = [
 ] as const;
 
 const categoryIcons = {
+  internship: BriefcaseBusiness,
   hackathon: Lightbulb,
   scholarship: GraduationCap,
   competition: Trophy,
@@ -81,7 +84,7 @@ function OpportunityCard({
         <div className="p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-primary/15 bg-primary/[0.08] text-[#a998ff]"><Icon className="size-5" aria-hidden="true" /></span>
-            <div className="flex flex-wrap justify-end gap-2"><Badge variant="demo">Demo pattern</Badge><Badge variant="success">{item.relevance}% fit</Badge></div>
+            <div className="flex flex-wrap justify-end gap-2"><Badge variant={item.isDemo ? "demo" : "success"}>{item.isDemo ? "Demo pattern" : "Official source"}</Badge><Badge variant="success">{item.relevance}% fit</Badge></div>
           </div>
           <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">{item.organizerLabel}</p>
           <h2 className="mt-2 text-lg font-semibold tracking-[-0.025em]">{item.title}</h2>
@@ -98,7 +101,7 @@ function OpportunityCard({
           <button type="button" onClick={() => setAction(item.id, action === "saved" ? null : "saved")} className={cn("flex min-h-12 items-center justify-center gap-2 border-r border-border text-xs text-muted-foreground hover:text-foreground", action === "saved" && "text-success")} aria-label={action === "saved" ? `Remove ${item.title} from saved opportunities` : `Save ${item.title}`}>
             {action === "saved" ? <BookmarkCheck className="size-4" /> : <Bookmark className="size-4" />} {action === "saved" ? "Saved" : "Save"}
           </button>
-          <button type="button" onClick={() => setAction(item.id, action === "joined" ? null : "joined")} className={cn("flex min-h-12 items-center justify-center gap-2 border-r border-border text-xs text-muted-foreground hover:text-foreground", action === "joined" && "text-[#a998ff]")}><ExternalLink className="size-4" /> {action === "joined" ? "Tracking" : "Track"}</button>
+          {item.applicationUrl || item.sourceUrl ? <a href={item.applicationUrl ?? item.sourceUrl ?? "#"} target="_blank" rel="noreferrer" className="flex min-h-12 items-center justify-center gap-2 border-r border-border text-xs text-muted-foreground hover:text-foreground"><ExternalLink className="size-4" /> Apply / view</a> : <button type="button" onClick={() => setAction(item.id, action === "joined" ? null : "joined")} className={cn("flex min-h-12 items-center justify-center gap-2 border-r border-border text-xs text-muted-foreground hover:text-foreground", action === "joined" && "text-[#a998ff]")}><ExternalLink className="size-4" /> {action === "joined" ? "Tracking" : "Track"}</button>}
           <button type="button" onClick={() => setAction(item.id, "dismissed")} className="flex min-h-12 items-center justify-center gap-2 text-xs text-muted-foreground hover:text-destructive" aria-label={`Dismiss ${item.title}`}><X className="size-4" /> Dismiss</button>
         </div>
       </Card>
@@ -145,7 +148,7 @@ export function OpportunityRadarScreen() {
         <div className="pointer-events-none absolute inset-0 grid-fade opacity-35" />
         <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_260px]">
           <div>
-            <div className="flex flex-wrap items-center gap-2"><Badge><Radar className="size-3" /> Opportunity Radar</Badge><Badge variant="demo">Static ranked dataset</Badge></div>
+            <div className="flex flex-wrap items-center gap-2"><Badge><Radar className="size-3" /> Opportunity Radar</Badge>{radarQuery.data?.result.mode === "official-live" ? <Badge variant="success">Verified live sources</Badge> : <Badge variant="demo">Planning patterns</Badge>}</div>
             <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Find the next place to prove your potential.</h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">Hackathon, scholarship, competition, open-source, and event patterns ranked against your profile. No fabricated deadlines.</p>
             <div className="mt-5 flex flex-wrap gap-4 text-xs text-muted-foreground"><span><strong className="font-data text-foreground">{radarQuery.data?.result.opportunities.length ?? 0}</strong> ranked patterns</span><span><strong className="font-data text-foreground">{savedCount}</strong> saved</span><span>Target: <strong className="text-foreground">{career?.careerName ?? "your top career"}</strong></span></div>
@@ -166,7 +169,7 @@ export function OpportunityRadarScreen() {
         <div className="relative w-full xl:max-w-sm"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="pl-10" placeholder="Search skills or opportunity types" aria-label="Search opportunity patterns" /></div>
       </div>
 
-      <div className="mt-4 flex gap-3 rounded-lg border border-warning/20 bg-warning/[0.06] p-4 text-xs leading-5 text-muted-foreground"><CalendarClock className="mt-0.5 size-4 shrink-0 text-warning" /><p><strong className="text-foreground">Demo opportunity patterns, not live listings.</strong> Typical timing helps you plan, but always verify current programs, eligibility, and dates independently.</p></div>
+      <div className="mt-4 flex gap-3 rounded-lg border border-primary/20 bg-primary/[0.06] p-4 text-xs leading-5 text-muted-foreground"><CalendarClock className="mt-0.5 size-4 shrink-0 text-primary" /><p>{radarQuery.data?.result.disclaimer ?? "Loading verified opportunities and source links."}</p></div>
 
       {radarQuery.isPending ? <div className="mt-6"><LoadingSkeleton variant="cards" /></div> : null}
       {radarQuery.isError ? <div className="mt-6"><ErrorBanner message={radarQuery.error.message} onRetry={() => radarQuery.refetch()} /></div> : null}

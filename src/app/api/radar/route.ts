@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server";
 
 import { rankRadarOpportunities } from "@/features/pathpilot/radar-engine";
+import { getVerifiedOpportunities } from "@/features/verified-data/server/live-catalogue";
 import {
   defaultOnboardingProfile,
   opportunityCategorySchema,
 } from "@/features/pathpilot/schemas";
 import { pathPilotApiError } from "@/features/pathpilot/server/api";
-import { getPathPilotUserId } from "@/features/pathpilot/server/auth";
 
 export async function GET(request: Request) {
   try {
-    await getPathPilotUserId();
+    // Official opportunities can be browsed without an account. Saving or
+    // tracking a result remains an authenticated personal action.
     const { searchParams } = new URL(request.url);
     const careerName = searchParams.get("career")?.trim() || undefined;
     const interests = searchParams
@@ -32,7 +33,12 @@ export async function GET(request: Request) {
       ...defaultOnboardingProfile,
       interests: interests?.length ? interests : defaultOnboardingProfile.interests,
     };
-    const result = rankRadarOpportunities({
+    const verified = await getVerifiedOpportunities({
+      interests: profile.interests,
+      skills: skills ?? [],
+      careerName,
+    });
+    const result = verified ?? rankRadarOpportunities({
       profile,
       careerName,
       starterSkills: skills,

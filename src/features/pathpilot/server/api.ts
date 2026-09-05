@@ -61,6 +61,24 @@ export function pathPilotApiError(error: unknown) {
       { status: 429, headers },
     );
   }
+  if (error instanceof Error && error.message === "RESUME_FILE_REQUIRED") {
+    return NextResponse.json({ error: "Choose a resume file or capture a clear image first.", requestId }, { status: 422, headers });
+  }
+  if (error instanceof Error && error.message === "RESUME_FILE_TYPE_INVALID") {
+    return NextResponse.json({ error: "Use a PDF, DOCX, JPG, PNG, or WEBP resume file.", requestId }, { status: 422, headers });
+  }
+  if (error instanceof Error && error.message === "RESUME_FILE_SIZE_INVALID") {
+    return NextResponse.json({ error: "Resume files must be between 100 bytes and 5 MB.", requestId }, { status: 422, headers });
+  }
+  if (error instanceof Error && error.message === "RESUME_STORAGE_UNAVAILABLE") {
+    return NextResponse.json({ error: "Private resume storage is not ready. Apply the storage migration and try again.", requestId }, { status: 503, headers });
+  }
+  if (error instanceof Error && error.message === "RESUME_ANALYSIS_FAILED") {
+    return NextResponse.json({ error: "The AI could not return a complete resume review. Please try again.", requestId }, { status: 502, headers });
+  }
+  if (error instanceof Error && error.message === "PROFILE_REQUIRED") {
+    return NextResponse.json({ error: "Finish your student profile before applying skills to it.", requestId }, { status: 422, headers });
+  }
   console.error(`[PathPilot API ${requestId}]`, error instanceof Error ? error.message : "Unknown server error");
   return NextResponse.json(
     { error: "PathPilot could not complete that request. Please try again.", requestId },

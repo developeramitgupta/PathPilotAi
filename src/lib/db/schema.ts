@@ -1,6 +1,7 @@
 import { relations, type InferInsertModel, type InferSelectModel } from "drizzle-orm";
 import {
   boolean,
+  customType,
   index,
   integer,
   jsonb,
@@ -14,6 +15,12 @@ import {
 
 const timestamp3 = (name: string) =>
   timestamp(name, { mode: "date", precision: 3 });
+
+const byteaColumn = customType<{ data: Buffer; driverData: Buffer }>({
+  dataType() {
+    return "bytea";
+  },
+});
 
 export const userRole = pgEnum("UserRole", [
   "student",
@@ -777,6 +784,10 @@ export const resumes = pgTable(
         onUpdate: "cascade",
       }),
     fileUrl: text("file_url").notNull(),
+    fileName: text("file_name"),
+    mimeType: text("mime_type"),
+    /** Private database fallback when a Storage server key is not configured. */
+    fileBytes: byteaColumn("file_bytes"),
     createdAt: timestamp3("created_at").notNull().defaultNow(),
   },
   (table) => [
@@ -801,6 +812,9 @@ export const resumeAnalyses = pgTable(
     impactScore: integer("impact_score").notNull(),
     missingSkills: text("missing_skills").array(),
     topFixes: text("top_fixes").array(),
+    /** Complete, validated AI report for re-opening a past resume analysis. */
+    analysisReport: jsonb("analysis_report").$type<Record<string, unknown>>(),
+    analysisMode: text("analysis_mode"),
   },
   (table) => [
     uniqueIndex("resume_analyses_resume_id_key").on(table.resumeId),

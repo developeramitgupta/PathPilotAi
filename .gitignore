@@ -34,3 +34,6 @@ Thumbs.db
 
 # PRD inspection intermediates
 tmp/
+
+.vercel
+.env*

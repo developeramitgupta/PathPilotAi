@@ -147,23 +147,29 @@ export const collegeMatchSchema = z.object({
   compatibility: z.number().int().min(0).max(100),
   why: z.string().min(1),
   reasoningRefs: z.array(z.string().min(1)).min(1),
-  estimatedAnnualCost: z.number().int().positive(),
-  hostelAvailable: z.boolean(),
-  scholarshipAvailable: z.boolean(),
-  branches: z.array(z.string().min(1)).min(1),
-  boardCutoffDemo: z.number().min(0).max(100),
-  placementRateDemo: z.number().int().min(0).max(100),
-  medianPackageDemo: z.string().min(1),
+  estimatedAnnualCost: z.number().int().nonnegative().nullable(),
+  hostelAvailable: z.boolean().nullable(),
+  scholarshipAvailable: z.boolean().nullable(),
+  branches: z.array(z.string().min(1)),
+  /** Admissions and placement fields are deliberately null until an official source supplies them. */
+  boardCutoffDemo: z.number().min(0).max(100).nullable(),
+  placementRateDemo: z.number().int().min(0).max(100).nullable(),
+  medianPackageDemo: z.string().nullable(),
   cultureTags: z.array(z.string().min(1)),
   overview: z.string().min(1),
+  sourceUrl: z.url().nullable(),
+  lastVerifiedAt: z.iso.datetime().nullable(),
+  officialRank: z.number().int().positive().nullable(),
+  rankingYear: z.number().int().positive().nullable(),
+  dataMode: z.enum(["official", "demo"]),
 });
 
 export const collegeFinderResultSchema = z.object({
   matches: z.array(collegeMatchSchema).max(8),
-  mode: z.enum(["ai", "deterministic-fallback"]),
+  mode: z.enum(["official", "ai", "deterministic-fallback"]),
   candidateCount: z.number().int().nonnegative(),
   generatedAt: z.iso.datetime(),
-  disclaimer: z.literal("Cutoffs and placement figures are demo data, not live admissions data."),
+  disclaimer: z.string().min(1),
 });
 
 export type CollegeFinderInput = z.infer<typeof collegeFinderInputSchema>;
@@ -423,6 +429,7 @@ export type MissionPlan = z.infer<typeof missionPlanSchema>;
 export type MissionInput = z.infer<typeof missionInputSchema>;
 
 export const opportunityCategorySchema = z.enum([
+  "internship",
   "hackathon",
   "scholarship",
   "competition",
@@ -444,16 +451,18 @@ export const radarOpportunitySchema = z.object({
   relevance: z.number().int().min(0).max(100),
   whyRelevant: z.string().min(1),
   reasoningRefs: z.array(z.string().min(1)).min(1),
-  isDemo: z.literal(true),
+  isDemo: z.boolean(),
+  sourceUrl: z.url().nullable().optional(),
+  applicationUrl: z.url().nullable().optional(),
+  deadlineAt: z.iso.datetime().nullable().optional(),
+  lastVerifiedAt: z.iso.datetime().nullable().optional(),
 });
 
 export const radarResultSchema = z.object({
   opportunities: z.array(radarOpportunitySchema),
-  mode: z.literal("static-ranked-demo"),
+  mode: z.enum(["official-live", "static-ranked-demo", "official-empty"]),
   generatedAt: z.iso.datetime(),
-  disclaimer: z.literal(
-    "Demo opportunity patterns, not live listings. Verify current programs and dates independently.",
-  ),
+  disclaimer: z.string().min(1),
 });
 
 export type OpportunityCategory = z.infer<typeof opportunityCategorySchema>;

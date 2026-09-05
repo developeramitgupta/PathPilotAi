@@ -32,10 +32,23 @@ export async function getPathPilotActor(): Promise<PathPilotActor> {
 
 export async function getPathPilotUserId() {
   const actor = await getPathPilotActor();
-  if (!actor.isPreview && serviceAvailability.database) {
-    await ensurePathPilotUser(actor);
+  if (serviceAvailability.database) {
+    if (actor.isPreview) {
+      await ensurePreviewUser(actor);
+    } else {
+      await ensurePathPilotUser(actor);
+    }
   }
   return actor.userId;
+}
+
+/** Allows the credentials-free local preview to exercise database-backed flows. */
+async function ensurePreviewUser(actor: PathPilotActor) {
+  const now = new Date();
+  await getDb()
+    .insert(users)
+    .values({ id: actor.userId, name: "PathPilot preview", email: "preview-user@users.pathpilot.local", updatedAt: now })
+    .onConflictDoUpdate({ target: users.id, set: { updatedAt: now } });
 }
 
 /** Returns the verified primary Clerk email for consent/invite verification. */

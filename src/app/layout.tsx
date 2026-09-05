@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { hasValidClerkPublishableKey } from "@/lib/env";
 import { fraunces, geist, geistMono } from "@/lib/fonts";
 
 import "./globals.css";
@@ -31,6 +32,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const useClerk = hasValidClerkPublishableKey(clerkKey);
 
   return (
     <html
@@ -40,7 +42,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased" suppressHydrationWarning>
-        {clerkKey ? (
+        {useClerk ? (
           <ClerkProvider publishableKey={clerkKey}><ThemeProvider>{children}</ThemeProvider></ClerkProvider>
         ) : (
           <ThemeProvider>{children}</ThemeProvider>

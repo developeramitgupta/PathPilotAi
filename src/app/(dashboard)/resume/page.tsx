@@ -1,3 +1,3 @@
-import { PlannedModulePage } from "@/components/modules/module-placeholder";
+import { ResumeAnalyzerScreen } from "@/components/resume/resume-analyzer-screen";
 
-export default function Page() { return <PlannedModulePage slug="resume" />; }
+export default function Page() { return <ResumeAnalyzerScreen />; }

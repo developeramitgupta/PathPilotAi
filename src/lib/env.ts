@@ -13,8 +13,14 @@ export const publicEnvironment = publicEnvironmentSchema.parse({
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || undefined,
 });
 
+/** Clerk rejects placeholder and malformed keys at request time. Treat those
+ * values as unconfigured so a credentials-free local preview can still run. */
+export function hasValidClerkPublishableKey(value = publicEnvironment.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+  return Boolean(value && /^(pk_test|pk_live)_/.test(value));
+}
+
 export const serviceAvailability = {
-  clerk: Boolean(publicEnvironment.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY),
+  clerk: hasValidClerkPublishableKey(),
   supabase: Boolean(
     publicEnvironment.NEXT_PUBLIC_SUPABASE_URL &&
       publicEnvironment.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
