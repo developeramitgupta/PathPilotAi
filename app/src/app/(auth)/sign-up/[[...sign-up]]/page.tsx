@@ -19,12 +19,12 @@ export default async function SignUpPage({
   const journey = role === "student" && isStudentJourney(params.journey) ? params.journey : undefined;
 
   if (!serviceAvailability.clerk) {
-    return <AuthPreview mode="sign-up" role={role} journey={journey} />;
+    return <AuthPreview mode="sign-up" role={role} journey={journey} lockRole />;
   }
 
   return (
     <main className="relative grid min-h-screen place-items-center px-4 py-16"><div className="absolute left-4 top-4"><BackButton fallbackHref="/student-stage" /></div>
-      <SignUp fallbackRedirectUrl={`${workspaceRoleConfig[role].destination}?role=${role}${journey ? `&journey=${journey}` : ""}`} signInUrl="/sign-in" />
+      <SignUp fallbackRedirectUrl={`${workspaceRoleConfig[role].destination}?role=${role}${journey ? `&journey=${journey}` : ""}`} signInUrl={`/sign-in?role=${role}${journey ? `&journey=${journey}` : ""}`} />
     </main>
   );
 }

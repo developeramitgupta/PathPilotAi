@@ -22,10 +22,12 @@ export function AuthPreview({
   mode,
   role: initialRole = "student",
   journey,
+  lockRole = false,
 }: {
   mode: "sign-in" | "sign-up";
   role?: WorkspaceRole;
   journey?: StudentJourney;
+  lockRole?: boolean;
 }) {
   const router = useRouter();
   const setWorkspaceSession = usePathPilotStore((state) => state.setWorkspaceSession);
@@ -77,7 +79,7 @@ export function AuthPreview({
       <div className="mx-auto flex min-h-[calc(100vh-3rem)] max-w-6xl flex-col">
         <header className="flex items-center justify-between gap-4">
           <Logo className="text-[#10284a]" href="/" />
-          <div className="flex items-center gap-1"><BackButton fallbackHref={isSignUp ? "/student-stage" : "/"} className="text-[#526174]" /><Link className="text-sm font-semibold text-[#526174] hover:text-[#1264c4]" href={isSignUp ? "/sign-in" : "/"}>{isSignUp ? "Sign in" : "Back to PathPilot"}</Link></div>
+          <div className="flex items-center gap-1"><BackButton fallbackHref={isSignUp ? "/student-stage" : "/"} className="text-[#526174]" /><Link className="text-sm font-semibold text-[#526174] hover:text-[#1264c4]" href={isSignUp ? `/sign-in?role=${role}${journey ? `&journey=${journey}` : ""}` : "/"}>{isSignUp ? "Sign in" : "Back to PathPilot"}</Link></div>
         </header>
 
         <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
@@ -107,7 +109,7 @@ export function AuthPreview({
               <span className="grid size-11 place-items-center rounded-xl bg-[#eaf3ff] text-[#1264c4]"><Icon className="size-5" aria-hidden="true" /></span>
             </div>
 
-            <div className="mt-6" role="group" aria-label="Choose a workspace role">
+            {lockRole ? <p className="mt-6 text-sm text-[#526174]">Selected role: <span className="font-semibold text-[#10284a]">{config.label}</span></p> : <div className="mt-6" role="group" aria-label="Choose a workspace role">
               <p className="text-sm font-medium">I&apos;m here as</p>
               <div className="mt-3 grid grid-cols-3 gap-2">
                 {workspaceRoles.map((candidateRole) => {
@@ -125,7 +127,7 @@ export function AuthPreview({
                   );
                 })}
               </div>
-            </div>
+            </div>}
 
             <form className="mt-6 grid gap-5" onSubmit={continueToWorkspace} noValidate>
               {isSignUp ? (
