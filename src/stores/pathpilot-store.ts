@@ -68,6 +68,7 @@ interface PathPilotStore {
   ) => void;
   restoreDismissedOpportunities: () => void;
   setWorkspaceSession: (session: WorkspaceSession) => void;
+  clearLocalSession: () => void;
   setStudentJourney: (journey: StudentJourney) => void;
   completeStudentJourney: (input: { profile: OnboardingProfile; discovery: CareerDiscoveryResult; journey: StudentJourney; stagePlan: StagePlan; stageAnswers: StudentStageAnswers }) => void;
 }
@@ -206,6 +207,26 @@ export const usePathPilotStore = create<PathPilotStore>()(
           ),
         })),
       setWorkspaceSession: (workspaceSession) => set({ workspaceSession }),
+      clearLocalSession: () =>
+        set({
+          onboardingDraft: null,
+          profile: null,
+          careerDiscovery: null,
+          decisions: [],
+          selectedCareerKey: null,
+          selectedCollegeId: null,
+          selectedExamId: null,
+          selectedDegreeKey: null,
+          roadmap: null,
+          resourceProgress: {},
+          mission: null,
+          opportunityActions: {},
+          workspaceSession: null,
+          studentJourney: null,
+          stagePlan: null,
+          stageAnswers: null,
+          journeyAssessments: {},
+        }),
       setStudentJourney: (studentJourney) => set({ studentJourney }),
       completeStudentJourney: ({ profile, discovery, journey, stagePlan, stageAnswers }) => set((state) => ({
         profile,

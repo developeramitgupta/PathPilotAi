@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { motion, MotionConfig } from "framer-motion";
 import {
   ArrowRight,
@@ -14,6 +16,7 @@ import {
   Sparkles,
   SunMedium,
   UserRound,
+  LogOut,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -25,7 +28,13 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { defaultOnboardingProfile, type OnboardingProfile } from "@/features/pathpilot/schemas";
 import { cn } from "@/lib/utils";
+import { serviceAvailability } from "@/lib/env";
 import { usePathPilotStore } from "@/stores/pathpilot-store";
+
+const ClerkLogoutButton = dynamic(
+  () => import("@/components/auth/clerk-logout-button").then((module) => module.ClerkLogoutButton),
+  { ssr: false },
+);
 
 const LANGUAGE_STORAGE_KEY = "pathpilot-language-v1";
 
@@ -95,8 +104,10 @@ function ThemeOption({
 }
 
 export function SettingsScreen() {
+  const router = useRouter();
   const storedProfile = usePathPilotStore((state) => state.profile);
   const updateProfile = usePathPilotStore((state) => state.updateProfile);
+  const clearLocalSession = usePathPilotStore((state) => state.clearLocalSession);
   const { theme, setTheme } = useThemePreference();
   const baseProfile = storedProfile ?? defaultOnboardingProfile;
   const [profile, setProfile] = useState<ProfileForm>(() => getProfileForm(baseProfile));
@@ -148,6 +159,11 @@ export function SettingsScreen() {
     } catch {
       // The selected language remains active for this session.
     }
+  }
+
+  function logoutPreview() {
+    clearLocalSession();
+    router.replace("/");
   }
 
   return (
@@ -260,6 +276,19 @@ export function SettingsScreen() {
             </CardContent>
           </Card>
         </motion.div>
+
+        <motion.section initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.24, duration: 0.35 }} className="mt-6 border-t border-border pt-6" aria-labelledby="sign-out-title">
+          <div className="flex flex-col justify-between gap-5 rounded-2xl border border-destructive/20 bg-destructive/[0.035] p-5 sm:flex-row sm:items-center sm:p-6">
+            <div className="flex items-start gap-3">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-destructive/20 bg-destructive/10 text-destructive"><LogOut className="size-4.5" aria-hidden="true" /></span>
+              <div>
+                <h2 id="sign-out-title" className="text-base font-semibold text-foreground">Log out of PathPilot</h2>
+                <p className="mt-1 max-w-xl text-sm leading-6 text-muted-foreground">This clears your personal PathPilot workspace from this browser and returns you to the app entry screen.</p>
+              </div>
+            </div>
+            {serviceAvailability.clerk ? <ClerkLogoutButton onLocalLogout={clearLocalSession} /> : <Button type="button" variant="outline" className="border-destructive/35 text-destructive hover:bg-destructive/10 hover:text-destructive" onClick={logoutPreview}>Log out <LogOut aria-hidden="true" /></Button>}
+          </div>
+        </motion.section>
       </div>
     </MotionConfig>
   );
