@@ -84,7 +84,13 @@ export function StudentTimelineScreen() {
             return (
               <li key={step.id} className="relative pb-8 pl-8 last:pb-0 sm:pl-10">
                 <span className={cn("absolute -left-3 top-0 grid size-6 place-items-center rounded-full border bg-background", status === "complete" && "border-success/35 bg-success/10 text-success", status === "next" && "border-primary/45 bg-primary/10 text-primary")}>{status === "future" ? <Circle className="size-3" /> : <Icon className="size-3.5" />}</span>
-                <div className={cn("rounded-xl border p-4 sm:p-5", status === "next" && "border-primary/35 bg-primary/[0.045]", status === "complete" && "border-success/20 bg-success/[0.025]")}> 
+                <div
+                  className={cn(
+                    "rounded-xl border p-4 sm:p-5",
+                    status === "next" && "border-primary/35 bg-primary/[0.045]",
+                    status === "complete" && "border-success/20 bg-success/[0.025]",
+                  )}
+                >
                   <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
                     <div className="min-w-0"><div className="flex flex-wrap items-center gap-2"><Badge variant={status === "complete" ? "success" : status === "next" ? "default" : "demo"}>{step.label}</Badge><span className="text-xs capitalize text-muted-foreground">{status === "next" ? "Your next action" : status}</span></div><h2 className="mt-3 text-lg font-semibold">{step.title}</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{step.detail}</p></div>
                     <Button className="shrink-0" size="sm" variant={isNext ? "default" : "secondary"} asChild><Link href={step.href}>{step.complete ? "Review" : isNext ? "Continue" : "Open"} <ArrowRight /></Link></Button>
