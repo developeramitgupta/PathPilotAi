@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Bell, BriefcaseBusiness, CheckCircle2, ChevronRight, Handshake, Landmark, LogOut, MapPin, Plus, Search, Settings, SlidersHorizontal, UsersRound } from "lucide-react";
-import { type FormEvent, useMemo, useState } from "react";
+import { type FormEvent, useEffect, useMemo, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
 import { Drawer, Modal } from "@/components/ui/dialog";
@@ -23,6 +23,19 @@ const ClerkLogoutButton = dynamic(
 const institutionTabs = ["Overview", "Students", "Readiness", "Opportunities", "Partners", "Settings"] as const;
 const industryTabs = ["Overview", "Candidates", "Opportunities", "Pipeline", "Company profile", "Settings"] as const;
 
+type WorkspaceSettings = { name: string; contact: string; emailUpdates: boolean };
+type CompanyProfile = { name: string; sector: string; location: string; website: string; about: string };
+type WorkspaceSnapshot = {
+  company?: CompanyProfile;
+  workspaceSettings?: WorkspaceSettings;
+  industryOpportunities?: WorkspaceOpportunity[];
+  pipeline?: PipelineCandidate[];
+};
+
+function workspaceStorageKey(role: Exclude<WorkspaceRole, "student">) {
+  return `pathpilot.workspace.${role}.v1`;
+}
+
 function Metric({ value, label, note }: { value: string; label: string; note: string }) { return <article className="border border-[#dbe3ed] bg-white p-5"><strong className="block text-3xl font-semibold tracking-[-.055em]">{value}</strong><span className="mt-2 block text-sm font-medium text-[#526174]">{label}</span><span className="mt-1 block text-xs text-[#7a8aa0]">{note}</span></article>; }
 function Progress({ value, label }: { value: number; label: string }) { return <div><div className="mb-2 flex justify-between gap-3 text-sm"><span className="text-[#526174]">{label}</span><strong>{value}%</strong></div><div className="h-2 overflow-hidden rounded-full bg-[#e8eef5]"><div className="h-full rounded-full bg-[#1264c4]" style={{ width: `${value}%` }} /></div></div>; }
 function Ring({ value }: { value: number }) { return <span className="grid size-12 shrink-0 place-items-center rounded-full border-[5px] border-[#d7e9ff] text-xs font-bold text-[#1264c4]">{value}</span>; }
@@ -41,7 +54,35 @@ export function RoleWorkspace({ role, displayName, workspaceName }: { role: Excl
   const [search, setSearch] = useState(""); const [readyOnly, setReadyOnly] = useState(false); const [selected, setSelected] = useState<WorkspaceStudent | null>(null); const [saved, setSaved] = useState(false);
   const [company, setCompany] = useState({ name: workspaceName || "Your company", sector: "Technology", location: "Bengaluru, India", website: "", about: "We connect early talent to meaningful work with clear expectations and feedback." });
   const [workspaceSettings, setWorkspaceSettings] = useState({ name: workspaceName || (role === "institution" ? "Your institution" : "Your company"), contact: displayName || "Workspace lead", emailUpdates: true }); const [settingsSaved, setSettingsSaved] = useState(false);
+  const [storageReady, setStorageReady] = useState(false);
   const tabs = role === "institution" ? institutionTabs : industryTabs; const label = role === "industry" ? company.name : workspaceSettings.name;
+
+  useEffect(() => {
+    try {
+      const savedWorkspace = window.localStorage.getItem(workspaceStorageKey(role));
+      if (savedWorkspace) {
+        const snapshot = JSON.parse(savedWorkspace) as WorkspaceSnapshot;
+        if (snapshot.company) setCompany(snapshot.company);
+        if (snapshot.workspaceSettings) setWorkspaceSettings(snapshot.workspaceSettings);
+        if (snapshot.industryOpportunities) setIndustryOpportunities(snapshot.industryOpportunities);
+        if (snapshot.pipeline) setPipeline(snapshot.pipeline);
+      }
+    } catch {
+      window.localStorage.removeItem(workspaceStorageKey(role));
+    } finally {
+      setStorageReady(true);
+    }
+  }, [role]);
+
+  useEffect(() => {
+    if (!storageReady) return;
+    const snapshot: WorkspaceSnapshot = { company, workspaceSettings };
+    if (role === "industry") {
+      snapshot.industryOpportunities = industryOpportunities;
+      snapshot.pipeline = pipeline;
+    }
+    window.localStorage.setItem(workspaceStorageKey(role), JSON.stringify(snapshot));
+  }, [company, industryOpportunities, pipeline, role, storageReady, workspaceSettings]);
   const people = useMemo(() => (role === "institution" ? seedStudents : pipeline).filter((person) => `${person.name} ${person.programme} ${person.evidence.join(" ")}`.toLowerCase().includes(search.toLowerCase()) && (!readyOnly || person.readiness >= 85)), [role, search, readyOnly, pipeline]);
   const openPost = () => setCreateMode(role === "institution" ? "cohort" : "opportunity");
   const shortlist = (person: WorkspaceStudent) => { setPipeline((current) => current.map((entry) => entry.id === person.id && entry.pipelineStage === "New" ? { ...entry, pipelineStage: "Shortlisted" } : entry)); setTab("Pipeline"); };
