@@ -1,4 +1,10 @@
 import type { NextConfig } from "next";
+import { config } from "dotenv";
+
+// Environment files deliberately remain at the workspace root, outside the
+// deployable frontend directory, so local secrets do not get mixed with UI code.
+config({ path: "../.env.local", quiet: true });
+config({ path: "../.env", quiet: true });
 
 const nextConfig: NextConfig = {
   // Keep Turbopack's rapidly-changing development manifests away from the

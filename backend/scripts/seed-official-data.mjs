@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { config } from "dotenv";
 import postgres from "postgres";
 
-config({ path: ".env.local", quiet: true });
+config({ path: "../.env.local", quiet: true });
 
 const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) throw new Error("DATABASE_URL is required. Run `vercel env pull .env.local` first.");

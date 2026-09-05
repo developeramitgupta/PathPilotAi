@@ -1,5 +1,5 @@
-import collegeDataset from "../../../data/verified_indian_colleges.json";
-import internshipDataset from "../../../data/official_indian_internships.json";
+import collegeDataset from "../../../../backend/data/verified_indian_colleges.json";
+import internshipDataset from "../../../../backend/data/official_indian_internships.json";
 
 export const verifiedCollegeRecords = collegeDataset.records;
 export const verifiedInternshipRecords = internshipDataset.records;
