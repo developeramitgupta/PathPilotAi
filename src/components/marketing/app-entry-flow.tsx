@@ -20,8 +20,6 @@ const stories: Array<{
   image: string;
   imageAlt: string;
   note: string;
-  panelTitle: string;
-  panelLabel: string;
 }> = [
   {
     role: "student",
@@ -31,8 +29,6 @@ const stories: Array<{
     image: "/images/onboarding/student-v2.png",
     imageAlt: "Student holding a notebook, surrounded by symbols for skills and goals.",
     note: "Discover a path that begins with you.",
-    panelTitle: "Your Path Snapshot",
-    panelLabel: "Exploring · Skills · Goals",
   },
   {
     role: "college",
@@ -42,19 +38,15 @@ const stories: Array<{
     image: "/images/onboarding/college-v2.png",
     imageAlt: "College mentor with a tablet, surrounded by symbols for mentoring and student growth.",
     note: "Support growth with the right evidence.",
-    panelTitle: "Readiness Snapshot",
-    panelLabel: "Skills · Guidance · Outcomes",
   },
   {
     role: "industry",
     eyebrow: "For industry",
     title: "Industry sees potential — with proof.",
     copy: "Find candidates through verified skills, projects, and readiness—not just another static resume.",
-    image: "/images/onboarding/industry-v2.png",
-    imageAlt: "Recruiter reviewing a candidate on a laptop, surrounded by symbols for verified skills and opportunity.",
+    image: "/images/onboarding/industry-network.png",
+    imageAlt: "Recruiter viewing a verified candidate profile at a desk.",
     note: "Open opportunities with more confidence.",
-    panelTitle: "Candidate Snapshot",
-    panelLabel: "Verified skills · Projects · Readiness",
   },
 ];
 
@@ -115,27 +107,6 @@ function LaunchScreen() {
         </div>
       </motion.div>
     </motion.div>
-  );
-}
-
-function EvidencePreview({ title, label }: { title: string; label: string }) {
-  return (
-    <div className="absolute -right-[7%] top-[6%] z-0 w-[58%] rounded-2xl border border-[#cdd8e8] bg-white/95 p-5 shadow-[0_18px_44px_rgba(16,40,74,0.10)] sm:p-6" aria-hidden="true">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#1264c4]">PathPilot evidence</p>
-          <p className="mt-2 text-base font-semibold text-[#10284a]">{title}</p>
-          <p className="mt-1 text-xs leading-5 text-[#607089]">{label}</p>
-        </div>
-        <span className="grid size-9 place-items-center rounded-full border border-[#b9d8c8] bg-[#effbf4] text-[#1e8b5b]"><Check className="size-4" /></span>
-      </div>
-      <div className="mt-5 border-t border-[#e3eaf3] pt-4">
-        <div className="flex items-center gap-2 text-xs font-medium text-[#10284a]"><span className="size-2 rounded-full bg-[#1264c4]" /> Verified signals</div>
-        <div className="mt-3 grid grid-cols-3 gap-2">
-          {["Skills", "Projects", "Readiness"].map((item, index) => <span className="rounded-md bg-[#f2f6fb] px-2 py-2 text-center text-[10px] font-semibold text-[#50647d]" key={item}>{index === 2 ? "Live" : item}</span>)}
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -210,8 +181,17 @@ export function AppEntryFlow() {
               <AnimatePresence mode="wait">
                 <motion.div key={current.image} initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.97, y: reduceMotion ? 0 : 16 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: reduceMotion ? 1 : 1.02 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }} className="relative mx-auto hidden h-[min(66vh,620px)] w-full max-w-[680px] lg:block">
                   <div className="absolute inset-x-[14%] bottom-[10%] top-[16%] -z-10 rounded-full bg-[#dcebfc] blur-3xl" />
-                  <EvidencePreview title={current.panelTitle} label={current.panelLabel} />
-                  <Image src={current.image} alt={current.imageAlt} width={900} height={900} priority className="absolute -left-[4%] bottom-0 z-10 h-[98%] w-[80%] object-contain mix-blend-multiply" />
+                  <Image
+                    src={current.image}
+                    alt={current.imageAlt}
+                    width={1100}
+                    height={900}
+                    priority
+                    className={cn(
+                      "absolute inset-0 z-10 h-full w-full object-contain",
+                      current.role === "industry" ? "" : "mix-blend-multiply",
+                    )}
+                  />
                 </motion.div>
               </AnimatePresence>
             </section>
