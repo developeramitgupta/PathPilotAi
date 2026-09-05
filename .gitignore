@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+.next-*/
+out/
+
+# production
+build/
+
+# environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# testing and coverage
+coverage/
+playwright-report/
+test-results/
+
+# local tooling
+.vercel/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# operating system and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# PRD inspection intermediates
+tmp/

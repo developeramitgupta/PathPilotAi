@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1787523811780,
+      "tag": "20260823222331_amazing_molecule_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788389705917,
+      "tag": "20260902225505_faulty_luke_cage",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788391021825,
+      "tag": "20260902231701_bright_krista_starr",
+      "breakpoints": true
+    }
+  ]
+}
