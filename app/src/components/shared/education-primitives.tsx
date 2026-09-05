@@ -60,7 +60,7 @@ export function ChoiceChips<T extends string>({ label, values, selected, onChang
 
 const refLabels: Record<string, string> = {
   annualBudget: "Annual budget", state: "Preferred state", branch: "Chosen branch",
-  placementPriority: "Placement priority", hostel: "Hostel preference", scholarshipNeed: "Scholarship need",
+  placementPriority: "Placement priority", minPlacementRate: "Minimum placement rate", hostel: "Hostel preference", scholarshipNeed: "Scholarship need",
   cultureTags: "Campus culture", careerGoal: "Career goal", location: "Location",
   collegePreference: "College preference", difficultyTolerance: "Difficulty tolerance",
   shortlistedCareers: "Shortlisted careers", totalBudget: "Total budget", timeHorizon: "Time horizon",

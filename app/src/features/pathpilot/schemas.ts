@@ -130,6 +130,7 @@ export const collegeFinderInputSchema = z.object({
   city: z.string().trim(),
   ownership: z.enum(["any", "government", "private"]),
   hostel: z.enum(["required", "preferred", "not-needed"]),
+  minPlacementRate: z.number().int().min(0).max(100),
   placementPriority: z.number().int().min(1).max(5),
   branch: z.string().trim().min(1),
   scholarshipNeed: z.boolean(),

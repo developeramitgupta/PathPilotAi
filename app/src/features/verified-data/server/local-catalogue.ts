@@ -38,6 +38,9 @@ export function getLocalCollegeMatches(input: CollegeFinderInput): CollegeFinder
     // A budget is a hard filter: unknown fees never masquerade as affordable.
     .filter((college) => college.annual_fees !== null && college.annual_fees <= input.annualBudget)
     .filter((college) => input.hostel !== "required" || college.hostel_fees !== null)
+    // Placement is also a hard filter when the student chooses a minimum.
+    // A missing disclosure must not be treated as a qualifying percentage.
+    .filter((college) => input.minPlacementRate === 0 || (college.placement_percentage !== null && college.placement_percentage >= input.minPlacementRate))
     .filter((college) => courseMatches(college.available_branches_courses, input.branch))
     .map((college) => {
       const annualFee = college.annual_fees ?? Number.POSITIVE_INFINITY;
@@ -62,7 +65,7 @@ export function getLocalCollegeMatches(input: CollegeFinderInput): CollegeFinder
         tier: rank && rank <= 20 ? "1" as const : rank && rank <= 75 ? "2" as const : "3" as const,
         compatibility,
         why: `${college.college_name} has a published annual tuition of ₹${annualFee.toLocaleString("en-IN")}. ${placementNote}`,
-        reasoningRefs: ["annualBudget", "state", "programme", ...(rank ? ["officialRanking"] : [])],
+        reasoningRefs: ["annualBudget", "minPlacementRate", "state", "programme", ...(rank ? ["officialRanking"] : [])],
         estimatedAnnualCost: annualFee,
         hostelAvailable: college.hostel_fees !== null,
         scholarshipAvailable: null,

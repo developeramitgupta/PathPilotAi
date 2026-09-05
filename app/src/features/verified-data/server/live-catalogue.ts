@@ -94,7 +94,7 @@ export async function getVerifiedCollegeMatches(
         tier: ranking && ranking.rank <= 20 ? "1" : ranking && ranking.rank <= 75 ? "2" : "3",
         compatibility,
         why: `${college.name} is a ${rankDescription}. ${programmeNote} ${feeKnown ? "Its published fee field fits your selected budget." : "Fee data is not published here; check the institution before deciding."}`,
-        reasoningRefs: ["state", "branch", "annualBudget", ...(ranking ? ["officialRanking"] : [])],
+        reasoningRefs: ["state", "branch", "annualBudget", "minPlacementRate", ...(ranking ? ["officialRanking"] : [])],
         estimatedAnnualCost: feeKnown ? college.annualCostInr : null,
         // A false legacy value means hostel evidence was not imported; it is
         // not a claim that an institution has no hostel.
