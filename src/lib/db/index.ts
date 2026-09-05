@@ -22,8 +22,10 @@ export function getDb(): Database {
   }
 
   const client = postgres(connectionString, {
-    connect_timeout: 20,
-    idle_timeout: 20,
+    // A failed/paused free-tier database should fail fast. The client request
+    // layer surfaces a retry state instead of keeping a UI action disabled.
+    connect_timeout: 8,
+    idle_timeout: 15,
     // The Supabase transaction pooler is shared on the Nano/free tier. Keep
     // this serverless app to one checked-out connection per instance.
     max: 1,

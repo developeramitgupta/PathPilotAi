@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, MotionConfig, useReducedMotion } from "framer-motion";
-import { ArrowRight, BriefcaseBusiness, Check, GraduationCap, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, BriefcaseBusiness, Check, GraduationCap, UserRound } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
@@ -110,10 +110,10 @@ function LaunchScreen() {
   );
 }
 
-function RoleSelection({ onReplay }: { onReplay: () => void }) {
+function RoleSelection({ onReplay, onBack }: { onReplay: () => void; onBack: () => void }) {
   return (
     <motion.main initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }} className="min-h-screen bg-[#f8fafc] px-4 py-6 text-[#10284a] sm:px-8 sm:py-9">
-      <header className="mx-auto flex max-w-6xl items-center justify-between"><Logo className="text-[#10284a]" /><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={onReplay}>Replay intro</Button></header>
+      <header className="mx-auto flex max-w-6xl items-center justify-between"><Logo className="text-[#10284a]" /><div className="flex items-center gap-1"><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={onBack}><ArrowLeft aria-hidden="true" /> Back</Button><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={onReplay}>Replay intro</Button></div></header>
       <section className="mx-auto flex min-h-[calc(100vh-9rem)] max-w-6xl flex-col justify-center py-12">
         <p className="text-center text-xs font-bold uppercase tracking-[0.17em] text-[#1264c4]">Welcome to the network</p>
         <h1 className="mx-auto mt-4 max-w-3xl text-center text-4xl font-semibold tracking-[-0.055em] text-[#10284a] sm:text-6xl">Choose the role that brings you here.</h1>
@@ -164,7 +164,7 @@ export function AppEntryFlow() {
     <MotionConfig reducedMotion="user">
       <AnimatePresence mode="wait">
         {screen === "launch" ? <LaunchScreen key="launch" /> : null}
-        {screen === "roles" ? <RoleSelection key="roles" onReplay={replay} /> : null}
+        {screen === "roles" ? <RoleSelection key="roles" onReplay={replay} onBack={() => { setStep(stories.length - 1); setScreen("story"); }} /> : null}
         {screen === "story" ? (
           <motion.main key="story" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-[100dvh] overflow-hidden bg-[#f8fafc] px-5 py-6 text-[#10284a] sm:px-8 sm:py-9">
             <header className="relative mx-auto flex max-w-7xl items-center"><Logo className="text-[#10284a] [&_span:last-child]:text-lg" /><div className="absolute left-1/2 -translate-x-1/2"><Progress activeStep={step} /></div></header>
@@ -175,7 +175,7 @@ export function AppEntryFlow() {
                   <h1 className="mt-5 text-[clamp(2.75rem,5.6vw,5.4rem)] font-semibold leading-[0.96] tracking-[-0.07em] text-[#10284a]">{current.title}</h1>
                   <p className={cn("mt-6 max-w-md text-base leading-7 text-[#526174] sm:text-lg sm:leading-8", current.role === "industry" && "max-w-[24rem]")}>{current.copy}</p>
                   {current.note ? <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[#385c82]"><span className="size-2 rounded-full bg-[#69b99d]" aria-hidden="true" /> {current.note}</p> : null}
-                  <div className="mt-9 flex flex-wrap items-center gap-3"><Button size="lg" className="bg-[#1264c4] px-7 shadow-[0_12px_28px_rgba(18,100,196,0.24)] hover:bg-[#0d55aa]" onClick={next}>Continue <ArrowRight aria-hidden="true" /></Button><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={() => setScreen("roles")}>Skip intro</Button></div>
+                  <div className="mt-9 flex flex-wrap items-center gap-3"><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={() => step > 0 ? setStep((currentStep) => currentStep - 1) : setScreen("launch")}><ArrowLeft aria-hidden="true" /> Back</Button><Button size="lg" className="bg-[#1264c4] px-7 shadow-[0_12px_28px_rgba(18,100,196,0.24)] hover:bg-[#0d55aa]" onClick={next}>Continue <ArrowRight aria-hidden="true" /></Button><Button variant="ghost" className="text-[#526174] hover:bg-[#edf2f7] hover:text-[#10284a]" onClick={() => setScreen("roles")}>Skip intro</Button></div>
                 </motion.div>
               </AnimatePresence>
               <AnimatePresence mode="wait">

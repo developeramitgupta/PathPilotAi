@@ -17,7 +17,7 @@ import { Select } from "@/components/ui/select";
 import { requestPathPilot } from "@/features/pathpilot/api-client";
 import { createAcceptedDecision } from "@/features/pathpilot/decision-helpers";
 import type { CollegeFinderInput, CollegeFinderResult, CollegeMatchResult, DecisionRecord } from "@/features/pathpilot/schemas";
-import { collegeBranches, collegeStates } from "@/lib/static-data/colleges";
+import { verifiedCollegeCourses, verifiedCollegeStates } from "@/lib/verified-data/local-dataset";
 import { cn } from "@/lib/utils";
 import { usePathPilotStore } from "@/stores/pathpilot-store";
 
@@ -54,7 +54,7 @@ export function CollegeFinderScreen() {
   const setEducationTarget = usePathPilotStore((state) => state.setEducationTarget);
   const recordDecision = usePathPilotStore((state) => state.recordDecision);
   const [input, setInput] = useState<CollegeFinderInput>(() => ({
-    annualBudget: budgetByBand[profile?.studyBudget ?? "medium"], state: stateByCity[profile?.city ?? ""] ?? "All India", city: "", ownership: "any", hostel: "preferred", placementPriority: 4, branch: "Computer Science", scholarshipNeed: false, boardPercentile: 82, cultureTags: ["tech-clubs"],
+    annualBudget: budgetByBand[profile?.studyBudget ?? "medium"], state: stateByCity[profile?.city ?? ""] ?? "All India", city: "", ownership: "any", hostel: "preferred", placementPriority: 4, branch: "Any programme", scholarshipNeed: false, boardPercentile: 82, cultureTags: ["tech-clubs"],
   }));
   const [result, setResult] = useState<CollegeFinderResult | null>(null);
   const [layout, setLayout] = useState<"grid" | "list">("grid");
@@ -80,9 +80,9 @@ export function CollegeFinderScreen() {
           <div className="flex items-center gap-2"><Search className="size-4 text-[#a998ff]" /><h2 className="font-semibold">Your filters</h2></div>
           <div className="mt-5 grid gap-4">
             <FieldLabel htmlFor="college-budget" label="Annual budget" hint={formatCurrency(input.annualBudget)}><input id="college-budget" type="range" min="50000" max="800000" step="25000" value={input.annualBudget} onChange={(event) => setInput({ ...input, annualBudget: Number(event.target.value) })} className="accent-[#7c5cfc]" /></FieldLabel>
-            <FieldLabel htmlFor="college-state" label="State"><Select id="college-state" value={input.state} onChange={(event) => setInput({ ...input, state: event.target.value })}>{collegeStates.map((state) => <option value={state} key={state}>{state}</option>)}</Select></FieldLabel>
+            <FieldLabel htmlFor="college-state" label="State"><Select id="college-state" value={input.state} onChange={(event) => setInput({ ...input, state: event.target.value })}>{verifiedCollegeStates.map((state) => <option value={state} key={state}>{state}</option>)}</Select></FieldLabel>
             <FieldLabel htmlFor="college-city" label="City" hint="optional"><Input id="college-city" value={input.city} onChange={(event) => setInput({ ...input, city: event.target.value })} placeholder="e.g. Pune" /></FieldLabel>
-            <FieldLabel htmlFor="college-branch" label="Branch"><Select id="college-branch" value={input.branch} onChange={(event) => setInput({ ...input, branch: event.target.value })}>{collegeBranches.map((branch) => <option key={branch}>{branch}</option>)}</Select></FieldLabel>
+            <FieldLabel htmlFor="college-branch" label="Programme / course"><Select id="college-branch" value={input.branch} onChange={(event) => setInput({ ...input, branch: event.target.value })}>{verifiedCollegeCourses.map((branch) => <option key={branch}>{branch}</option>)}</Select></FieldLabel>
             <ChoiceChips label="Ownership" values={[{ value: "any", label: "Any" }, { value: "government", label: "Government" }, { value: "private", label: "Private" }]} selected={input.ownership} onChange={(value) => setInput({ ...input, ownership: value as CollegeFinderInput["ownership"] })} />
             <FieldLabel htmlFor="college-hostel" label="Hostel"><Select id="college-hostel" value={input.hostel} onChange={(event) => setInput({ ...input, hostel: event.target.value as CollegeFinderInput["hostel"] })}><option value="required">Required</option><option value="preferred">Preferred</option><option value="not-needed">Not needed</option></Select></FieldLabel>
             <FieldLabel htmlFor="college-board" label="Board percentile" hint={`${input.boardPercentile}%`}><input id="college-board" type="range" min="35" max="100" value={input.boardPercentile} onChange={(event) => setInput({ ...input, boardPercentile: Number(event.target.value) })} className="accent-[#7c5cfc]" /></FieldLabel>

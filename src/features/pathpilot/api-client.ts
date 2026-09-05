@@ -9,23 +9,48 @@ export class PathPilotApiError extends Error {
   }
 }
 
+type PathPilotRequestInit = RequestInit & {
+  /** Keep an unavailable integration from leaving an action permanently pending. */
+  timeoutMs?: number;
+};
+
 export async function requestPathPilot<T>(
   input: RequestInfo | URL,
-  init?: RequestInit,
+  init?: PathPilotRequestInit,
 ) {
+  const { timeoutMs = 15_000, signal: suppliedSignal, ...requestInit } = init ?? {};
+  const controller = new AbortController();
+  let didTimeOut = false;
+  const abortFromCaller = () => controller.abort(suppliedSignal?.reason);
+  if (suppliedSignal) {
+    if (suppliedSignal.aborted) abortFromCaller();
+    else suppliedSignal.addEventListener("abort", abortFromCaller, { once: true });
+  }
+  const timeout = window.setTimeout(() => {
+    didTimeOut = true;
+    controller.abort();
+  }, timeoutMs);
+
   let response: Response;
   try {
     response = await fetch(input, {
-      ...init,
+      ...requestInit,
+      signal: controller.signal,
       headers: {
         Accept: "application/json",
-        ...(init?.body ? { "Content-Type": "application/json" } : {}),
-        ...init?.headers,
+        ...(requestInit.body ? { "Content-Type": "application/json" } : {}),
+        ...requestInit.headers,
       },
     });
   } catch (error) {
-    if (error instanceof DOMException && error.name === "AbortError") throw error;
+    if (didTimeOut) {
+      throw new PathPilotApiError("This is taking longer than expected. Your work has not been lost—please try again.", 408);
+    }
+    if (suppliedSignal?.aborted) throw error;
     throw new PathPilotApiError("PathPilot is offline or unreachable. Check your connection and try again.", 0);
+  } finally {
+    window.clearTimeout(timeout);
+    suppliedSignal?.removeEventListener("abort", abortFromCaller);
   }
 
   const raw = await response.text();

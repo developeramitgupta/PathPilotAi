@@ -11,7 +11,13 @@ function getClient() {
     return null;
   }
 
-  openAIClient ??= new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  openAIClient ??= new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+    // Guidance always has a deterministic fallback, so do not make a person
+    // wait through provider retries when the AI service is unavailable.
+    timeout: 12_000,
+    maxRetries: 0,
+  });
   return openAIClient;
 }
 

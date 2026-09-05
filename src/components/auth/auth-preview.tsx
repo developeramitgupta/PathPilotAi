@@ -6,6 +6,7 @@ import { type FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { Logo } from "@/components/shared/logo";
+import { BackButton } from "@/components/shared/back-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -76,9 +77,7 @@ export function AuthPreview({
       <div className="mx-auto flex min-h-[calc(100vh-3rem)] max-w-6xl flex-col">
         <header className="flex items-center justify-between gap-4">
           <Logo className="text-[#10284a]" href="/" />
-          <Link className="text-sm font-semibold text-[#526174] hover:text-[#1264c4]" href={isSignUp ? "/sign-in" : "/"}>
-            {isSignUp ? "Sign in" : "Back to PathPilot"}
-          </Link>
+          <div className="flex items-center gap-1"><BackButton fallbackHref={isSignUp ? "/student-stage" : "/"} className="text-[#526174]" /><Link className="text-sm font-semibold text-[#526174] hover:text-[#1264c4]" href={isSignUp ? "/sign-in" : "/"}>{isSignUp ? "Sign in" : "Back to PathPilot"}</Link></div>
         </header>
 
         <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">

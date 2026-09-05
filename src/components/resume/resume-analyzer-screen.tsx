@@ -102,14 +102,20 @@ export function ResumeAnalyzerScreen() {
   async function analyze() {
     if (!file) { setError("Choose a file or capture your resume first."); return; }
     setError(""); setLoading(true); setProfileSaved(false);
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 45_000);
     try {
       const form = new FormData(); form.set("file", file); form.set("targetRole", targetRole);
-      const response = await fetch("/api/resume/analyze", { method: "POST", body: form });
+      const response = await fetch("/api/resume/analyze", { method: "POST", body: form, signal: controller.signal });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "The resume could not be analyzed.");
       setResult(payload);
-    } catch (cause) { setError(cause instanceof Error ? cause.message : "The resume could not be analyzed."); }
-    finally { setLoading(false); }
+    } catch (cause) {
+      setError(cause instanceof DOMException && cause.name === "AbortError"
+        ? "Resume analysis took too long. Please try again; your selected file is still ready."
+        : cause instanceof Error ? cause.message : "The resume could not be analyzed.");
+    }
+    finally { window.clearTimeout(timeout); setLoading(false); }
   }
 
   async function applySkills() {

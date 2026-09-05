@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import { rankRadarOpportunities } from "@/features/pathpilot/radar-engine";
 import { getVerifiedOpportunities } from "@/features/verified-data/server/live-catalogue";
+import { getLocalInternships } from "@/features/verified-data/server/local-catalogue";
 import {
   defaultOnboardingProfile,
   opportunityCategorySchema,
@@ -38,12 +39,17 @@ export async function GET(request: Request) {
       skills: skills ?? [],
       careerName,
     });
-    const result = verified ?? rankRadarOpportunities({
-      profile,
-      careerName,
-      starterSkills: skills,
-      category,
-    });
+    const local = getLocalInternships({ interests: profile.interests, skills: skills ?? [], careerName });
+    const result = local.opportunities.length || local.mode === "official-empty"
+      ? local
+      : verified?.opportunities.length
+        ? verified
+        : rankRadarOpportunities({
+          profile,
+          careerName,
+          starterSkills: skills,
+          category,
+        });
     return NextResponse.json({
       result,
       reasoningRefs: ["profile.interests", "profile.learningStyle", "selectedCareer"],

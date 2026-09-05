@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, GraduationCap, Map, Rocket } from "lucide-rea
 import { useSearchParams } from "next/navigation";
 
 import { Logo } from "@/components/shared/logo";
-import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/shared/back-button";
 import { studentJourneyConfig, studentJourneys } from "@/features/student-journey/config";
 
 const icons = [GraduationCap, Map, Rocket];
@@ -35,7 +35,7 @@ export function StudentStageSelection() {
               </Link>;
             })}
           </div>
-          <div className="mt-8 text-center"><Button asChild variant="ghost" className="text-[#526174]"><Link href="/">Back to PathPilot</Link></Button></div>
+          <div className="mt-8 text-center"><BackButton fallbackHref="/" className="text-[#526174]" /></div>
         </section>
       </div>
     </main>

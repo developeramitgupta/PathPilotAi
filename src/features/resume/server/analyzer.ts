@@ -39,7 +39,13 @@ export async function analyzeResume(file: ResumeFile, targetRole?: string) {
     return { analysis: fallbackAnalysis(targetRole), mode: "needs-ai-key" as const };
   }
 
-  const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  const client = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+    // File analysis can take a little longer than text guidance, but it must
+    // still return control to the upload screen with an actionable error.
+    timeout: 40_000,
+    maxRetries: 0,
+  });
   const encoded = file.bytes.toString("base64");
   const content = [
     {

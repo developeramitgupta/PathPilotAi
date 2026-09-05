@@ -456,6 +456,8 @@ export const radarOpportunitySchema = z.object({
   applicationUrl: z.url().nullable().optional(),
   deadlineAt: z.iso.datetime().nullable().optional(),
   lastVerifiedAt: z.iso.datetime().nullable().optional(),
+  stipendInr: z.number().int().nonnegative().nullable().optional(),
+  duration: z.string().min(1).nullable().optional(),
 });
 
 export const radarResultSchema = z.object({

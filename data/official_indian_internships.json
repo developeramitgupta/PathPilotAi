@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "dataset": "Official Indian internship programmes",
+    "generated_at": "2026-09-04",
+    "currency": "INR",
+    "null_policy": "null means the reviewed official notice did not publish that value. Deadlines are retained where the notice states them and should be filtered against the current date before display."
+  },
+  "records": [
+    {
+      "internship_id": "IN-MOSPI-NIOS-2026-01",
+      "organization_name": "Ministry of Statistics and Programme Implementation",
+      "internship_title": "National Internship in Official Statistics (NIOS), Phase I 2026-27",
+      "eligibility": "Bonafide students of recognised universities/institutions in India or abroad, subject to the official scheme conditions.",
+      "stipend": 10000,
+      "mode": "Offline",
+      "duration": "2-6 months",
+      "application_deadline": "2026-03-20",
+      "application_link": "https://internship.mospi.gov.in/",
+      "official_source": "https://www.mospi.gov.in/uploads/announcements/announcements_1771577018780_832947a8-5a35-4147-9fea-8e181ce13fd0_Phase_I_of_National_Internship_in_Official_Statistics_%28NIOS%29_2026-27_of_MoSPI.pdf",
+      "last_verified_date": "2026-09-04"
+    },
+    {
+      "internship_id": "IN-MEITY-DIIS-2026-02",
+      "organization_name": "Ministry of Electronics and Information Technology",
+      "internship_title": "Digital India Internship Scheme 2026",
+      "eligibility": "As specified in the Digital India Internship Scheme 2026 notice and portal.",
+      "stipend": 10000,
+      "mode": null,
+      "duration": "2 months",
+      "application_deadline": "2026-04-29",
+      "application_link": "https://intern.meity.gov.in/",
+      "official_source": "https://intern.meity.gov.in/public/assets/Files/DIIS-2026.pdf",
+      "last_verified_date": "2026-09-04"
+    },
+    {
+      "internship_id": "IN-NHAI-2026-03",
+      "organization_name": "National Highways Authority of India",
+      "internship_title": "NHAI Internship Program",
+      "eligibility": "Undergraduate engineering students from eligible institutions; see official NHAI/DHE programme notice for selection conditions.",
+      "stipend": 20000,
+      "mode": "Offline",
+      "duration": "6 months",
+      "application_deadline": null,
+      "application_link": "https://nhai.gov.in/",
+      "official_source": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2212864&lang=1&reg=1",
+      "last_verified_date": "2026-09-04"
+    },
+    {
+      "internship_id": "IN-IDEX-IDEAL-2026-04",
+      "organization_name": "Innovations for Defence Excellence (iDEX), Ministry of Defence",
+      "internship_title": "iDEAL Internship 2026",
+      "eligibility": "As specified in the official iDEAL internship notice and application form.",
+      "stipend": 30000,
+      "mode": "Offline",
+      "duration": "6 months (or 3-month track with INR 20,000/month)",
+      "application_deadline": null,
+      "application_link": "https://idex.gov.in/d/s/form/ideal_internship_2026",
+      "official_source": "https://idex.gov.in/uploads/executive/1762750615_51e006bfaaa8d8b6a66e.pdf",
+      "last_verified_date": "2026-09-04"
+    },
+    {
+      "internship_id": "IN-DRDO-DEAL-2026-05",
+      "organization_name": "Defence Electronics Applications Laboratory, DRDO",
+      "internship_title": "Paid Internship Scheme 2026-27",
+      "eligibility": "B.E./B.Tech students in the disciplines and eligibility categories listed in the official DEAL notice.",
+      "stipend": 30000,
+      "mode": "Offline",
+      "duration": "6 months",
+      "application_deadline": "2026-06-30",
+      "application_link": "https://drdo.gov.in/drdo/sites/default/files/vacancy/advtDEAL27052026.pdf",
+      "official_source": "https://drdo.gov.in/drdo/sites/default/files/vacancy/advtDEAL27052026.pdf",
+      "last_verified_date": "2026-09-04"
+    },
+    {
+      "internship_id": "IN-NIDM-2026-06",
+      "organization_name": "National Institute of Disaster Management",
+      "internship_title": "Internship Programme",
+      "eligibility": "Students/recent graduates with at least 65% in a relevant academic programme, including disaster management, social sciences, engineering, health studies, architecture, design, and allied fields.",
+      "stipend": 12000,
+      "mode": "Offline",
+      "duration": "2-4 months",
+      "application_deadline": null,
+      "application_link": "https://nidm.gov.in/internship.asp",
+      "official_source": "https://nidm.gov.in/internship.asp",
+      "last_verified_date": "2026-09-04"
+    }
+  ]
+}

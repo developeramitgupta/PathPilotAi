@@ -27,6 +27,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { requestPathPilot } from "@/features/pathpilot/api-client";
 import {
   defaultOnboardingProfile,
@@ -92,6 +93,7 @@ function OpportunityCard({
           <div className="mt-5 grid gap-2 text-[11px] text-muted-foreground">
             <span className="flex items-start gap-2"><CalendarClock className="mt-0.5 size-3.5 shrink-0 text-[#aaa0ef]" /> {item.typicalTiming}</span>
             <span className="flex items-center gap-2"><MapPin className="size-3.5 shrink-0 text-[#aaa0ef]" /> {item.location} · {item.format}</span>
+            {item.stipendInr !== null && item.stipendInr !== undefined ? <span><strong className="text-foreground">₹{item.stipendInr.toLocaleString("en-IN")}</strong> stipend {item.duration ? `· ${item.duration}` : ""}</span> : null}
           </div>
           <div className="mt-5 flex flex-wrap gap-1.5">{item.tags.slice(0, 4).map((tag) => <Badge variant="outline" key={tag}>{tag}</Badge>)}</div>
           <button type="button" onClick={onExpand} aria-expanded={expanded} className="mt-5 flex min-h-11 w-full items-center justify-between rounded-lg border border-border bg-black/10 px-3 text-left text-xs text-muted-foreground transition-colors hover:border-primary/20 hover:text-foreground"><span className="inline-flex items-center gap-2"><Sparkles className="size-3.5 text-[#a998ff]" /> Why this?</span><ChevronDown className={cn("size-4 transition-transform", expanded && "rotate-180")} /></button>
@@ -118,6 +120,8 @@ export function OpportunityRadarScreen() {
   const profile = profileState ?? defaultOnboardingProfile;
   const career = discovery?.matches.find((item) => item.careerKey === selectedCareerKey) ?? discovery?.matches[0];
   const [category, setCategory] = useState<OpportunityCategory | "all">("all");
+  const [minimumStipend, setMinimumStipend] = useState(0);
+  const [workMode, setWorkMode] = useState<"any" | RadarOpportunity["format"]>("any");
   const [search, setSearch] = useState("");
   const deferredSearch = useDeferredValue(search.trim().toLowerCase());
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -136,6 +140,8 @@ export function OpportunityRadarScreen() {
   const opportunities = (radarQuery.data?.result.opportunities ?? []).filter((item) => {
     if (category !== "all" && item.category !== category) return false;
     if (opportunityActions[item.id] === "dismissed") return false;
+    if (minimumStipend > 0 && (item.stipendInr ?? 0) < minimumStipend) return false;
+    if (workMode !== "any" && item.format !== workMode) return false;
     if (!deferredSearch) return true;
     return `${item.title} ${item.description} ${item.tags.join(" ")}`.toLowerCase().includes(deferredSearch);
   });
@@ -166,7 +172,15 @@ export function OpportunityRadarScreen() {
         <div className="flex gap-2 overflow-x-auto pb-1" role="group" aria-label="Opportunity category filters">
           {categories.map(([value, label]) => <Button key={value} size="sm" variant={category === value ? "default" : "secondary"} onClick={() => setCategory(value)} aria-pressed={category === value}>{label}</Button>)}
         </div>
-        <div className="relative w-full xl:max-w-sm"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="pl-10" placeholder="Search skills or opportunity types" aria-label="Search opportunity patterns" /></div>
+        <div className="grid w-full gap-2 sm:grid-cols-[150px_150px_1fr] xl:max-w-2xl">
+          <Select value={minimumStipend} onChange={(event) => setMinimumStipend(Number(event.target.value))} aria-label="Minimum monthly stipend">
+            <option value={0}>Any stipend</option><option value={10000}>₹10,000+</option><option value={20000}>₹20,000+</option><option value={30000}>₹30,000+</option>
+          </Select>
+          <Select value={workMode} onChange={(event) => setWorkMode(event.target.value as typeof workMode)} aria-label="Internship mode">
+            <option value="any">Any mode</option><option value="online">Online</option><option value="hybrid">Hybrid</option><option value="in-person">Offline</option>
+          </Select>
+          <div className="relative"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="pl-10" placeholder="Search skills or opportunity types" aria-label="Search opportunity patterns" /></div>
+        </div>
       </div>
 
       <div className="mt-4 flex gap-3 rounded-lg border border-primary/20 bg-primary/[0.06] p-4 text-xs leading-5 text-muted-foreground"><CalendarClock className="mt-0.5 size-4 shrink-0 text-primary" /><p>{radarQuery.data?.result.disclaimer ?? "Loading verified opportunities and source links."}</p></div>
