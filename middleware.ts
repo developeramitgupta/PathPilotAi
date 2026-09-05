@@ -21,6 +21,8 @@ const isProtectedRoute = createRouteMatcher([
   "/journal(.*)",
   "/settings(.*)",
   "/admin(.*)",
+  "/institution(.*)",
+  "/industry(.*)",
 ]);
 
 const isPublicApi = createRouteMatcher(["/api/catalog(.*)"]);

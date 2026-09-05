@@ -161,13 +161,17 @@ function stepIsValid(step: number, profile: OnboardingProfile) {
   return true;
 }
 
-export function OnboardingWizard() {
+export function OnboardingWizard({ initialName }: { initialName?: string }) {
   const router = useRouter();
   const onboardingDraft = usePathPilotStore((state) => state.onboardingDraft);
+  const workspaceSession = usePathPilotStore((state) => state.workspaceSession);
   const setOnboardingDraft = usePathPilotStore((state) => state.setOnboardingDraft);
   const completeOnboarding = usePathPilotStore((state) => state.completeOnboarding);
   const [profile, setProfileState] = useState<OnboardingProfile>(
-    () => onboardingDraft ?? defaultOnboardingProfile,
+    () => onboardingDraft ?? {
+      ...defaultOnboardingProfile,
+      name: initialName?.trim() || workspaceSession?.displayName || defaultOnboardingProfile.name,
+    },
   );
   const [step, setStep] = useState(0);
   const [showValidation, setShowValidation] = useState(false);
@@ -184,7 +188,7 @@ export function OnboardingWizard() {
       }),
     onSuccess: (payload) => {
       completeOnboarding(payload.profile, payload.result);
-      router.push("/career-discovery");
+      router.push("/dashboard");
     },
   });
 

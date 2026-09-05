@@ -14,9 +14,16 @@ import type {
   OpportunityAction,
   RoadmapPlan,
 } from "@/features/pathpilot/schemas";
+import type { WorkspaceRole } from "@/features/roles/config";
 import { getSafeBrowserStorage } from "@/lib/safe-storage";
 
 export type ResourceProgress = "saved" | "started" | "done";
+
+export type WorkspaceSession = {
+  role: WorkspaceRole;
+  displayName: string;
+  workspaceName?: string;
+};
 
 interface PathPilotStore {
   onboardingDraft: OnboardingProfile | null;
@@ -31,6 +38,7 @@ interface PathPilotStore {
   resourceProgress: Record<string, ResourceProgress>;
   mission: MissionPlan | null;
   opportunityActions: Record<string, OpportunityAction>;
+  workspaceSession: WorkspaceSession | null;
   setOnboardingDraft: (profile: OnboardingProfile) => void;
   updateProfile: (profile: OnboardingProfile) => void;
   completeOnboarding: (
@@ -52,6 +60,7 @@ interface PathPilotStore {
     action: OpportunityAction | null,
   ) => void;
   restoreDismissedOpportunities: () => void;
+  setWorkspaceSession: (session: WorkspaceSession) => void;
 }
 
 export const usePathPilotStore = create<PathPilotStore>()(
@@ -69,6 +78,7 @@ export const usePathPilotStore = create<PathPilotStore>()(
       resourceProgress: {},
       mission: null,
       opportunityActions: {},
+      workspaceSession: null,
       setOnboardingDraft: (onboardingDraft) => set({ onboardingDraft }),
       updateProfile: (profile) => set({ profile, onboardingDraft: profile }),
       completeOnboarding: (profile, careerDiscovery) =>
@@ -182,6 +192,7 @@ export const usePathPilotStore = create<PathPilotStore>()(
             Object.entries(state.opportunityActions).filter(([, action]) => action !== "dismissed"),
           ),
         })),
+      setWorkspaceSession: (workspaceSession) => set({ workspaceSession }),
     }),
     {
       name: "pathpilot-core-loop-v1",
@@ -200,6 +211,7 @@ export const usePathPilotStore = create<PathPilotStore>()(
         resourceProgress: state.resourceProgress,
         mission: state.mission,
         opportunityActions: state.opportunityActions,
+        workspaceSession: state.workspaceSession,
       }),
     },
   ),

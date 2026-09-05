@@ -17,6 +17,8 @@ const timestamp3 = (name: string) =>
 
 export const userRole = pgEnum("UserRole", [
   "student",
+  "institution",
+  "industry",
   "parent",
   "counselor",
   "admin",
