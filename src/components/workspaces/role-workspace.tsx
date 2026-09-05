@@ -1,144 +1,56 @@
 "use client";
 
-import {
-  ArrowRight,
-  Building2,
-  ClipboardPlus,
-  GraduationCap,
-  Handshake,
-  MapPin,
-  Plus,
-  Search,
-  UsersRound,
-} from "lucide-react";
-import { FormEvent, useMemo, useState } from "react";
+import { ArrowRight, BriefcaseBusiness, Building2, CheckCircle2, ChevronRight, ClipboardPlus, GraduationCap, Handshake, Landmark, MapPin, Plus, Search, SlidersHorizontal, UsersRound } from "lucide-react";
+import { type FormEvent, useMemo, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
+import { Drawer, Modal } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Modal } from "@/components/ui/dialog";
+import { pipelineStages, readinessCopy, seedIndustryOpportunities, seedInstitutionCohorts, seedInstitutionOpportunities, seedPartners, seedPipeline, seedStudents, type Cohort, type Partner, type PipelineCandidate, type PipelineStage, type WorkspaceOpportunity, type WorkspaceStudent } from "@/features/workspaces/workspace-data";
 import { workspaceRoleConfig, type WorkspaceRole } from "@/features/roles/config";
 import { cn } from "@/lib/utils";
 
-type Candidate = {
-  name: string;
-  programme: string;
-  location: string;
-  readiness: number;
-  proof: string;
-};
+const institutionTabs = ["Overview", "Students", "Readiness", "Opportunities", "Partners"] as const;
+const industryTabs = ["Overview", "Candidates", "Opportunities", "Pipeline", "Company profile"] as const;
 
-const candidates: Candidate[] = [
-  { name: "Aanya Sharma", programme: "B.Tech · Computer Science", location: "Bengaluru", readiness: 92, proof: "Python · SQL · 2 verified projects" },
-  { name: "Kabir Mehta", programme: "B.Des · Interaction Design", location: "Pune", readiness: 87, proof: "Research · Figma · portfolio review" },
-  { name: "Nisha Iyer", programme: "B.Sc · Data Science", location: "Chennai", readiness: 83, proof: "Statistics · Python · capstone" },
-];
+function Metric({ value, label, note }: { value: string; label: string; note: string }) { return <article className="border border-[#dbe3ed] bg-white p-5"><strong className="block text-3xl font-semibold tracking-[-.055em]">{value}</strong><span className="mt-2 block text-sm font-medium text-[#526174]">{label}</span><span className="mt-1 block text-xs text-[#7a8aa0]">{note}</span></article>; }
+function Progress({ value, label }: { value: number; label: string }) { return <div><div className="mb-2 flex justify-between gap-3 text-sm"><span className="text-[#526174]">{label}</span><strong>{value}%</strong></div><div className="h-2 overflow-hidden rounded-full bg-[#e8eef5]"><div className="h-full rounded-full bg-[#1264c4]" style={{ width: `${value}%` }} /></div></div>; }
+function Ring({ value }: { value: number }) { return <span className="grid size-12 shrink-0 place-items-center rounded-full border-[5px] border-[#d7e9ff] text-xs font-bold text-[#1264c4]">{value}</span>; }
+function Pill({ children, green = false }: { children: React.ReactNode; green?: boolean }) { return <span className={cn("inline-flex rounded-full px-2.5 py-1 text-xs font-semibold", green ? "bg-emerald-50 text-emerald-700" : "bg-[#eaf3ff] text-[#1264c4]")}>{children}</span>; }
 
-const tabs = {
-  institution: ["Overview", "Students", "Opportunities", "Partners"],
-  industry: ["Overview", "Candidates", "Opportunities", "Pipeline"],
-} as const;
-
-function ReadinessRing({ value }: { value: number }) {
-  return (
-    <span className="grid size-12 place-items-center rounded-full border-[5px] border-[#d7e9ff] text-xs font-bold text-[#1264c4]" aria-label={`${value}% readiness`}>
-      {value}
-    </span>
-  );
+function People({ people, industry, onOpen, onShortlist }: { people: WorkspaceStudent[]; industry?: boolean; onOpen: (person: WorkspaceStudent) => void; onShortlist?: (person: WorkspaceStudent) => void }) {
+  if (!people.length) return <div className="border border-dashed border-[#cad7e5] bg-white p-10 text-center text-sm text-[#62748b]">No matches yet. Clear a filter to see more people.</div>;
+  return <div className="divide-y divide-[#dbe3ed] border-y border-[#dbe3ed] bg-white">{people.map((person) => <article className="flex flex-col gap-4 px-5 py-5 lg:flex-row lg:items-center" key={person.id}><Ring value={person.readiness} /><div className="min-w-0 flex-1"><div className="flex flex-wrap gap-2"><h3 className="font-semibold">{person.name}</h3><span className={cn("rounded-full px-2 py-0.5 text-xs font-medium ring-1", readinessCopy[person.band].className)}>{readinessCopy[person.band].label}</span></div><p className="mt-1 text-sm text-[#62748b]">{person.programme} · {person.location}</p><p className="mt-2 text-sm text-[#385c82]">{person.evidence.join(" · ")}</p></div><div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => onOpen(person)}>View evidence <ChevronRight /></Button>{industry && onShortlist ? <Button size="sm" className="bg-[#1264c4] hover:bg-[#0d55aa]" onClick={() => onShortlist(person)}>Shortlist</Button> : null}</div></article>)}</div>;
 }
 
-export function RoleWorkspace({
-  role,
-  displayName,
-  workspaceName,
-}: {
-  role: Exclude<WorkspaceRole, "student">;
-  displayName?: string;
-  workspaceName?: string;
-}) {
-  const config = workspaceRoleConfig[role];
-  const Icon = config.icon;
-  const [activeTab, setActiveTab] = useState<(typeof tabs)[typeof role][number]>("Overview");
-  const [createOpen, setCreateOpen] = useState(false);
-  const [newItem, setNewItem] = useState("");
-  const [items, setItems] = useState<string[]>(role === "institution" ? ["Data & AI readiness cohort", "First-year exploration cohort"] : ["Data Analyst Internship", "Design Research Sprint"]);
-  const [candidateFilter, setCandidateFilter] = useState<"all" | "ready" | "nearby">("all");
-  const workspaceLabel = workspaceName || (role === "institution" ? "Your institution" : "Your company");
-  const actionTitle = role === "institution" ? "Create a student cohort" : "Post an opportunity";
-  const actionDescription = role === "institution" ? "Group learners around a shared outcome and make support visible." : "Describe the real work so candidates can assess their fit before applying.";
-  const filteredCandidates = useMemo(() => candidates.filter((candidate) => candidateFilter === "all" || candidateFilter === "ready" ? candidateFilter !== "ready" || candidate.readiness >= 87 : candidate.location === "Bengaluru"), [candidateFilter]);
-
-  function createItem(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const value = newItem.trim();
-    if (!value) return;
-    setItems((current) => [value, ...current]);
-    setNewItem("");
-    setCreateOpen(false);
-    setActiveTab(role === "institution" ? "Students" : "Opportunities");
-  }
-
-  return (
-    <main className="min-h-screen bg-[#f8fafc] text-[#10284a]">
-      <header className="border-b border-[#e1e8f0] bg-white/90 px-4 py-4 backdrop-blur sm:px-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-          <Logo className="text-[#10284a]" href="/" />
-          <div className="flex items-center gap-3 text-right">
-            <div className="hidden sm:block"><p className="text-sm font-semibold">{workspaceLabel}</p><p className="text-xs text-[#62748b]">{displayName || "Workspace lead"}</p></div>
-            <span className="grid size-10 place-items-center rounded-full bg-[#eaf3ff] text-[#1264c4]"><Icon className="size-5" aria-hidden="true" /></span>
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-12">
-        <div className="flex flex-col justify-between gap-6 border-b border-[#dbe3ed] pb-8 lg:flex-row lg:items-end">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-[#1264c4]">{role === "institution" ? "Institution workspace" : "Industry workspace"}</p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-[-0.06em] sm:text-6xl">
-              {role === "institution" ? "Turn student potential into a coordinated plan." : "Build your early-talent pipeline on proof."}
-            </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-[#526174] sm:text-lg">
-              {role === "institution" ? "Connect readiness signals, student support, and industry opportunities in one shared view." : "Review skills, work samples, and readiness signals before your first conversation."}
-            </p>
-          </div>
-          <Button className="bg-[#1264c4] hover:bg-[#0d55aa]" size="lg" onClick={() => setCreateOpen(true)}><Plus aria-hidden="true" />{actionTitle}</Button>
-        </div>
-
-        <nav className="mt-6 flex gap-1 overflow-x-auto border-b border-[#dbe3ed]" aria-label={`${config.label} workspace sections`}>
-          {tabs[role].map((tab) => <button key={tab} type="button" onClick={() => setActiveTab(tab)} className={cn("min-h-11 shrink-0 border-b-2 px-4 text-sm font-semibold transition-colors", activeTab === tab ? "border-[#1264c4] text-[#1264c4]" : "border-transparent text-[#62748b] hover:text-[#10284a]")} aria-current={activeTab === tab ? "page" : undefined}>{tab}</button>)}
-        </nav>
-
-        {activeTab === "Overview" ? (
-          <section className="grid gap-6 py-8 lg:grid-cols-[1.25fr_0.75fr]">
-            <div className="border-b border-[#dbe3ed] pb-8 lg:border-b-0 lg:border-r lg:pr-8">
-              <div className="flex items-start justify-between gap-4"><div><p className="text-sm font-semibold text-[#1264c4]">Today&apos;s next action</p><h2 className="mt-2 text-2xl font-semibold tracking-[-0.04em]">{role === "institution" ? "Review students who need a next step" : "Review evidence-backed candidates"}</h2></div><span className="grid size-11 place-items-center rounded-xl bg-[#eaf3ff] text-[#1264c4]">{role === "institution" ? <GraduationCap className="size-5" /> : <Search className="size-5" />}</span></div>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-[#526174]">{role === "institution" ? "12 students have completed their latest reflection. Two are ready for a project brief, and three need a mentoring check-in." : "Three candidates match the skills and evidence signals for your active opportunity. Start with the strongest work samples."}</p>
-              <div className="mt-6 flex flex-wrap gap-3"><Button variant="outline" onClick={() => setActiveTab(role === "institution" ? "Students" : "Candidates")}>Open the list <ArrowRight /></Button><Button variant="ghost" onClick={() => setActiveTab("Opportunities")}>See active opportunities</Button></div>
-            </div>
-            <div className="grid content-start gap-4">
-              {role === "institution" ? [
-                ["184", "students in active cohorts"],
-                ["61%", "have a clear next action"],
-                ["8", "industry-linked briefs open"],
-              ] : [
-                ["24", "evidence-backed candidates"],
-                ["8", "active opportunities"],
-                ["76%", "average candidate readiness"],
-              ].map(([value, label]) => <div className="flex items-baseline justify-between border-b border-[#e8edf3] py-3" key={label}><strong className="text-2xl tracking-[-0.04em]">{value}</strong><span className="text-sm text-[#62748b]">{label}</span></div>)}
-            </div>
-          </section>
-        ) : null}
-
-        {activeTab === "Students" && role === "institution" ? <section className="py-8"><div className="flex items-end justify-between gap-4"><div><h2 className="text-2xl font-semibold tracking-[-0.04em]">Cohorts that need attention</h2><p className="mt-2 text-sm text-[#62748b]">Use readiness and evidence to decide the support each group needs next.</p></div><Button variant="outline" onClick={() => setCreateOpen(true)}><Plus /> New cohort</Button></div><div className="mt-7 grid gap-3 md:grid-cols-2">{items.map((item, index) => <article className="border border-[#dbe3ed] bg-white p-5" key={item}><div className="flex items-start justify-between"><span className="grid size-9 place-items-center rounded-lg bg-[#eaf3ff] text-[#1264c4]"><UsersRound className="size-4" /></span><span className="text-sm font-semibold text-[#1264c4]">{18 + index * 7} learners</span></div><h3 className="mt-6 font-semibold">{item}</h3><p className="mt-2 text-sm text-[#62748b]">{index + 2} learners need a check-in this week.</p><Button className="mt-5 -ml-3" variant="ghost" size="sm">Review readiness <ArrowRight /></Button></article>)}</div></section> : null}
-
-        {activeTab === "Candidates" && role === "industry" ? <section className="py-8"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-2xl font-semibold tracking-[-0.04em]">Candidates with visible evidence</h2><p className="mt-2 text-sm text-[#62748b]">The strongest evidence comes first—then you decide who to meet.</p></div><div className="flex gap-2">{(["all", "ready", "nearby"] as const).map((filter) => <Button key={filter} variant={candidateFilter === filter ? "default" : "outline"} size="sm" onClick={() => setCandidateFilter(filter)}>{filter === "all" ? "All" : filter === "ready" ? "Readiness 87+" : "Near Bengaluru"}</Button>)}</div></div><div className="mt-7 divide-y divide-[#dbe3ed] border-y border-[#dbe3ed]">{filteredCandidates.map((candidate) => <article className="flex flex-col gap-4 py-5 sm:flex-row sm:items-center" key={candidate.name}><ReadinessRing value={candidate.readiness} /><div className="min-w-0 flex-1"><h3 className="font-semibold">{candidate.name}</h3><p className="mt-1 text-sm text-[#62748b]">{candidate.programme} · {candidate.location}</p><p className="mt-2 text-sm text-[#385c82]">{candidate.proof}</p></div><Button variant="outline">Review profile <ArrowRight /></Button></article>)}</div></section> : null}
-
-        {(activeTab === "Opportunities" || activeTab === "Partners" || activeTab === "Pipeline") ? <section className="py-8"><div className="flex items-end justify-between gap-4"><div><h2 className="text-2xl font-semibold tracking-[-0.04em]">{activeTab === "Partners" ? "Industry partners" : activeTab === "Pipeline" ? "Hiring pipeline" : "Active opportunities"}</h2><p className="mt-2 text-sm text-[#62748b]">{activeTab === "Partners" ? "Relationships that turn learning into real work." : "Work that is ready for the right people to see."}</p></div><Button variant="outline" onClick={() => setCreateOpen(true)}><Plus />{activeTab === "Partners" ? "Add partner" : actionTitle}</Button></div><div className="mt-7 grid gap-3 md:grid-cols-2">{items.map((item, index) => <article className="border border-[#dbe3ed] bg-white p-5" key={item}><div className="flex items-center justify-between"><span className="grid size-9 place-items-center rounded-lg bg-[#eaf3ff] text-[#1264c4]">{activeTab === "Partners" ? <Handshake className="size-4" /> : <ClipboardPlus className="size-4" />}</span><span className="text-xs font-semibold text-[#39a27e]">Active</span></div><h3 className="mt-6 font-semibold">{item}</h3><p className="mt-2 flex items-center gap-1.5 text-sm text-[#62748b]"><MapPin className="size-3.5" />{index % 2 ? "Remote / India" : "Bengaluru, India"}</p><Button className="mt-5 -ml-3" variant="ghost" size="sm">Open details <ArrowRight /></Button></article>)}</div></section> : null}
-      </div>
-
-      <Modal open={createOpen} onOpenChange={setCreateOpen} title={actionTitle} description={actionDescription} titleIcon={role === "institution" ? <Building2 className="size-5 text-[#1264c4]" /> : <ClipboardPlus className="size-5 text-[#1264c4]" />}>
-        <form className="grid gap-5" onSubmit={createItem}><label className="grid gap-2 text-sm font-medium">{role === "institution" ? "Cohort name" : "Opportunity title"}<Input autoFocus value={newItem} onChange={(event) => setNewItem(event.target.value)} placeholder={role === "institution" ? "e.g. Product thinking cohort" : "e.g. Frontend engineering internship"} /></label><Button className="bg-[#1264c4] hover:bg-[#0d55aa]" type="submit">Create and continue <ArrowRight /></Button></form>
-      </Modal>
-    </main>
-  );
+export function RoleWorkspace({ role, displayName, workspaceName }: { role: Exclude<WorkspaceRole, "student">; displayName?: string; workspaceName?: string }) {
+  const config = workspaceRoleConfig[role]; const Icon = config.icon;
+  const [tab, setTab] = useState<string>("Overview"); const [createMode, setCreateMode] = useState<"cohort" | "partner" | "opportunity" | null>(null); const [draft, setDraft] = useState("");
+  const [cohorts, setCohorts] = useState<Cohort[]>(seedInstitutionCohorts); const [partners, setPartners] = useState<Partner[]>(seedPartners); const [industryOpportunities, setIndustryOpportunities] = useState<WorkspaceOpportunity[]>(seedIndustryOpportunities); const [pipeline, setPipeline] = useState<PipelineCandidate[]>(seedPipeline);
+  const [search, setSearch] = useState(""); const [readyOnly, setReadyOnly] = useState(false); const [selected, setSelected] = useState<WorkspaceStudent | null>(null); const [saved, setSaved] = useState(false);
+  const [company, setCompany] = useState({ name: workspaceName || "Your company", sector: "Technology", location: "Bengaluru, India", website: "", about: "We connect early talent to meaningful work with clear expectations and feedback." });
+  const tabs = role === "institution" ? institutionTabs : industryTabs; const label = workspaceName || (role === "institution" ? "Your institution" : "Your company");
+  const people = useMemo(() => (role === "institution" ? seedStudents : pipeline).filter((person) => `${person.name} ${person.programme} ${person.evidence.join(" ")}`.toLowerCase().includes(search.toLowerCase()) && (!readyOnly || person.readiness >= 85)), [role, search, readyOnly, pipeline]);
+  const openPost = () => setCreateMode(role === "institution" ? "cohort" : "opportunity");
+  const shortlist = (person: WorkspaceStudent) => { setPipeline((current) => current.map((entry) => entry.id === person.id && entry.pipelineStage === "New" ? { ...entry, pipelineStage: "Shortlisted" } : entry)); setTab("Pipeline"); };
+  function saveCreate(event: FormEvent) { event.preventDefault(); if (!draft.trim() || !createMode) return; if (createMode === "cohort") { setCohorts((list) => [{ id: `cohort-${Date.now()}`, name: draft.trim(), programme: "Programme to be configured", term: "Current term", learners: 0, readiness: 0, needsAttention: 0, focus: "Set the first outcome" }, ...list]); setTab("Readiness"); } if (createMode === "partner") { setPartners((list) => [{ id: `partner-${Date.now()}`, name: draft.trim(), sector: "To be confirmed", relationship: "New partner", activeBriefs: 0, nextTouchpoint: "Set a first conversation" }, ...list]); setTab("Partners"); } if (createMode === "opportunity") { setIndustryOpportunities((list) => [{ id: `opportunity-${Date.now()}`, title: draft.trim(), organization: company.name, type: "Internship", location: company.location, deadline: "Add a deadline", skills: ["Add required skills"], status: "Draft", applicants: 0 }, ...list]); setTab("Opportunities"); } setDraft(""); setCreateMode(null); }
+  const info = role === "institution" ? { eyebrow: "Institution workspace", title: "Turn student potential into coordinated support.", body: "See readiness across cohorts, act on students who need help, and make the right opportunities visible." } : { eyebrow: "Industry workspace", title: "Build an early-talent pipeline on proof.", body: "Review evidence before a conversation, publish clear opportunities, and keep every hiring decision moving." };
+  const modal = createMode === "cohort" ? ["Create a student cohort", "Cohort name", "e.g. Product thinking cohort"] : createMode === "partner" ? ["Add an industry partner", "Organisation name", "e.g. Northstar Labs"] : ["Post an opportunity", "Opportunity title", "e.g. Frontend engineering internship"];
+  return <main className="min-h-screen bg-[#f8fafc] text-[#10284a]"><header className="border-b border-[#e1e8f0] bg-white/90 px-4 py-4 backdrop-blur sm:px-8"><div className="mx-auto flex max-w-7xl items-center justify-between gap-4"><Logo className="text-[#10284a]" href="/" /><div className="flex items-center gap-3 text-right"><div className="hidden sm:block"><p className="text-sm font-semibold">{label}</p><p className="text-xs text-[#62748b]">{displayName || "Workspace lead"}</p></div><span className="grid size-10 place-items-center rounded-full bg-[#eaf3ff] text-[#1264c4]"><Icon className="size-5" /></span></div></div></header><div className="mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-12">
+    <section className="flex flex-col justify-between gap-6 border-b border-[#dbe3ed] pb-8 lg:flex-row lg:items-end"><div className="max-w-3xl"><p className="text-sm font-semibold text-[#1264c4]">{info.eyebrow}</p><h1 className="mt-3 text-4xl font-semibold tracking-[-.06em] sm:text-6xl">{info.title}</h1><p className="mt-4 max-w-2xl text-base leading-7 text-[#526174] sm:text-lg">{info.body}</p></div><Button className="bg-[#1264c4] hover:bg-[#0d55aa]" size="lg" onClick={openPost}><Plus />{role === "institution" ? "Create cohort" : "Post opportunity"}</Button></section>
+    <nav className="mt-6 flex gap-1 overflow-x-auto border-b border-[#dbe3ed]" aria-label={`${config.label} workspace sections`}>{tabs.map((item) => <button key={item} type="button" onClick={() => setTab(item)} className={cn("min-h-11 shrink-0 border-b-2 px-4 text-sm font-semibold", tab === item ? "border-[#1264c4] text-[#1264c4]" : "border-transparent text-[#62748b]")}>{item}</button>)}</nav>
+    {tab === "Overview" ? <section className="py-8"><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{role === "institution" ? <><Metric value="129" label="students in active cohorts" note="Across 3 programme groups" /><Metric value="72%" label="average readiness" note="Up 5 points this month" /><Metric value="28" label="students need a next step" note="6 need mentor check-ins" /><Metric value="3" label="active industry partners" note="4 live briefs" /></> : <><Metric value="24" label="evidence-backed candidates" note="Across 2 active roles" /><Metric value="2" label="open opportunities" note="40 expressions of interest" /><Metric value="6" label="candidates in conversation" note="2 interviews this week" /><Metric value="78%" label="average readiness" note="Based on visible evidence" /></>}</div><div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_.85fr]"><article className="border border-[#dbe3ed] bg-white p-6"><p className="text-sm font-semibold text-[#1264c4]">Today&apos;s priority</p><h2 className="mt-2 text-2xl font-semibold tracking-[-.04em]">{role === "institution" ? "Review six learners before opportunity nominations close." : "Move two strong candidates from shortlist to interview."}</h2><p className="mt-4 text-sm leading-6 text-[#526174]">{role === "institution" ? "Aanya and Kabir are ready for a brief. Meera needs a mentor check-in before she is matched to anything new." : "Aanya has the strongest verified evidence for the data analyst internship. Start with her work samples."}</p><div className="mt-6 flex flex-wrap gap-3"><Button variant="outline" onClick={() => setTab(role === "institution" ? "Students" : "Candidates")}>Open the list <ArrowRight /></Button><Button variant="ghost" onClick={() => setTab(role === "institution" ? "Readiness" : "Pipeline")}>See what needs attention</Button></div></article><article className="border border-[#dbe3ed] bg-white p-6"><p className="text-sm font-semibold">{role === "institution" ? "Readiness across the institution" : "Hiring pipeline health"}</p><div className="mt-5 grid gap-5"><Progress label={role === "institution" ? "Career direction" : "Profiles reviewed"} value={76} /><Progress label={role === "institution" ? "Project evidence" : "Shortlist to interview"} value={69} /><Progress label={role === "institution" ? "Opportunity readiness" : "Candidate response"} value={82} /></div></article></div></section> : null}
+    {tab === "Students" && role === "institution" ? <section className="py-8"><div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><h2 className="text-2xl font-semibold tracking-[-.04em]">Student readiness</h2><p className="mt-2 text-sm text-[#62748b]">Open a record to see evidence, the current next action, and where support is needed.</p></div><Filters search={search} setSearch={setSearch} readyOnly={readyOnly} setReadyOnly={setReadyOnly} /></div><div className="mt-7"><People people={people} onOpen={setSelected} /></div></section> : null}
+    {tab === "Readiness" && role === "institution" ? <section className="py-8"><div className="flex items-end justify-between gap-4"><div><h2 className="text-2xl font-semibold tracking-[-.04em]">Cohort readiness</h2><p className="mt-2 text-sm text-[#62748b]">Use gaps to decide what each group needs before its next opportunity.</p></div><Button variant="outline" onClick={() => setCreateMode("cohort")}><Plus />New cohort</Button></div><div className="mt-7 grid gap-4 lg:grid-cols-3">{cohorts.map((cohort) => <article className="border border-[#dbe3ed] bg-white p-5" key={cohort.id}><div className="flex justify-between"><span className="grid size-10 place-items-center rounded-xl bg-[#eaf3ff] text-[#1264c4]"><UsersRound className="size-5" /></span><Pill green={cohort.readiness >= 70}>{cohort.readiness >= 70 ? "On track" : "Needs focus"}</Pill></div><h3 className="mt-6 font-semibold">{cohort.name}</h3><p className="mt-1 text-sm text-[#62748b]">{cohort.programme} · {cohort.term}</p><div className="mt-5"><Progress value={cohort.readiness} label="Average readiness" /></div><dl className="mt-5 grid grid-cols-2 gap-3 border-t border-[#e8edf3] pt-4 text-sm"><div><dt className="text-[#7a8aa0]">Learners</dt><dd className="mt-1 font-semibold">{cohort.learners}</dd></div><div><dt className="text-[#7a8aa0]">Need support</dt><dd className="mt-1 font-semibold text-rose-700">{cohort.needsAttention}</dd></div></dl><p className="mt-4 text-sm text-[#385c82]"><strong>Focus:</strong> {cohort.focus}</p></article>)}</div></section> : null}
+    {tab === "Opportunities" ? <Opportunities opportunities={role === "institution" ? seedInstitutionOpportunities : industryOpportunities} industry={role === "industry"} onPost={() => setCreateMode("opportunity")} /> : null}
+    {tab === "Partners" && role === "institution" ? <section className="py-8"><div className="flex items-end justify-between gap-4"><div><h2 className="text-2xl font-semibold tracking-[-.04em]">Industry partners</h2><p className="mt-2 text-sm text-[#62748b]">Keep the relationship, live work, and next conversation in one place.</p></div><Button variant="outline" onClick={() => setCreateMode("partner")}><Plus />Add partner</Button></div><div className="mt-7 grid gap-4 lg:grid-cols-3">{partners.map((partner) => <article className="border border-[#dbe3ed] bg-white p-5" key={partner.id}><Handshake className="size-5 text-[#1264c4]" /><h3 className="mt-6 font-semibold">{partner.name}</h3><p className="mt-1 text-sm text-[#62748b]">{partner.sector} · {partner.relationship}</p><dl className="mt-5 grid gap-3 border-y border-[#e8edf3] py-4 text-sm"><div className="flex justify-between"><dt>Active briefs</dt><dd className="font-semibold">{partner.activeBriefs}</dd></div><div className="flex justify-between gap-4"><dt>Next touchpoint</dt><dd className="text-right font-medium text-[#385c82]">{partner.nextTouchpoint}</dd></div></dl></article>)}</div></section> : null}
+    {tab === "Candidates" && role === "industry" ? <section className="py-8"><div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><h2 className="text-2xl font-semibold tracking-[-.04em]">Candidates with evidence</h2><p className="mt-2 text-sm text-[#62748b]">Skills are easier to assess when you can see the work behind them.</p></div><Filters search={search} setSearch={setSearch} readyOnly={readyOnly} setReadyOnly={setReadyOnly} /></div><div className="mt-7"><People people={people} industry onOpen={setSelected} onShortlist={shortlist} /></div></section> : null}
+    {tab === "Pipeline" && role === "industry" ? <section className="py-8"><h2 className="text-2xl font-semibold tracking-[-.04em]">Hiring pipeline</h2><p className="mt-2 text-sm text-[#62748b]">Move candidates deliberately so every next conversation is clear.</p><div className="mt-7 grid gap-4 xl:grid-cols-4">{pipelineStages.map((stage) => <section className="border border-[#dbe3ed] bg-white p-4" key={stage}><div className="flex justify-between border-b border-[#e8edf3] pb-3"><h3 className="font-semibold">{stage}</h3><Pill green={stage === "Selected"}>{pipeline.filter((item) => item.pipelineStage === stage).length}</Pill></div><div className="mt-3 grid gap-3">{pipeline.filter((item) => item.pipelineStage === stage).map((candidate) => <article className="border border-[#e1e8f0] bg-[#fbfdff] p-3" key={candidate.id}><div className="flex justify-between gap-3"><div><h4 className="text-sm font-semibold">{candidate.name}</h4><p className="mt-1 text-xs text-[#62748b]">{candidate.appliedTo}</p></div><span className="font-semibold text-[#1264c4]">{candidate.readiness}</span></div><select className="mt-3 h-9 w-full rounded-md border border-[#cbd7e5] bg-white px-2 text-xs font-medium" aria-label={`Move ${candidate.name}`} value={candidate.pipelineStage} onChange={(event) => setPipeline((list) => list.map((item) => item.id === candidate.id ? { ...item, pipelineStage: event.target.value as PipelineStage } : item))}>{pipelineStages.map((option) => <option key={option}>{option}</option>)}</select></article>)}{!pipeline.some((item) => item.pipelineStage === stage) ? <p className="py-8 text-center text-xs text-[#7a8aa0]">No candidates here yet.</p> : null}</div></section>)}</div></section> : null}
+    {tab === "Company profile" && role === "industry" ? <section className="grid gap-7 py-8 lg:grid-cols-[.75fr_1.25fr]"><article className="border border-[#dbe3ed] bg-white p-6"><Landmark className="size-6 text-[#1264c4]" /><h2 className="mt-5 text-xl font-semibold">Make the opportunity context clear.</h2><p className="mt-3 text-sm leading-6 text-[#62748b]">Candidates should understand what you do, where work happens, and how you support early talent before they apply.</p><p className="mt-6 flex gap-2 border-t border-[#e8edf3] pt-5 text-sm text-[#385c82]"><CheckCircle2 className="size-4 shrink-0 text-emerald-600" />Profile details are visible on every opportunity.</p></article><form className="border border-[#dbe3ed] bg-white p-6" onSubmit={(event) => { event.preventDefault(); setSaved(true); }}><div className="flex justify-between gap-4"><div><h2 className="text-xl font-semibold">Company profile</h2><p className="mt-1 text-sm text-[#62748b]">Used on every opportunity you publish.</p></div>{saved ? <Pill green>Saved</Pill> : null}</div><div className="mt-6 grid gap-5 sm:grid-cols-2"><Field label="Organisation name" value={company.name} onChange={(name) => setCompany((item) => ({ ...item, name }))} /><Field label="Sector" value={company.sector} onChange={(sector) => setCompany((item) => ({ ...item, sector }))} /><Field label="Primary location" value={company.location} onChange={(location) => setCompany((item) => ({ ...item, location }))} /><Field label="Website" value={company.website} onChange={(website) => setCompany((item) => ({ ...item, website }))} /></div><label className="mt-5 grid gap-2 text-sm font-medium">About your work<textarea className="min-h-32 rounded-md border border-[#cbd7e5] bg-white p-3 text-sm leading-6 outline-none focus:ring-2 focus:ring-[#1264c4]" value={company.about} onChange={(event) => setCompany((item) => ({ ...item, about: event.target.value }))} /></label><Button className="mt-6 bg-[#1264c4] hover:bg-[#0d55aa]" type="submit">Save company profile <CheckCircle2 /></Button></form></section> : null}
+  </div><Modal open={createMode !== null} onOpenChange={(open) => !open && setCreateMode(null)} title={modal[0]} description="Save the first detail now; you can enrich it from the workspace." titleIcon={createMode === "partner" ? <Handshake className="size-5 text-[#1264c4]" /> : createMode === "cohort" ? <UsersRound className="size-5 text-[#1264c4]" /> : <BriefcaseBusiness className="size-5 text-[#1264c4]" />}><form className="grid gap-5" onSubmit={saveCreate}><label className="grid gap-2 text-sm font-medium">{modal[1]}<Input autoFocus value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={modal[2]} /></label><Button className="bg-[#1264c4] hover:bg-[#0d55aa]" type="submit">Save and continue <ArrowRight /></Button></form></Modal><Drawer open={selected !== null} onOpenChange={(open) => !open && setSelected(null)} title={selected?.name || "Candidate record"} description={selected ? `${selected.programme} · ${selected.location}` : undefined}>{selected ? <div className="grid gap-6"><div className="flex gap-4"><Ring value={selected.readiness} /><p className="text-sm leading-6 text-[#526174]"><strong className="block text-[#10284a]">{selected.readiness}% readiness</strong>Evidence is based on work the student has added to PathPilot.</p></div><section><h3 className="font-semibold">Visible evidence</h3><div className="mt-3 flex flex-wrap gap-2">{selected.evidence.map((item) => <Pill key={item}>{item}</Pill>)}</div></section><section className="border-y border-[#e1e8f0] py-5"><h3 className="font-semibold">Current next action</h3><p className="mt-2 text-sm text-[#526174]">{selected.nextAction}</p></section>{role === "industry" ? <Button className="bg-[#1264c4] hover:bg-[#0d55aa]" onClick={() => { shortlist(selected); setSelected(null); }}>Shortlist for a conversation <ArrowRight /></Button> : <Button variant="outline" onClick={() => setSelected(null)}>Record support action <ArrowRight /></Button>}</div> : null}</Drawer></main>;
 }
+
+function Filters({ search, setSearch, readyOnly, setReadyOnly }: { search: string; setSearch: (value: string) => void; readyOnly: boolean; setReadyOnly: (value: boolean) => void }) { return <div className="flex flex-col gap-2 sm:flex-row"><div className="relative"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#62748b]" /><Input className="min-w-64 pl-9" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search people" /></div><Button variant="outline" onClick={() => setReadyOnly(!readyOnly)}><SlidersHorizontal />{readyOnly ? "Show all" : "Readiness 85+"}</Button></div>; }
+function Field({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) { return <label className="grid gap-2 text-sm font-medium">{label}<Input value={value} onChange={(event) => onChange(event.target.value)} /></label>; }
+function Opportunities({ opportunities, industry, onPost }: { opportunities: WorkspaceOpportunity[]; industry: boolean; onPost: () => void }) { return <section className="py-8"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h2 className="text-2xl font-semibold tracking-[-.04em]">{industry ? "Published opportunities" : "Opportunities for your students"}</h2><p className="mt-2 text-sm text-[#62748b]">{industry ? "Give candidates a clear view of the work, evidence, and timeline before they apply." : "Review requirements before nominating students or sharing with a cohort."}</p></div>{industry ? <Button variant="outline" onClick={onPost}><Plus />Post opportunity</Button> : null}</div><div className="mt-7 grid gap-4 lg:grid-cols-2">{opportunities.map((opportunity) => <article className="border border-[#dbe3ed] bg-white p-5" key={opportunity.id}><div className="flex justify-between gap-4"><div><Pill green={opportunity.status === "Open"}>{opportunity.status}</Pill><h3 className="mt-4 text-lg font-semibold">{opportunity.title}</h3><p className="mt-1 text-sm text-[#62748b]">{opportunity.organization} · {opportunity.type}</p></div><BriefcaseBusiness className="size-5 text-[#1264c4]" /></div><div className="mt-5 flex flex-wrap gap-2">{opportunity.skills.map((skill) => <span className="rounded-full bg-[#f2f6fa] px-2.5 py-1 text-xs font-medium text-[#385c82]" key={skill}>{skill}</span>)}</div><div className="mt-5 flex justify-between gap-3 border-t border-[#e8edf3] pt-4 text-sm text-[#62748b]"><span className="flex items-center gap-1"><MapPin className="size-3.5" />{opportunity.location}</span><span>{opportunity.deadline}</span></div><div className="mt-4 flex justify-between"><span className="text-sm font-medium text-[#385c82]">{opportunity.applicants} interested</span><Button size="sm" variant="ghost">{industry ? "Open details" : "Review fit"} <ArrowRight /></Button></div></article>)}</div></section>; }
