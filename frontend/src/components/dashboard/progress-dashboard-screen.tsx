@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, MotionConfig } from "framer-motion";
-import { ArrowRight, Check, Compass, Flag, Map, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Compass, FileCheck2, Flag, GraduationCap, Map, Rocket, Route, Sparkles, Target } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { usePathPilotProgressModel } from "@/features/pathpilot/use-progress-model";
@@ -15,42 +15,83 @@ type PathStep = {
   detail: string;
   href: string;
   done: boolean;
+  action: string;
+  icon: typeof Compass;
 };
 
+type JourneySnapshot = {
+  hasProfile: boolean;
+  hasCareer: boolean;
+  hasRoadmap: boolean;
+  hasStagePlan: boolean;
+  hasDegree: boolean;
+  hasCollegeOrExam: boolean;
+  hasEvidence: boolean;
+  hasApplication: boolean;
+  hasMission: boolean;
+};
+
+function getJourneyPathway(journey: ReturnType<typeof getStudentJourney>, state: JourneySnapshot): PathStep[] {
+  if (journey === "stream-explorer") {
+    return [
+      { label: "Know yourself", detail: "Start with an assessment", href: "/onboarding", done: state.hasProfile, action: "Begin assessment", icon: Compass },
+      { label: "Explore careers", detail: "See career families", href: "/career-discovery", done: state.hasCareer, action: "Explore careers", icon: Sparkles },
+      { label: "Choose a stream", detail: "Build your stream pathway", href: "/roadmap", done: state.hasRoadmap, action: "Explore stream pathways", icon: Route },
+      { label: "Build confidence", detail: "Skills and activities", href: "/learning", done: state.hasEvidence, action: "Choose an activity", icon: Target },
+      { label: "Keep momentum", detail: "A simple mission", href: "/mission", done: state.hasMission, action: "Open Mission Mode", icon: Flag },
+    ];
+  }
+
+  if (journey === "career-launch") {
+    return [
+      { label: "Know your direction", detail: "Career assessment", href: "/onboarding", done: state.hasProfile, action: "Begin assessment", icon: Compass },
+      { label: "Choose a direction", detail: "Career matches", href: "/career-discovery", done: state.hasCareer, action: "Review my direction", icon: Sparkles },
+      { label: "Compare your options", detail: "Job or higher studies", href: "/degrees", done: state.hasStagePlan, action: "Compare directions", icon: Map },
+      { label: "Build your proof", detail: "Resume, projects, and skills", href: "/resume", done: state.hasEvidence, action: "Strengthen my evidence", icon: FileCheck2 },
+      { label: "Launch", detail: "Relevant opportunities", href: "/opportunities", done: state.hasApplication, action: "Find opportunities", icon: Rocket },
+    ];
+  }
+
+  return [
+    { label: "Know yourself", detail: "Start with an assessment", href: "/onboarding", done: state.hasProfile, action: "Begin assessment", icon: Compass },
+    { label: "Choose direction", detail: "Career discovery", href: "/career-discovery", done: state.hasCareer, action: "See career matches", icon: Sparkles },
+    { label: "Choose a degree", detail: "Compare degree routes", href: "/degrees", done: state.hasDegree, action: "Compare degrees", icon: GraduationCap },
+    { label: "Plan admission", detail: "College and entrance exams", href: "/colleges", done: state.hasCollegeOrExam, action: "Find colleges", icon: Map },
+    { label: "Make it actionable", detail: "Roadmap and mission", href: "/roadmap", done: state.hasRoadmap && state.hasMission, action: "Build my roadmap", icon: Route },
+  ];
+}
+
 export function ProgressDashboardScreen() {
-  const { profileState, career, roadmap, mission, health, progress } = usePathPilotProgressModel();
+  const { profileState, career, roadmap, mission, missionState, health, progress, resourceProgress } = usePathPilotProgressModel();
   const journey = usePathPilotStore((state) => state.studentJourney);
   const stagePlan = usePathPilotStore((state) => state.stagePlan);
+  const selectedDegreeKey = usePathPilotStore((state) => state.selectedDegreeKey);
+  const selectedCollegeId = usePathPilotStore((state) => state.selectedCollegeId);
+  const selectedExamId = usePathPilotStore((state) => state.selectedExamId);
+  const opportunityActions = usePathPilotStore((state) => state.opportunityActions);
   const currentJourney = getStudentJourney(journey);
   const journeyConfig = studentJourneyConfig[currentJourney];
   const activeMilestone = roadmap?.milestones.find((milestone) => milestone.status === "active") ?? roadmap?.milestones[0];
-  const nextAction = !profileState
-    ? { title: "Start with a quick assessment", detail: "Tell PathPilot what you enjoy, how you work, and what matters in your next step.", href: "/onboarding", action: "Begin assessment", icon: Compass }
-    : !career
-      ? { title: "Choose a career direction", detail: "Your assessment is ready. Review the paths that fit your interests and priorities.", href: "/career-discovery", action: "See my matches", icon: Sparkles }
-      : !roadmap
-        ? { title: `Turn ${career.careerName} into a plan`, detail: "Build a practical sequence of skills, projects, and proof points around the direction you chose.", href: "/roadmap", action: "Create roadmap", icon: Map }
-        : { title: activeMilestone?.title ?? journeyConfig.nextAction.title, detail: activeMilestone?.description ?? journeyConfig.nextAction.detail, href: activeMilestone ? "/roadmap" : journeyConfig.nextAction.href, action: activeMilestone ? "Open roadmap" : journeyConfig.nextAction.action, icon: activeMilestone ? Flag : journeyConfig.nextAction.icon };
+  const hasEvidence = Object.values(resourceProgress).some((status) => status === "done") || progress.completedThisWeek > 0;
+  const hasApplication = Object.values(opportunityActions).some((action) => action === "saved" || action === "joined");
+  const pathway = getJourneyPathway(currentJourney, {
+    hasProfile: Boolean(profileState),
+    hasCareer: Boolean(career),
+    hasRoadmap: Boolean(roadmap),
+    hasStagePlan: Boolean(stagePlan),
+    hasDegree: Boolean(selectedDegreeKey),
+    hasCollegeOrExam: Boolean(selectedCollegeId || selectedExamId),
+    hasEvidence,
+    hasApplication,
+    hasMission: Boolean(missionState),
+  });
+  const nextStep = pathway.find((step) => !step.done);
+  const nextAction = activeMilestone && pathway.every((step) => step.done)
+    ? { title: activeMilestone.title, detail: activeMilestone.description, href: "/roadmap", action: "Open roadmap", icon: Flag }
+    : nextStep
+      ? { title: nextStep.label, detail: nextStep.detail, href: nextStep.href, action: nextStep.action, icon: nextStep.icon }
+      : { title: journeyConfig.nextAction.title, detail: journeyConfig.nextAction.detail, href: journeyConfig.nextAction.href, action: journeyConfig.nextAction.action, icon: journeyConfig.nextAction.icon };
   const NextIcon = nextAction.icon;
-  const pathway: PathStep[] = currentJourney === "stream-explorer" ? [
-    { label: "Know yourself", detail: "Assessment", href: "/onboarding", done: Boolean(profileState) },
-    { label: "Choose a stream", detail: stagePlan?.title ?? "Stream pathways", href: "/roadmap", done: Boolean(stagePlan) },
-    { label: "Explore careers", detail: career?.careerName ?? "Career discovery", href: "/career-discovery", done: Boolean(career) },
-    { label: "Build subject confidence", detail: "Skills & activities", href: "/learning", done: progress.completedThisWeek > 0 },
-    { label: "Keep exploring", detail: "Mission", href: "/mission", done: false },
-  ] : currentJourney === "career-launch" ? [
-    { label: "Choose direction", detail: stagePlan?.title ?? "Job or higher studies", href: "/degrees", done: Boolean(stagePlan) },
-    { label: "Build proof", detail: "Projects", href: "/projects", done: false },
-    { label: "Show readiness", detail: "Resume and GitHub", href: "/resume", done: false },
-    { label: "Practice", detail: "Interview Coach", href: "/interview", done: false },
-    { label: "Apply", detail: "Opportunities", href: "/opportunities", done: false },
-  ] : [
-    { label: "Know yourself", detail: "Assessment", href: "/onboarding", done: Boolean(profileState) },
-    { label: "Choose direction", detail: career?.careerName ?? "Career discovery", href: "/career-discovery", done: Boolean(career) },
-    { label: "Plan your route", detail: roadmap ? `${roadmap.milestones.length} milestones` : "Roadmap", href: "/roadmap", done: Boolean(roadmap) },
-    { label: "Build evidence", detail: `${progress.completedThisWeek} actions this week`, href: "/learning", done: progress.completedThisWeek > 0 },
-    { label: "Access opportunity", detail: "When you are ready", href: "/radar", done: false },
-  ];
 
   return (
     <MotionConfig reducedMotion="user">
