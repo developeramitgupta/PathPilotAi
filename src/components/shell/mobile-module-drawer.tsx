@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 
-import { navigationGroups } from "@/components/shell/navigation-config";
+import { getNavigationGroups } from "@/components/shell/navigation-config";
+import { usePathPilotStore } from "@/stores/pathpilot-store";
 import { Drawer } from "@/components/ui/dialog";
 
 export function MobileModuleDrawer({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+  const studentJourney = usePathPilotStore((state) => state.studentJourney);
+  const navigationGroups = getNavigationGroups(studentJourney);
   return (
     <Drawer open={open} onOpenChange={onOpenChange} title="All modules" description="Jump to any PathPilot workspace." side="bottom">
       <div className="grid gap-5">

@@ -13,15 +13,18 @@ import {
   workspaceRoles,
   type WorkspaceRole,
 } from "@/features/roles/config";
+import { type StudentJourney } from "@/features/student-journey/config";
 import { cn } from "@/lib/utils";
 import { usePathPilotStore } from "@/stores/pathpilot-store";
 
 export function AuthPreview({
   mode,
   role: initialRole = "student",
+  journey,
 }: {
   mode: "sign-in" | "sign-up";
   role?: WorkspaceRole;
+  journey?: StudentJourney;
 }) {
   const router = useRouter();
   const setWorkspaceSession = usePathPilotStore((state) => state.setWorkspaceSession);
@@ -57,9 +60,14 @@ export function AuthPreview({
     const displayName = cleanName || savedSession?.displayName || "PathPilot member";
     const nextWorkspaceName = workspaceName.trim() || undefined;
     setWorkspaceSession({ role, displayName, workspaceName: nextWorkspaceName });
+    if (role === "student" && !journey) {
+      router.push("/student-stage");
+      return;
+    }
     const destination = config.destination;
     const query = new URLSearchParams({ role, name: displayName });
     if (nextWorkspaceName) query.set("workspace", nextWorkspaceName);
+    if (role === "student" && journey) query.set("journey", journey);
     router.push(`${destination}?${query.toString()}`);
   }
 

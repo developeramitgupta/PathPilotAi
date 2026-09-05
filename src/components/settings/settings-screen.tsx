@@ -252,9 +252,9 @@ export function SettingsScreen() {
                 <span className="min-w-0 flex-1"><span className="block text-sm font-medium text-foreground">Decision history</span><span className="mt-0.5 block text-xs text-muted-foreground">Review choices that shaped your plan.</span></span>
                 <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
               </Link>
-              <Link href="/onboarding" className="group flex min-h-16 items-center gap-3 rounded-xl border border-border bg-background/35 p-3 transition-colors hover:border-primary/25 hover:bg-primary/5">
+              <Link href="/student-stage?mode=switch" className="group flex min-h-16 items-center gap-3 rounded-xl border border-border bg-background/35 p-3 transition-colors hover:border-primary/25 hover:bg-primary/5">
                 <span className="grid size-9 place-items-center rounded-lg bg-success/10 text-success"><MapPin className="size-4" aria-hidden="true" /></span>
-                <span className="min-w-0 flex-1"><span className="block text-sm font-medium text-foreground">Refresh career signals</span><span className="mt-0.5 block text-xs text-muted-foreground">Update interests, strengths, and learning style.</span></span>
+                <span className="min-w-0 flex-1"><span className="block text-sm font-medium text-foreground">Change student stage</span><span className="mt-0.5 block text-xs text-muted-foreground">Keep shared answers and tailor the next assessment.</span></span>
                 <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden="true" />
               </Link>
             </CardContent>

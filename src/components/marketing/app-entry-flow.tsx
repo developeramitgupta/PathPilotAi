@@ -56,14 +56,14 @@ const roles = [
     title: "Student",
     copy: "Find your direction, build skill evidence, and access relevant opportunities.",
     icon: GraduationCap,
-    href: "/sign-up?role=student",
+    href: "/student-stage",
   },
   {
     key: "college",
     title: "College",
     copy: "Guide student growth, improve readiness, and strengthen industry connections.",
     icon: UserRound,
-    href: "/sign-up?role=institution_admin",
+    href: "/sign-up?role=institution",
   },
   {
     key: "industry",

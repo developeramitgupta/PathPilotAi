@@ -1,61 +1,13 @@
-import {
-  BookOpenCheck,
-  ClipboardCheck,
-  Compass,
-  Flag,
-  GraduationCap,
-  HeartPulse,
-  LayoutDashboard,
-  Radar,
-  Route,
-  Scale,
-  Settings,
-  type LucideIcon,
-} from "lucide-react";
+import type { StudentJourney } from "@/features/student-journey/config";
+import { studentJourneyConfig, type JourneyNavigationGroup, type JourneyNavigationItem } from "@/features/student-journey/config";
 
-export interface NavigationItem {
-  label: string;
-  href: string;
-  icon: LucideIcon;
+export type NavigationItem = JourneyNavigationItem;
+export type NavigationGroup = JourneyNavigationGroup;
+
+export function getNavigationGroups(journey: StudentJourney | null | undefined): NavigationGroup[] {
+  return studentJourneyConfig[journey ?? "education-planner"].navigation;
 }
 
-export interface NavigationGroup {
-  label: string;
-  items: NavigationItem[];
+export function getMobilePrimary(journey: StudentJourney | null | undefined): NavigationItem[] {
+  return studentJourneyConfig[journey ?? "education-planner"].mobileNavigation;
 }
-
-export const navigationGroups: NavigationGroup[] = [
-  {
-    label: "Explore",
-    items: [
-      { label: "Career Discovery", href: "/career-discovery", icon: Compass },
-      { label: "College Finder", href: "/colleges", icon: GraduationCap },
-      { label: "Exam Navigator", href: "/exams", icon: ClipboardCheck },
-      { label: "Degree Advisor", href: "/degrees", icon: Scale },
-    ],
-  },
-  {
-    label: "Plan",
-    items: [
-      { label: "Roadmap", href: "/roadmap", icon: Route },
-      { label: "Learning Coach", href: "/learning", icon: BookOpenCheck },
-    ],
-  },
-  {
-    label: "Your path",
-    items: [
-      { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-      { label: "Mission Mode", href: "/mission", icon: Flag },
-      { label: "Health Score", href: "/health-score", icon: HeartPulse },
-      { label: "Opportunity Radar", href: "/radar", icon: Radar },
-      { label: "Settings", href: "/settings", icon: Settings },
-    ],
-  },
-];
-
-export const mobilePrimary: NavigationItem[] = [
-  { label: "Home", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Discover", href: "/career-discovery", icon: Compass },
-  { label: "Roadmap", href: "/roadmap", icon: Route },
-  { label: "Missions", href: "/mission", icon: Flag },
-];

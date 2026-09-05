@@ -29,6 +29,13 @@
       "when": 1788431450772,
       "tag": "20260903103050_add_workspace_roles",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1788466793967,
+      "tag": "20260903201953_add_student_journey_assessments",
+      "breakpoints": true
     }
   ]
 }

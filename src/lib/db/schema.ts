@@ -131,6 +131,9 @@ export const studentProfiles = pgTable(
     strengths: text("strengths").array(),
     weaknesses: text("weaknesses").array(),
     currentStage: text("current_stage"),
+    studentJourney: text("student_journey").notNull().default("education-planner"),
+    assessmentVersion: integer("assessment_version").notNull().default(1),
+    stageChangedAt: timestamp3("stage_changed_at"),
     ageBand: studentAgeBand("age_band").notNull().default("adult"),
     preferredLocale: text("preferred_locale").notNull().default("en"),
     onboardingDone: boolean("onboarding_done").notNull().default(false),
@@ -138,6 +141,29 @@ export const studentProfiles = pgTable(
   },
   (table) => [
     uniqueIndex("student_profiles_user_id_key").on(table.userId),
+  ],
+);
+
+/** Versioned answers and generated plans for each student journey. */
+export const studentJourneyAssessments = pgTable(
+  "student_journey_assessments",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade", onUpdate: "cascade" }),
+    studentJourney: text("student_journey").notNull(),
+    assessmentVersion: integer("assessment_version").notNull(),
+    responses: jsonb("responses").$type<Record<string, unknown>>().notNull(),
+    result: jsonb("result").$type<Record<string, unknown>>(),
+    completedAt: timestamp3("completed_at").notNull().defaultNow(),
+  },
+  (table) => [
+    index("student_journey_assessments_user_journey_completed_idx").on(
+      table.userId,
+      table.studentJourney,
+      table.completedAt,
+    ),
   ],
 );
 
@@ -1107,6 +1133,7 @@ export const usersRelations = relations(users, ({ many, one }) => ({
     fields: [users.id],
     references: [studentProfiles.userId],
   }),
+  studentJourneyAssessments: many(studentJourneyAssessments),
   decisions: many(decisions),
   careerMatches: many(careerMatches),
   collegeMatches: many(collegeMatches),
@@ -1136,11 +1163,15 @@ export const usersRelations = relations(users, ({ many, one }) => ({
   }),
 }));
 
-export const studentProfilesRelations = relations(studentProfiles, ({ one }) => ({
+export const studentProfilesRelations = relations(studentProfiles, ({ many, one }) => ({
   user: one(users, {
     fields: [studentProfiles.userId],
     references: [users.id],
   }),
+  assessments: many(studentJourneyAssessments),
+}));
+export const studentJourneyAssessmentsRelations = relations(studentJourneyAssessments, ({ one }) => ({
+  user: one(users, { fields: [studentJourneyAssessments.userId], references: [users.id] }),
 }));
 export const dataSourcesRelations = relations(dataSources, ({ many }) => ({
   ingestionRuns: many(ingestionRuns),
@@ -1380,6 +1411,7 @@ export type User = InferSelectModel<typeof users>;
 export type NewUser = InferInsertModel<typeof users>;
 export type StudentProfile = InferSelectModel<typeof studentProfiles>;
 export type NewStudentProfile = InferInsertModel<typeof studentProfiles>;
+export type StudentJourneyAssessment = InferSelectModel<typeof studentJourneyAssessments>;
 export type Decision = InferSelectModel<typeof decisions>;
 export type CareerMatch = InferSelectModel<typeof careerMatches>;
 export type Roadmap = InferSelectModel<typeof roadmaps>;

@@ -13,6 +13,7 @@ import {
   roadmapMilestones,
   roadmaps,
   roadmapVersions,
+  studentJourneyAssessments,
   studentProfiles,
   users,
 } from "@/lib/db/schema";
@@ -23,11 +24,14 @@ import {
   type MissionPlan,
   type OnboardingProfile,
   type RoadmapPlan,
+  type StagePlan,
+  type StudentAssessmentSubmission,
 } from "../schemas";
 
 export async function saveOnboardingProfile(
   userId: string,
   profile: OnboardingProfile,
+  journey = "education-planner",
 ) {
   const database = getDb();
   const now = new Date();
@@ -71,6 +75,7 @@ export async function saveOnboardingProfile(
         strengths: profile.strengths,
         weaknesses: profile.weaknesses,
         currentStage: profile.currentStage,
+        studentJourney: journey,
         onboardingDone: true,
         updatedAt: now,
       })
@@ -88,10 +93,64 @@ export async function saveOnboardingProfile(
           strengths: profile.strengths,
           weaknesses: profile.weaknesses,
           currentStage: profile.currentStage,
+          studentJourney: journey,
           onboardingDone: true,
           updatedAt: now,
         },
       });
+  });
+}
+
+export async function saveStudentJourneyAssessment(
+  userId: string,
+  submission: StudentAssessmentSubmission,
+  stagePlan: StagePlan,
+) {
+  const database = getDb();
+  const now = new Date();
+  const profile = submission.profile;
+  const workStyle = {
+    ...profile.workStyle,
+    preferredWorkMode: profile.preferredWorkMode,
+    preferredEnvironment: profile.preferredEnvironment,
+    preferredStructure: profile.preferredStructure,
+    studyBudget: profile.studyBudget,
+    learningStyle: profile.learningStyle,
+  };
+
+  await database.transaction(async (tx) => {
+    await tx.insert(users).values({
+      id: userId,
+      name: profile.name,
+      email: `${userId}@users.pathpilot.local`,
+      city: profile.city,
+      updatedAt: now,
+    }).onConflictDoUpdate({ target: users.id, set: { name: profile.name, city: profile.city, updatedAt: now } });
+
+    await tx.insert(studentProfiles).values({
+      id: randomUUID(), userId, interests: profile.interests, favoriteSubjects: profile.favoriteSubjects,
+      workStyle, hobbies: profile.hobbies, salaryExpectation: profile.salaryExpectation,
+      locationPref: profile.locationPref, studyPref: profile.studyPref,
+      higherStudiesLean: profile.higherStudiesLean, strengths: profile.strengths,
+      weaknesses: profile.weaknesses, currentStage: profile.currentStage,
+      studentJourney: submission.studentJourney, assessmentVersion: submission.assessmentVersion,
+      stageChangedAt: now, onboardingDone: true, updatedAt: now,
+    }).onConflictDoUpdate({ target: studentProfiles.userId, set: {
+      interests: profile.interests, favoriteSubjects: profile.favoriteSubjects, workStyle,
+      hobbies: profile.hobbies, salaryExpectation: profile.salaryExpectation,
+      locationPref: profile.locationPref, studyPref: profile.studyPref,
+      higherStudiesLean: profile.higherStudiesLean, strengths: profile.strengths,
+      weaknesses: profile.weaknesses, currentStage: profile.currentStage,
+      studentJourney: submission.studentJourney, assessmentVersion: submission.assessmentVersion,
+      stageChangedAt: now, onboardingDone: true, updatedAt: now,
+    } });
+
+    await tx.insert(studentJourneyAssessments).values({
+      id: randomUUID(), userId, studentJourney: submission.studentJourney,
+      assessmentVersion: submission.assessmentVersion,
+      responses: submission.stageAnswers as Record<string, unknown>,
+      result: stagePlan as unknown as Record<string, unknown>, completedAt: now,
+    });
   });
 }
 
@@ -141,6 +200,22 @@ export async function loadOnboardingProfile(userId: string) {
     strengths: row.profile.strengths ?? [],
     weaknesses: row.profile.weaknesses ?? [],
   } satisfies OnboardingProfile;
+}
+
+export async function loadStudentJourneyState(userId: string) {
+  const database = getDb();
+  const [profile] = await database
+    .select({ studentJourney: studentProfiles.studentJourney, assessmentVersion: studentProfiles.assessmentVersion })
+    .from(studentProfiles)
+    .where(eq(studentProfiles.userId, userId))
+    .limit(1);
+  const [assessment] = await database
+    .select()
+    .from(studentJourneyAssessments)
+    .where(eq(studentJourneyAssessments.userId, userId))
+    .orderBy(desc(studentJourneyAssessments.completedAt))
+    .limit(1);
+  return profile ? { ...profile, latestAssessment: assessment ?? null } : null;
 }
 
 export async function replaceCareerMatches(

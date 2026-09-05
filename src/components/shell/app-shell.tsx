@@ -7,11 +7,12 @@ import { Bell, ChevronLeft, ChevronRight, Command, MoreHorizontal, Search } from
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
-import { mobilePrimary, navigationGroups } from "@/components/shell/navigation-config";
+import { getMobilePrimary, getNavigationGroups } from "@/components/shell/navigation-config";
 import { Button } from "@/components/ui/button";
 import { serviceAvailability } from "@/lib/env";
 import { cn } from "@/lib/utils";
 import { useUiStore } from "@/stores/ui-store";
+import { usePathPilotStore } from "@/stores/pathpilot-store";
 
 const AskPathPilotDialog = dynamic(
   () => import("@/components/shell/ask-pathpilot-dialog").then((module) => module.AskPathPilotDialog),
@@ -32,8 +33,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const collapsed = useUiStore((state) => state.sidebarCollapsed);
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
+  const studentJourney = usePathPilotStore((state) => state.studentJourney);
   const [askOpen, setAskOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const navigationGroups = getNavigationGroups(studentJourney);
+  const mobilePrimary = getMobilePrimary(studentJourney);
 
   useEffect(() => {
     function openCommandPalette(event: KeyboardEvent) {

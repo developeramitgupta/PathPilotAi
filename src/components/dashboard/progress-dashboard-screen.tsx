@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { motion, MotionConfig } from "framer-motion";
-import { ArrowRight, Check, Compass, Flag, HeartPulse, Map, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Compass, Flag, Map, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { usePathPilotProgressModel } from "@/features/pathpilot/use-progress-model";
+import { getStudentJourney, studentJourneyConfig } from "@/features/student-journey/config";
 import { cn } from "@/lib/utils";
+import { usePathPilotStore } from "@/stores/pathpilot-store";
 
 type PathStep = {
   label: string;
@@ -17,6 +19,10 @@ type PathStep = {
 
 export function ProgressDashboardScreen() {
   const { profileState, profile, career, roadmap, mission, health, progress } = usePathPilotProgressModel();
+  const journey = usePathPilotStore((state) => state.studentJourney);
+  const stagePlan = usePathPilotStore((state) => state.stagePlan);
+  const currentJourney = getStudentJourney(journey);
+  const journeyConfig = studentJourneyConfig[currentJourney];
   const activeMilestone = roadmap?.milestones.find((milestone) => milestone.status === "active") ?? roadmap?.milestones[0];
   const nextAction = !profileState
     ? { title: "Start with a quick assessment", detail: "Tell PathPilot what you enjoy, how you work, and what matters in your next step.", href: "/onboarding", action: "Begin assessment", icon: Compass }
@@ -24,9 +30,21 @@ export function ProgressDashboardScreen() {
       ? { title: "Choose a career direction", detail: "Your assessment is ready. Review the paths that fit your interests and priorities.", href: "/career-discovery", action: "See my matches", icon: Sparkles }
       : !roadmap
         ? { title: `Turn ${career.careerName} into a plan`, detail: "Build a practical sequence of skills, projects, and proof points around the direction you chose.", href: "/roadmap", action: "Create roadmap", icon: Map }
-        : { title: activeMilestone?.title ?? "Keep your pathway moving", detail: activeMilestone?.description ?? "Review your roadmap and choose the next small action.", href: "/roadmap", action: "Open roadmap", icon: Flag };
+        : { title: activeMilestone?.title ?? journeyConfig.nextAction.title, detail: activeMilestone?.description ?? journeyConfig.nextAction.detail, href: activeMilestone ? "/roadmap" : journeyConfig.nextAction.href, action: activeMilestone ? "Open roadmap" : journeyConfig.nextAction.action, icon: activeMilestone ? Flag : journeyConfig.nextAction.icon };
   const NextIcon = nextAction.icon;
-  const pathway: PathStep[] = [
+  const pathway: PathStep[] = currentJourney === "stream-explorer" ? [
+    { label: "Know yourself", detail: "Assessment", href: "/onboarding", done: Boolean(profileState) },
+    { label: "Choose a stream", detail: stagePlan?.title ?? "Stream pathways", href: "/roadmap", done: Boolean(stagePlan) },
+    { label: "Explore careers", detail: career?.careerName ?? "Career discovery", href: "/career-discovery", done: Boolean(career) },
+    { label: "Build subject confidence", detail: "Skills & activities", href: "/learning", done: progress.completedThisWeek > 0 },
+    { label: "Keep exploring", detail: "Mission", href: "/mission", done: false },
+  ] : currentJourney === "career-launch" ? [
+    { label: "Choose direction", detail: stagePlan?.title ?? "Job or higher studies", href: "/degrees", done: Boolean(stagePlan) },
+    { label: "Build proof", detail: "Projects", href: "/projects", done: false },
+    { label: "Show readiness", detail: "Resume and GitHub", href: "/resume", done: false },
+    { label: "Practice", detail: "Interview Coach", href: "/interview", done: false },
+    { label: "Apply", detail: "Opportunities", href: "/opportunities", done: false },
+  ] : [
     { label: "Know yourself", detail: "Assessment", href: "/onboarding", done: Boolean(profileState) },
     { label: "Choose direction", detail: career?.careerName ?? "Career discovery", href: "/career-discovery", done: Boolean(career) },
     { label: "Plan your route", detail: roadmap ? `${roadmap.milestones.length} milestones` : "Roadmap", href: "/roadmap", done: Boolean(roadmap) },
@@ -38,13 +56,13 @@ export function ProgressDashboardScreen() {
     <MotionConfig reducedMotion="user">
       <div className="student-dashboard text-[#10284a]">
         <header className="border-b border-[#dbe3ed] pb-7">
-          <p className="text-sm font-semibold text-[#1264c4]">Your PathPilot</p>
+          <p className="text-sm font-semibold text-[#1264c4]">{journeyConfig.dashboardEyebrow}</p>
           <div className="mt-3 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
             <div>
-              <h1 className="text-3xl font-semibold tracking-[-0.055em] sm:text-5xl">Good to see you, {profile.name.split(" ")[0]}.</h1>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-[#526174] sm:text-base">One clear action at a time is enough. Your path gets sharper as you add decisions and evidence.</p>
+              <h1 className="text-3xl font-semibold tracking-[-0.055em] sm:text-5xl">{journeyConfig.dashboardTitle}</h1>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-[#526174] sm:text-base">{journeyConfig.dashboardDescription}</p>
             </div>
-            <Link className="inline-flex items-center gap-2 text-sm font-semibold text-[#1264c4] hover:underline" href="/settings">Update profile <ArrowRight className="size-4" /></Link>
+            <Link className="inline-flex items-center gap-2 text-sm font-semibold text-[#1264c4] hover:underline" href="/student-stage?mode=switch">Change stage <ArrowRight className="size-4" /></Link>
           </div>
         </header>
 
@@ -66,7 +84,7 @@ export function ProgressDashboardScreen() {
         </motion.section>
 
         <section className="mt-10">
-          <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end"><div><p className="text-sm font-semibold text-[#1264c4]">Your pathway</p><h2 className="mt-1 text-2xl font-semibold tracking-[-0.045em]">From direction to opportunity</h2></div><p className="text-sm text-[#62748b]">Built around your current stage: {profile.currentStage.replaceAll("-", " ")}</p></div>
+          <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-end"><div><p className="text-sm font-semibold text-[#1264c4]">Your pathway</p><h2 className="mt-1 text-2xl font-semibold tracking-[-0.045em]">{stagePlan?.title ?? "From direction to opportunity"}</h2></div><p className="text-sm text-[#62748b]">Built for your {journeyConfig.label.toLowerCase()} stage</p></div>
           <ol className="mt-6 grid border-y border-[#dbe3ed] sm:grid-cols-5">
             {pathway.map((step, index) => <li className={cn("relative min-h-36 border-b border-[#dbe3ed] p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0", step.done && "bg-[#f8fcfa]")} key={step.label}><span className={cn("grid size-7 place-items-center rounded-full border text-xs font-bold", step.done ? "border-[#69b99d] bg-[#eaf8f1] text-[#18865a]" : "border-[#cbd5e1] bg-white text-[#62748b]")}>{step.done ? <Check className="size-3.5" aria-hidden="true" /> : index + 1}</span><h3 className="mt-5 text-sm font-semibold">{step.label}</h3><Link className="mt-1 block text-xs leading-5 text-[#62748b] hover:text-[#1264c4]" href={step.href}>{step.detail}</Link></li>)}
           </ol>
@@ -77,11 +95,7 @@ export function ProgressDashboardScreen() {
             <p className="text-sm font-semibold text-[#1264c4]">This week</p>
             <h2 className="mt-1 text-2xl font-semibold tracking-[-0.045em]">Build evidence that travels with you.</h2>
             <div className="mt-5 divide-y divide-[#dbe3ed] border-y border-[#dbe3ed]">
-              {[
-                { label: career ? `Explore the path to ${career.careerName}` : "Review your career matches", href: "/career-discovery", icon: Compass },
-                { label: activeMilestone?.title ?? "Create your first roadmap", href: "/roadmap", icon: Map },
-                { label: "Find a relevant opportunity", href: "/radar", icon: HeartPulse },
-              ].map(({ label, href, icon: Icon }) => <Link className="flex min-h-16 items-center gap-4 py-4 transition-colors hover:bg-[#f4f8fc]" href={href} key={label}><span className="grid size-9 place-items-center rounded-lg bg-[#eaf3ff] text-[#1264c4]"><Icon className="size-4" /></span><span className="flex-1 text-sm font-medium">{label}</span><ArrowRight className="size-4 text-[#62748b]" /></Link>)}
+              {(stagePlan?.priorities ?? [{ title: career ? `Explore the path to ${career.careerName}` : "Review your career matches", detail: "Career discovery", href: "/career-discovery" }, { title: activeMilestone?.title ?? "Create your first roadmap", detail: "Roadmap", href: "/roadmap" }, { title: "Find a relevant opportunity", detail: "Opportunity Radar", href: "/radar" }]).map(({ title, href }) => <Link className="flex min-h-16 items-center gap-4 py-4 transition-colors hover:bg-[#f4f8fc]" href={href} key={title}><span className="grid size-9 place-items-center rounded-lg bg-[#eaf3ff] text-[#1264c4]"><Compass className="size-4" /></span><span className="flex-1 text-sm font-medium">{title}</span><ArrowRight className="size-4 text-[#62748b]" /></Link>)}
             </div>
           </div>
           <aside className="student-soft-surface border-l-2 border-[#1264c4] bg-[#f4f8fc] p-6"><p className="text-sm font-semibold text-[#385c82]">Your focus</p><p className="mt-4 text-xl font-semibold tracking-[-0.04em]">{mission.goal}</p><p className="mt-3 text-sm leading-6 text-[#526174]">{mission.milestones.find((milestone) => milestone.id === mission.nextMilestoneId)?.description ?? "Choose one small step that creates meaningful proof."}</p><div className="mt-6 flex items-center justify-between text-sm"><span className="text-[#62748b]">Mission progress</span><strong className="text-[#1264c4]">{mission.progressPct}%</strong></div><div className="mt-2 h-1.5 bg-[#d7e9ff]"><div className="h-full bg-[#1264c4]" style={{ width: `${mission.progressPct}%` }} /></div><Button asChild variant="ghost" className="mt-5 -ml-4 text-[#1264c4]"><Link href="/mission">Open Mission Mode <ArrowRight /></Link></Button></aside>

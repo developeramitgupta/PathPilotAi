@@ -1,4 +1,9 @@
 import { z } from "zod";
+import {
+  isStudentJourney,
+  studentJourneys,
+  type StudentJourney,
+} from "@/features/student-journey/config";
 
 export const workStyleSchema = z.object({
   collaboration: z.number().int().min(1).max(5),
@@ -41,6 +46,58 @@ export const onboardingProfileSchema = z.object({
 });
 
 export type OnboardingProfile = z.infer<typeof onboardingProfileSchema>;
+
+export const studentJourneySchema = z.enum(studentJourneys);
+
+const assessmentMetaSchema = z.object({
+  assessmentVersion: z.literal(1),
+});
+
+export const streamExplorerAnswersSchema = z.object({
+  preferredStreams: z.array(z.enum(["science", "commerce", "humanities", "creative-vocational", "still-exploring"])).min(1),
+  learningStyle: z.enum(["visual", "practice", "discussion", "structured"]),
+  familyLocationConstraint: z.enum(["local-school", "open-to-options", "need-guidance"]),
+  confidence: z.number().int().min(1).max(5),
+});
+
+export const educationPlannerAnswersSchema = z.object({
+  academicPosition: z.enum(["class-11", "class-12", "after-class-12"]),
+  degreeInterests: z.array(z.string().min(2)).min(1),
+  entranceExamAppetite: z.enum(["focused", "balanced", "exploring", "not-sure"]),
+  collegePriority: z.enum(["course-fit", "budget", "location", "rankings", "campus-life"]),
+  decisionTimeline: z.enum(["this-year", "next-year", "exploring"]),
+});
+
+export const careerLaunchAnswersSchema = z.object({
+  academicContext: z.enum(["first-second-year", "pre-final-year", "final-year", "graduate"]),
+  degreeOrBranch: z.string().trim().min(2),
+  evidenceReadiness: z.enum(["starting", "some-projects", "portfolio-ready"]),
+  primaryDirection: z.enum(["job", "internship", "higher-studies", "comparing"]),
+  opportunityPreference: z.enum(["home-city", "anywhere-india", "remote", "global"]),
+});
+
+export const studentAssessmentSubmissionSchema = z.discriminatedUnion("studentJourney", [
+  z.object({ studentJourney: z.literal("stream-explorer"), profile: onboardingProfileSchema, stageAnswers: streamExplorerAnswersSchema }).merge(assessmentMetaSchema),
+  z.object({ studentJourney: z.literal("education-planner"), profile: onboardingProfileSchema, stageAnswers: educationPlannerAnswersSchema }).merge(assessmentMetaSchema),
+  z.object({ studentJourney: z.literal("career-launch"), profile: onboardingProfileSchema, stageAnswers: careerLaunchAnswersSchema }).merge(assessmentMetaSchema),
+]);
+
+export type StudentAssessmentSubmission = z.infer<typeof studentAssessmentSubmissionSchema>;
+export type StudentStageAnswers = StudentAssessmentSubmission["stageAnswers"];
+
+export const stagePlanSchema = z.object({
+  journey: studentJourneySchema,
+  title: z.string().min(1),
+  summary: z.string().min(1),
+  priorities: z.array(z.object({ title: z.string().min(1), detail: z.string().min(1), href: z.string().startsWith("/") })).length(3),
+  generatedAt: z.string().datetime(),
+});
+
+export type StagePlan = z.infer<typeof stagePlanSchema>;
+
+export function normalizeStudentJourney(value: string | null | undefined): StudentJourney {
+  return isStudentJourney(value) ? value : "education-planner";
+}
 
 export const careerMatchSchema = z.object({
   careerKey: z.string().min(1),

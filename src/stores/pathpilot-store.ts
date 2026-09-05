@@ -13,8 +13,11 @@ import type {
   OnboardingProfile,
   OpportunityAction,
   RoadmapPlan,
+  StagePlan,
+  StudentStageAnswers,
 } from "@/features/pathpilot/schemas";
 import type { WorkspaceRole } from "@/features/roles/config";
+import type { StudentJourney } from "@/features/student-journey/config";
 import { getSafeBrowserStorage } from "@/lib/safe-storage";
 
 export type ResourceProgress = "saved" | "started" | "done";
@@ -39,6 +42,10 @@ interface PathPilotStore {
   mission: MissionPlan | null;
   opportunityActions: Record<string, OpportunityAction>;
   workspaceSession: WorkspaceSession | null;
+  studentJourney: StudentJourney | null;
+  stagePlan: StagePlan | null;
+  stageAnswers: StudentStageAnswers | null;
+  journeyAssessments: Partial<Record<StudentJourney, StudentStageAnswers>>;
   setOnboardingDraft: (profile: OnboardingProfile) => void;
   updateProfile: (profile: OnboardingProfile) => void;
   completeOnboarding: (
@@ -61,6 +68,8 @@ interface PathPilotStore {
   ) => void;
   restoreDismissedOpportunities: () => void;
   setWorkspaceSession: (session: WorkspaceSession) => void;
+  setStudentJourney: (journey: StudentJourney) => void;
+  completeStudentJourney: (input: { profile: OnboardingProfile; discovery: CareerDiscoveryResult; journey: StudentJourney; stagePlan: StagePlan; stageAnswers: StudentStageAnswers }) => void;
 }
 
 export const usePathPilotStore = create<PathPilotStore>()(
@@ -79,6 +88,10 @@ export const usePathPilotStore = create<PathPilotStore>()(
       mission: null,
       opportunityActions: {},
       workspaceSession: null,
+      studentJourney: null,
+      stagePlan: null,
+      stageAnswers: null,
+      journeyAssessments: {},
       setOnboardingDraft: (onboardingDraft) => set({ onboardingDraft }),
       updateProfile: (profile) => set({ profile, onboardingDraft: profile }),
       completeOnboarding: (profile, careerDiscovery) =>
@@ -193,6 +206,17 @@ export const usePathPilotStore = create<PathPilotStore>()(
           ),
         })),
       setWorkspaceSession: (workspaceSession) => set({ workspaceSession }),
+      setStudentJourney: (studentJourney) => set({ studentJourney }),
+      completeStudentJourney: ({ profile, discovery, journey, stagePlan, stageAnswers }) => set((state) => ({
+        profile,
+        onboardingDraft: profile,
+        careerDiscovery: discovery,
+        selectedCareerKey: discovery.matches[0]?.careerKey ?? null,
+        studentJourney: journey,
+        stagePlan,
+        stageAnswers,
+        journeyAssessments: { ...state.journeyAssessments, [journey]: stageAnswers },
+      })),
     }),
     {
       name: "pathpilot-core-loop-v1",
@@ -212,6 +236,10 @@ export const usePathPilotStore = create<PathPilotStore>()(
         mission: state.mission,
         opportunityActions: state.opportunityActions,
         workspaceSession: state.workspaceSession,
+        studentJourney: state.studentJourney,
+        stagePlan: state.stagePlan,
+        stageAnswers: state.stageAnswers,
+        journeyAssessments: state.journeyAssessments,
       }),
     },
   ),
