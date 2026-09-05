@@ -1,5 +1,5 @@
-import { LandingPage } from "@/components/marketing/landing-page";
+import { AppEntryFlow } from "@/components/marketing/app-entry-flow";
 
 export default function MarketingPage() {
-  return <LandingPage />;
+  return <AppEntryFlow />;
 }

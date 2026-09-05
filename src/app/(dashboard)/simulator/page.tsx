@@ -1,3 +1,3 @@
-import { PlannedModulePage } from "@/components/modules/module-placeholder";
+import { CareerSimulatorTool } from "@/components/planning/planning-tools";
 
-export default function Page() { return <PlannedModulePage slug="simulator" />; }
+export default function Page() { return <CareerSimulatorTool />; }

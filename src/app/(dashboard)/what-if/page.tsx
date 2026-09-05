@@ -1,3 +1,3 @@
-import { PlannedModulePage } from "@/components/modules/module-placeholder";
+import { WhatIfTool } from "@/components/planning/planning-tools";
 
-export default function Page() { return <PlannedModulePage slug="what-if" />; }
+export default function Page() { return <WhatIfTool />; }

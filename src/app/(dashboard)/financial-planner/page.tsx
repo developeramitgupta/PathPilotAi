@@ -1,3 +1,3 @@
-import { PlannedModulePage } from "@/components/modules/module-placeholder";
+import { FinancialPlannerTool } from "@/components/planning/planning-tools";
 
-export default function Page() { return <PlannedModulePage slug="financial-planner" />; }
+export default function Page() { return <FinancialPlannerTool />; }

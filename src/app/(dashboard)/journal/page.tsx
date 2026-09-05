@@ -1,3 +1,3 @@
-import { PlannedModulePage } from "@/components/modules/module-placeholder";
+import { ConfidenceJournalTool } from "@/components/planning/planning-tools";
 
-export default function Page() { return <PlannedModulePage slug="journal" />; }
+export default function Page() { return <ConfidenceJournalTool />; }
