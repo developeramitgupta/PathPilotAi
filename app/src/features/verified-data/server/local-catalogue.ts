@@ -163,7 +163,7 @@ export function getLocalInternships(input: { interests: string[]; skills: string
 
   const syntheticOpportunities = syntheticInternshipRecords
     .map((record, index) => ({ record, deadline: formatSyntheticDeadline(record.application_deadline), index }))
-    .filter(({ deadline }) => deadline !== null && deadline.getTime() >= now.getTime())
+    .filter((entry): entry is { record: (typeof syntheticInternshipRecords)[number]; deadline: Date; index: number } => entry.deadline !== null && entry.deadline.getTime() >= now.getTime())
     .map(({ record, deadline, index }) => {
       const searchableText = [record.role, record.domain, record.industry, record.eligibility, record.experience, ...record.required_skills].join(" ").toLocaleLowerCase("en-IN");
       const { overlaps, relevance } = scoreInternship({ terms, searchableText, index });

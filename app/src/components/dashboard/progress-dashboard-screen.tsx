@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, MotionConfig } from "framer-motion";
 import { ArrowRight, Check, Compass, FileCheck2, Flag, GraduationCap, Map, Rocket, Route, Sparkles, Target } from "lucide-react";
 
+import { StudentStageSwitcher } from "@/components/student-journey/student-stage-switcher";
 import { Button } from "@/components/ui/button";
 import { usePathPilotProgressModel } from "@/features/pathpilot/use-progress-model";
 import { getStudentJourney, studentJourneyConfig } from "@/features/student-journey/config";
@@ -103,7 +104,7 @@ export function ProgressDashboardScreen() {
               <h1 className="text-3xl font-semibold tracking-[-0.055em] sm:text-5xl">{journeyConfig.dashboardTitle}</h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-[#526174] sm:text-base">{journeyConfig.dashboardDescription}</p>
             </div>
-            <Link className="inline-flex items-center gap-2 text-sm font-semibold text-[#1264c4] hover:underline" href="/student-stage?mode=switch">Change stage <ArrowRight className="size-4" /></Link>
+            <StudentStageSwitcher />
           </div>
         </header>
 
