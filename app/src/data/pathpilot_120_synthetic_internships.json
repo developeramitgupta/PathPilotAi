@@ -1,0 +1,3467 @@
+[
+  {
+    "internship_id": "INT-001",
+    "company": "CyberNest Labs",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Arduino",
+      "Sensors",
+      "C/C++",
+      "ESP32",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "11-10-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-002",
+    "company": "VisionStack Solutions",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "GIS",
+      "Remote Sensing",
+      "Data Visualization",
+      "QGIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-09-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-003",
+    "company": "BlueOrbit Systems",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Spring Boot",
+      "Node.js",
+      "SQL",
+      "REST APIs",
+      "Java"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "16-09-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-004",
+    "company": "DevSphere Solutions",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Docker",
+      "CI/CD",
+      "AWS",
+      "Linux",
+      "Kubernetes",
+      "Git"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "11-10-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-005",
+    "company": "FinEdge Technologies",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Delhi, India",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Data Visualization",
+      "Statistics",
+      "Pandas",
+      "SQL",
+      "Power BI",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-09-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-006",
+    "company": "VisionStack Solutions",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "User Research",
+      "Design Systems",
+      "Figma",
+      "Wireframing",
+      "Prototyping"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-12-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-007",
+    "company": "TechNova Labs",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "Fresher",
+    "required_skills": [
+      "Wireframing",
+      "Design Systems",
+      "Figma",
+      "Prototyping"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "13-11-2026",
+    "industry": "E-commerce",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-008",
+    "company": "GreenGrid Innovations",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "Fresher",
+    "required_skills": [
+      "Prototyping",
+      "Figma",
+      "Wireframing",
+      "Design Systems"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-11-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-009",
+    "company": "SmartEdge Innovations",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "College students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Express",
+      "Spring Boot",
+      "Node.js",
+      "Java"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-010",
+    "company": "InnoStack Solutions",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "0-1 years",
+    "required_skills": [
+      "QGIS",
+      "Data Visualization",
+      "Remote Sensing",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "28-11-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-011",
+    "company": "UrbanTech Labs",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "College students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Machine Learning",
+      "Pandas",
+      "TensorFlow",
+      "Python",
+      "scikit-learn"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-10-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-012",
+    "company": "CodeBridge Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Pune, Maharashtra",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "JavaScript",
+      "Web3.js",
+      "Node.js",
+      "React"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "20-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-013",
+    "company": "OpenPath Technologies",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "Fresher",
+    "required_skills": [
+      "Flutter",
+      "REST APIs",
+      "Firebase",
+      "Dart"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-10-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-014",
+    "company": "EduCore Systems",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "Fresher",
+    "required_skills": [
+      "SQL",
+      "Statistics",
+      "Python",
+      "Power BI",
+      "Pandas"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-12-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-015",
+    "company": "QuantumLeaf Technologies",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "College students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Linux",
+      "Python",
+      "Networking",
+      "OWASP",
+      "SIEM"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "15-11-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-016",
+    "company": "PixelForge Studio",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Node.js",
+      "Python",
+      "SQL",
+      "REST APIs",
+      "Java",
+      "Express"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "23-10-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-017",
+    "company": "PixelForge Studio",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Delhi, India",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "PostGIS",
+      "GIS",
+      "Data Visualization",
+      "QGIS",
+      "Remote Sensing"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-11-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-018",
+    "company": "InnoStack Solutions",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "Unpaid",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "REST APIs",
+      "Java",
+      "Node.js",
+      "Express"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-10-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-019",
+    "company": "SmartEdge Innovations",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Git",
+      "Docker",
+      "CI/CD",
+      "Kubernetes",
+      "AWS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-11-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-020",
+    "company": "InnoStack Solutions",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Python",
+      "Sensors",
+      "Arduino",
+      "ESP32",
+      "C/C++",
+      "MQTT"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "28-09-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-021",
+    "company": "CodeBridge Technologies",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Wireframing",
+      "User Research",
+      "Prototyping",
+      "Figma"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-09-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-022",
+    "company": "AstraByte Labs",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Delhi, India",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "TensorFlow",
+      "Python",
+      "PyTorch",
+      "scikit-learn"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-09-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-023",
+    "company": "CodeBridge Technologies",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "SIEM",
+      "Linux",
+      "Networking",
+      "Cryptography"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "11-11-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-024",
+    "company": "BlueOrbit Systems",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Web3.js",
+      "Node.js",
+      "Solidity",
+      "JavaScript",
+      "React",
+      "Smart Contracts"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "26-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-025",
+    "company": "InnoStack Solutions",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Design Systems",
+      "Prototyping",
+      "Wireframing",
+      "User Research"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "18-10-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-026",
+    "company": "EduCore Systems",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Flutter",
+      "REST APIs",
+      "Dart",
+      "Android",
+      "Firebase",
+      "Kotlin"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-10-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-027",
+    "company": "DataSpring Analytics",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "AWS",
+      "Linux",
+      "Docker",
+      "CI/CD",
+      "Kubernetes"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "13-10-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-028",
+    "company": "CloudCraft Technologies",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Arduino",
+      "Python",
+      "ESP32",
+      "MQTT"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-09-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-029",
+    "company": "PixelForge Studio",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "SIEM",
+      "OWASP",
+      "Python",
+      "Cryptography",
+      "Linux"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "25-12-2026",
+    "industry": "E-commerce",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-030",
+    "company": "NextGen Digital",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Statistics",
+      "Data Visualization",
+      "Pandas",
+      "Power BI"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-11-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-031",
+    "company": "UrbanTech Labs",
+    "role": "Full Stack Developer Intern",
+    "domain": "Full Stack Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "React",
+      "Git",
+      "Node.js",
+      "TypeScript"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-12-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-032",
+    "company": "AstraByte Labs",
+    "role": "Full Stack Developer Intern",
+    "domain": "Full Stack Development",
+    "location": "Pune, Maharashtra",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "React",
+      "Git",
+      "Node.js",
+      "MongoDB",
+      "REST APIs",
+      "TypeScript"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-11-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-033",
+    "company": "VisionStack Solutions",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "REST APIs",
+      "Android",
+      "Firebase",
+      "Flutter",
+      "Dart",
+      "Kotlin"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-09-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-034",
+    "company": "NextGen Digital",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Linux",
+      "AWS",
+      "Kubernetes",
+      "CI/CD",
+      "Git"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "18-11-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-035",
+    "company": "BlueOrbit Systems",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Delhi, India",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "Students and recent graduates",
+    "experience": "Fresher",
+    "required_skills": [
+      "Figma",
+      "Design Systems",
+      "Wireframing",
+      "User Research",
+      "Prototyping"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-12-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-036",
+    "company": "GreenGrid Innovations",
+    "role": "Frontend Developer Intern",
+    "domain": "Frontend Development",
+    "location": "Pune, Maharashtra",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Tailwind CSS",
+      "TypeScript",
+      "CSS",
+      "React"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-10-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-037",
+    "company": "FinEdge Technologies",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Prototyping",
+      "Figma",
+      "Design Systems",
+      "Wireframing",
+      "User Research"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "27-10-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-038",
+    "company": "SmartEdge Innovations",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "OWASP",
+      "SIEM",
+      "Networking",
+      "Cryptography"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-10-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-039",
+    "company": "PixelForge Studio",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "Fresher",
+    "required_skills": [
+      "Arduino",
+      "ESP32",
+      "MQTT",
+      "Sensors",
+      "Python",
+      "C/C++"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-09-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-040",
+    "company": "AstraByte Labs",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "3 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Python",
+      "Cryptography",
+      "Linux",
+      "Networking",
+      "OWASP",
+      "SIEM"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "23-12-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-041",
+    "company": "CloudCraft Technologies",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Cryptography",
+      "Linux",
+      "SIEM",
+      "Networking",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-09-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-042",
+    "company": "InnoStack Solutions",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Flutter",
+      "Android",
+      "Kotlin",
+      "REST APIs"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "16-11-2026",
+    "industry": "E-commerce",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-043",
+    "company": "EduCore Systems",
+    "role": "Full Stack Developer Intern",
+    "domain": "Full Stack Development",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "REST APIs",
+      "MongoDB",
+      "Git"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-10-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-044",
+    "company": "DevSphere Solutions",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Figma",
+      "Prototyping",
+      "Design Systems",
+      "Wireframing"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "11-12-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-045",
+    "company": "AstraByte Labs",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Statistics",
+      "SQL",
+      "Power BI",
+      "Pandas",
+      "Python",
+      "Data Visualization"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-10-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-046",
+    "company": "FinEdge Technologies",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Express",
+      "REST APIs",
+      "Node.js",
+      "SQL",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "27-11-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-047",
+    "company": "Rudra Digital Labs",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "CI/CD",
+      "AWS",
+      "Docker",
+      "Linux"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-12-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-048",
+    "company": "UrbanTech Labs",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "Hybrid",
+    "duration": "3 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "SQL",
+      "Node.js",
+      "Java",
+      "REST APIs"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "15-11-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-049",
+    "company": "CloudCraft Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "React",
+      "Solidity",
+      "JavaScript",
+      "Node.js",
+      "Web3.js",
+      "Smart Contracts"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "20-10-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-050",
+    "company": "BlueOrbit Systems",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Delhi, India",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "PyTorch",
+      "TensorFlow",
+      "Pandas",
+      "Python",
+      "scikit-learn"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "16-11-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-051",
+    "company": "PixelForge Studio",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "MQTT",
+      "Arduino",
+      "Sensors",
+      "ESP32",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "28-09-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-052",
+    "company": "UrbanTech Labs",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "REST APIs",
+      "Node.js",
+      "Java",
+      "Express",
+      "SQL",
+      "Spring Boot"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-10-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-053",
+    "company": "NextGen Digital",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "QGIS",
+      "Remote Sensing",
+      "Python",
+      "Data Visualization",
+      "PostGIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-10-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-054",
+    "company": "CloudCraft Technologies",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Kotlin",
+      "Flutter",
+      "Android",
+      "Firebase",
+      "REST APIs"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "16-10-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-055",
+    "company": "InnoStack Solutions",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "Hybrid",
+    "duration": "3 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "SQL",
+      "Node.js",
+      "Spring Boot",
+      "REST APIs",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-12-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-056",
+    "company": "DevSphere Solutions",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Delhi, India",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Linux",
+      "AWS",
+      "Docker",
+      "Git",
+      "Kubernetes"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "11-09-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-057",
+    "company": "GreenGrid Innovations",
+    "role": "Frontend Developer Intern",
+    "domain": "Frontend Development",
+    "location": "Pune, Maharashtra",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Tailwind CSS",
+      "TypeScript",
+      "CSS",
+      "JavaScript",
+      "HTML",
+      "React"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-09-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-058",
+    "company": "VisionStack Solutions",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Prototyping",
+      "Design Systems",
+      "Wireframing",
+      "Figma",
+      "User Research"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-059",
+    "company": "AstraByte Labs",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Firebase",
+      "Kotlin",
+      "Android",
+      "REST APIs",
+      "Dart",
+      "Flutter"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-09-2026",
+    "industry": "E-commerce",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-060",
+    "company": "Rudra Digital Labs",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Python",
+      "Node.js",
+      "SQL",
+      "Express"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "15-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-061",
+    "company": "CodeBridge Technologies",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Pune, Maharashtra",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Design Systems",
+      "User Research",
+      "Prototyping",
+      "Wireframing",
+      "Figma"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "16-11-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-062",
+    "company": "OpenPath Technologies",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Spring Boot",
+      "SQL",
+      "REST APIs",
+      "Node.js"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "25-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-063",
+    "company": "UrbanTech Labs",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Data Visualization",
+      "Remote Sensing",
+      "Python",
+      "QGIS",
+      "PostGIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-12-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-064",
+    "company": "CodeBridge Technologies",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "SIEM",
+      "OWASP",
+      "Networking",
+      "Python",
+      "Cryptography"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-065",
+    "company": "TechNova Labs",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "Hybrid",
+    "duration": "3 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "Fresher",
+    "required_skills": [
+      "C/C++",
+      "Sensors",
+      "Arduino",
+      "Python",
+      "MQTT"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-066",
+    "company": "TechNova Labs",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Prototyping",
+      "User Research",
+      "Design Systems",
+      "Wireframing",
+      "Figma"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-11-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-067",
+    "company": "FinEdge Technologies",
+    "role": "Full Stack Developer Intern",
+    "domain": "Full Stack Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Node.js",
+      "MongoDB",
+      "React",
+      "TypeScript",
+      "Git"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-09-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-068",
+    "company": "BlueOrbit Systems",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Delhi, India",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "User Research",
+      "Prototyping",
+      "Figma",
+      "Wireframing"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "15-12-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-069",
+    "company": "InnoStack Solutions",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Python",
+      "TensorFlow",
+      "scikit-learn",
+      "PyTorch"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-12-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-070",
+    "company": "SmartEdge Innovations",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "Git",
+      "CI/CD",
+      "Linux"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-071",
+    "company": "UrbanTech Labs",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "User Research",
+      "Wireframing",
+      "Figma",
+      "Design Systems"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-10-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-072",
+    "company": "TechNova Labs",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "TensorFlow",
+      "scikit-learn"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "18-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-073",
+    "company": "FinEdge Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "3 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Solidity",
+      "Smart Contracts",
+      "React",
+      "Node.js",
+      "Web3.js",
+      "JavaScript"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-10-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-074",
+    "company": "BlueOrbit Systems",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Dart",
+      "Android",
+      "Kotlin",
+      "Firebase",
+      "Flutter",
+      "REST APIs"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "17-12-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-075",
+    "company": "VisionStack Solutions",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "CI/CD",
+      "AWS",
+      "Docker",
+      "Kubernetes"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-10-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-076",
+    "company": "OpenPath Technologies",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Python",
+      "Spring Boot",
+      "Express",
+      "REST APIs",
+      "Java"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-09-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-077",
+    "company": "TechNova Labs",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Delhi, India",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Android",
+      "Flutter",
+      "REST APIs",
+      "Dart",
+      "Firebase",
+      "Kotlin"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "27-12-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-078",
+    "company": "SmartEdge Innovations",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Design Systems",
+      "Prototyping",
+      "User Research",
+      "Wireframing"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "26-12-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-079",
+    "company": "NextGen Digital",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Git",
+      "Kubernetes",
+      "CI/CD",
+      "Linux",
+      "AWS",
+      "Docker"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-11-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-080",
+    "company": "FinEdge Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Smart Contracts",
+      "JavaScript",
+      "Web3.js",
+      "React",
+      "Solidity"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "26-12-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-081",
+    "company": "FinEdge Technologies",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "Unpaid",
+    "eligibility": "College students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Android",
+      "Kotlin",
+      "Firebase",
+      "Dart",
+      "REST APIs"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "28-10-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-082",
+    "company": "FinEdge Technologies",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "QGIS",
+      "Remote Sensing",
+      "Data Visualization",
+      "PostGIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "23-09-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-083",
+    "company": "EduCore Systems",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "SQL",
+      "Data Visualization",
+      "Pandas",
+      "Power BI",
+      "Statistics"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-10-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-084",
+    "company": "CyberNest Labs",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Kubernetes",
+      "AWS",
+      "Linux",
+      "Git",
+      "Docker"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "11-10-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-085",
+    "company": "QuantumLeaf Technologies",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Networking",
+      "SIEM",
+      "Cryptography",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-11-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-086",
+    "company": "CodeBridge Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Node.js",
+      "Smart Contracts",
+      "JavaScript",
+      "Solidity",
+      "React"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-11-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-087",
+    "company": "UrbanTech Labs",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Cryptography",
+      "Python",
+      "Networking",
+      "SIEM"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-11-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-088",
+    "company": "CloudCraft Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "Fresher",
+    "required_skills": [
+      "Smart Contracts",
+      "Solidity",
+      "Web3.js",
+      "JavaScript"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-09-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-089",
+    "company": "NextGen Digital",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "CI/CD",
+      "Linux",
+      "AWS",
+      "Git"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-12-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-090",
+    "company": "InnoStack Solutions",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Engineering students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "SQL",
+      "Pandas",
+      "Python",
+      "Power BI",
+      "Statistics"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "23-09-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-091",
+    "company": "PixelForge Studio",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "College students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Kubernetes",
+      "Docker",
+      "Git",
+      "CI/CD",
+      "Linux"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-09-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-092",
+    "company": "OpenPath Technologies",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Jaipur, Rajasthan",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Node.js",
+      "React",
+      "Smart Contracts",
+      "Web3.js",
+      "JavaScript"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-093",
+    "company": "BlueOrbit Systems",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Machine Learning",
+      "Pandas",
+      "PyTorch",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "12-11-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-094",
+    "company": "CloudCraft Technologies",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Pune, Maharashtra",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Python",
+      "PyTorch",
+      "Pandas",
+      "TensorFlow",
+      "scikit-learn"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-12-2026",
+    "industry": "EdTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-095",
+    "company": "AstraByte Labs",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "React",
+      "Web3.js"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "27-10-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-096",
+    "company": "CyberNest Labs",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "Unpaid",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "REST APIs",
+      "Kotlin",
+      "Flutter",
+      "Android",
+      "Dart",
+      "Firebase"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "18-09-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-097",
+    "company": "FinEdge Technologies",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "Fresher",
+    "required_skills": [
+      "PostGIS",
+      "Data Visualization",
+      "GIS",
+      "Remote Sensing",
+      "QGIS",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "25-10-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-098",
+    "company": "CyberNest Labs",
+    "role": "Blockchain Developer Intern",
+    "domain": "Blockchain/Web3",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Node.js",
+      "Web3.js",
+      "React",
+      "Solidity"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "13-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-099",
+    "company": "AstraByte Labs",
+    "role": "Mobile App Developer Intern",
+    "domain": "Mobile Development",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Kotlin",
+      "Flutter",
+      "REST APIs",
+      "Firebase",
+      "Android"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "28-12-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-100",
+    "company": "NextGen Digital",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Linux",
+      "SIEM",
+      "Python",
+      "OWASP"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "18-12-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-101",
+    "company": "InnoStack Solutions",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Bengaluru, Karnataka",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "College students",
+    "experience": "Fresher",
+    "required_skills": [
+      "TensorFlow",
+      "Pandas",
+      "Machine Learning",
+      "scikit-learn",
+      "PyTorch",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-09-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-102",
+    "company": "FinEdge Technologies",
+    "role": "IoT Intern",
+    "domain": "IoT/Embedded",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Sensors",
+      "Python",
+      "MQTT",
+      "ESP32"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "20-11-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-103",
+    "company": "Rudra Digital Labs",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "Any undergraduate student",
+    "experience": "Fresher",
+    "required_skills": [
+      "QGIS",
+      "Python",
+      "Data Visualization",
+      "GIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-10-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-104",
+    "company": "InnoStack Solutions",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "QGIS",
+      "PostGIS",
+      "Remote Sensing",
+      "Python",
+      "Data Visualization",
+      "GIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "24-11-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-105",
+    "company": "OpenPath Technologies",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "SQL",
+      "Data Visualization",
+      "Pandas",
+      "Statistics",
+      "Power BI"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-10-2026",
+    "industry": "FinTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-106",
+    "company": "TechNova Labs",
+    "role": "Frontend Developer Intern",
+    "domain": "Frontend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "3 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Any undergraduate student",
+    "experience": "0-1 years",
+    "required_skills": [
+      "React",
+      "HTML",
+      "Tailwind CSS",
+      "JavaScript"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "27-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-107",
+    "company": "CodeBridge Technologies",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "QGIS",
+      "Data Visualization",
+      "PostGIS",
+      "GIS",
+      "Remote Sensing",
+      "Python"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "19-10-2026",
+    "industry": "Cybersecurity",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-108",
+    "company": "AstraByte Labs",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Delhi, India",
+    "work_mode": "Hybrid",
+    "duration": "6 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Python",
+      "Remote Sensing",
+      "Data Visualization",
+      "GIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "26-09-2026",
+    "industry": "Government Tech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-109",
+    "company": "DevSphere Solutions",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "Unpaid",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Python",
+      "Pandas",
+      "Statistics",
+      "Power BI",
+      "SQL",
+      "Data Visualization"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "20-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-110",
+    "company": "FinEdge Technologies",
+    "role": "Frontend Developer Intern",
+    "domain": "Frontend Development",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "₹10,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "TypeScript",
+      "JavaScript",
+      "HTML",
+      "Tailwind CSS",
+      "React"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "13-12-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-111",
+    "company": "CloudCraft Technologies",
+    "role": "GIS Intern",
+    "domain": "GIS/Geospatial",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "6 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "GIS",
+      "Data Visualization",
+      "PostGIS",
+      "Python",
+      "QGIS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "21-10-2026",
+    "industry": "E-commerce",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-112",
+    "company": "OpenPath Technologies",
+    "role": "Data Science Intern",
+    "domain": "Data Science",
+    "location": "Gwalior, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "4 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Statistics",
+      "Power BI",
+      "SQL",
+      "Python",
+      "Pandas",
+      "Data Visualization"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-09-2026",
+    "industry": "HealthTech",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-113",
+    "company": "PixelForge Studio",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Indore, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Wireframing",
+      "Design Systems",
+      "Figma",
+      "Prototyping",
+      "User Research"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "26-11-2026",
+    "industry": "SaaS",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-114",
+    "company": "SmartEdge Innovations",
+    "role": "Backend Developer Intern",
+    "domain": "Backend Development",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "2 months",
+    "stipend": "₹20,000/month",
+    "eligibility": "B.Tech/B.E. students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Python",
+      "Spring Boot",
+      "Express",
+      "Java",
+      "REST APIs"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-10-2026",
+    "industry": "E-commerce",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-115",
+    "company": "InnoStack Solutions",
+    "role": "Frontend Developer Intern",
+    "domain": "Frontend Development",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "2 months",
+    "stipend": "Unpaid",
+    "eligibility": "Engineering students",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "HTML",
+      "React",
+      "TypeScript",
+      "CSS",
+      "JavaScript",
+      "Tailwind CSS"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "22-09-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-116",
+    "company": "EduCore Systems",
+    "role": "Cloud/DevOps Intern",
+    "domain": "Cloud/DevOps",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "On-site",
+    "duration": "3 months",
+    "stipend": "₹12,000/month",
+    "eligibility": "College students",
+    "experience": "0-1 years",
+    "required_skills": [
+      "Git",
+      "Docker",
+      "Linux",
+      "Kubernetes"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "20-11-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-117",
+    "company": "SmartEdge Innovations",
+    "role": "UI/UX Design Intern",
+    "domain": "UI/UX Design",
+    "location": "Hyderabad, Telangana",
+    "work_mode": "On-site",
+    "duration": "4 months",
+    "stipend": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "Prototyping",
+      "Wireframing",
+      "Figma",
+      "Design Systems",
+      "User Research"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "18-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-118",
+    "company": "PixelForge Studio",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Jabalpur, Madhya Pradesh",
+    "work_mode": "On-site",
+    "duration": "6 months",
+    "stipend": "Unpaid",
+    "eligibility": "Any undergraduate student",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Python",
+      "scikit-learn",
+      "PyTorch",
+      "Pandas"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "10-12-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-119",
+    "company": "OpenPath Technologies",
+    "role": "Cybersecurity Intern",
+    "domain": "Cybersecurity",
+    "location": "Bhopal, Madhya Pradesh",
+    "work_mode": "Hybrid",
+    "duration": "2 months",
+    "stipend": "₹5,000/month",
+    "eligibility": "Engineering students",
+    "experience": "Fresher",
+    "required_skills": [
+      "OWASP",
+      "Linux",
+      "Networking",
+      "SIEM"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "23-09-2026",
+    "industry": "Technology",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  },
+  {
+    "internship_id": "INT-120",
+    "company": "CloudCraft Technologies",
+    "role": "AI/ML Intern",
+    "domain": "AI/ML",
+    "location": "Remote / India",
+    "work_mode": "Remote",
+    "duration": "4 months",
+    "stipend": "₹8,000/month",
+    "eligibility": "Students and recent graduates",
+    "experience": "No prior experience required",
+    "required_skills": [
+      "Machine Learning",
+      "scikit-learn",
+      "TensorFlow",
+      "PyTorch",
+      "Python",
+      "Pandas"
+    ],
+    "responsibilities": [
+      "Work on production-style projects",
+      "Collaborate with mentors and developers",
+      "Debug, test and document assigned work"
+    ],
+    "start_date": "Immediately",
+    "application_deadline": "14-10-2026",
+    "industry": "Analytics",
+    "source_type": "Synthetic demo data",
+    "verification_status": "Demo record — verify before publishing"
+  }
+]

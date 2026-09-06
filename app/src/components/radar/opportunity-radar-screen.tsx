@@ -146,6 +146,12 @@ export function OpportunityRadarScreen() {
     return `${item.title} ${item.description} ${item.tags.join(" ")}`.toLowerCase().includes(deferredSearch);
   });
   const savedCount = Object.values(opportunityActions).filter((action) => action === "saved").length;
+  const sourceLabel = radarQuery.data?.result.mode === "official-live"
+    ? "Verified live sources"
+    : radarQuery.data?.result.mode === "mixed-catalogue"
+      ? "Official + demo listings"
+      : "Planning patterns";
+  const sourceVariant = radarQuery.data?.result.mode === "official-live" ? "success" : "demo";
 
   return (
     <MotionConfig reducedMotion="user">
@@ -154,10 +160,10 @@ export function OpportunityRadarScreen() {
         <div className="pointer-events-none absolute inset-0 grid-fade opacity-35" />
         <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_260px]">
           <div>
-            <div className="flex flex-wrap items-center gap-2"><Badge><Radar className="size-3" /> Opportunity Radar</Badge>{radarQuery.data?.result.mode === "official-live" ? <Badge variant="success">Verified live sources</Badge> : <Badge variant="demo">Planning patterns</Badge>}</div>
+            <div className="flex flex-wrap items-center gap-2"><Badge><Radar className="size-3" /> Opportunity Finder</Badge><Badge variant={sourceVariant}>{sourceLabel}</Badge></div>
             <h1 className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">Find the next place to prove your potential.</h1>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">Hackathon, scholarship, competition, open-source, and event patterns ranked against your profile. No fabricated deadlines.</p>
-            <div className="mt-5 flex flex-wrap gap-4 text-xs text-muted-foreground"><span><strong className="font-data text-foreground">{radarQuery.data?.result.opportunities.length ?? 0}</strong> ranked patterns</span><span><strong className="font-data text-foreground">{savedCount}</strong> saved</span><span>Target: <strong className="text-foreground">{career?.careerName ?? "your top career"}</strong></span></div>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">Internships and other opportunity paths ranked against your profile. Official records retain their source links; demo listings are clearly labelled and never pretend to be application links.</p>
+            <div className="mt-5 flex flex-wrap gap-4 text-xs text-muted-foreground"><span><strong className="font-data text-foreground">{radarQuery.data?.result.opportunities.length ?? 0}</strong> ranked opportunities</span><span><strong className="font-data text-foreground">{savedCount}</strong> saved</span><span>Target: <strong className="text-foreground">{career?.careerName ?? "your top career"}</strong></span></div>
           </div>
           <div className="relative mx-auto grid size-52 place-items-center">
             {["inset-0", "inset-7", "inset-14"].map((position, index) => <motion.span key={position} className={cn("absolute rounded-full border border-primary/20", position)} animate={reducedMotion ? undefined : { rotate: index % 2 ? -360 : 360 }} transition={{ duration: 16 + index * 5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }} />)}
@@ -179,7 +185,7 @@ export function OpportunityRadarScreen() {
           <Select value={workMode} onChange={(event) => setWorkMode(event.target.value as typeof workMode)} aria-label="Internship mode">
             <option value="any">Any mode</option><option value="online">Online</option><option value="hybrid">Hybrid</option><option value="in-person">Offline</option>
           </Select>
-          <div className="relative"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="pl-10" placeholder="Search skills or opportunity types" aria-label="Search opportunity patterns" /></div>
+          <div className="relative"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="pl-10" placeholder="Search roles, skills or companies" aria-label="Search opportunities" /></div>
         </div>
       </div>
 
@@ -187,7 +193,7 @@ export function OpportunityRadarScreen() {
 
       {radarQuery.isPending ? <div className="mt-6"><LoadingSkeleton variant="cards" /></div> : null}
       {radarQuery.isError ? <div className="mt-6"><ErrorBanner message={radarQuery.error.message} onRetry={() => radarQuery.refetch()} /></div> : null}
-      {radarQuery.isSuccess && opportunities.length === 0 ? <Card className="mt-6 grid min-h-64 place-items-center p-6 text-center"><div><Search className="mx-auto size-6 text-muted-foreground" aria-hidden="true" /><h2 className="mt-4 text-lg font-semibold">No visible patterns match these filters</h2><p className="mt-2 text-xs text-muted-foreground">Search, category choices, and dismissed cards can all narrow this view.</p><Button className="mt-5" variant="secondary" onClick={() => { setSearch(""); setCategory("all"); restoreDismissedOpportunities(); }}>Show all patterns</Button></div></Card> : null}
+      {radarQuery.isSuccess && opportunities.length === 0 ? <Card className="mt-6 grid min-h-64 place-items-center p-6 text-center"><div><Search className="mx-auto size-6 text-muted-foreground" aria-hidden="true" /><h2 className="mt-4 text-lg font-semibold">No opportunities match these filters</h2><p className="mt-2 text-xs text-muted-foreground">Search, category choices, stipend, mode, and dismissed cards can all narrow this view.</p><Button className="mt-5" variant="secondary" onClick={() => { setSearch(""); setCategory("all"); restoreDismissedOpportunities(); }}>Show all opportunities</Button></div></Card> : null}
       {opportunities.length ? <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{opportunities.map((item, index) => <OpportunityCard key={item.id} item={item} index={index} expanded={expandedId === item.id} onExpand={() => setExpandedId((value) => value === item.id ? null : item.id)} />)}</div> : null}
       </div>
     </MotionConfig>

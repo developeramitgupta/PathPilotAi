@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, MotionConfig } from "framer-motion";
-import { ArrowRight, Check, Clock3, GraduationCap, IndianRupee, Sparkles, TrendingUp } from "lucide-react";
-import { useMutation } from "@tanstack/react-query";
+import { ArrowRight, BookOpenCheck, Check, Clock3, ExternalLink, GraduationCap, IndianRupee, Search, Sparkles, TrendingUp } from "lucide-react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { ComparisonTable, type ComparisonColumn } from "@/components/shared/comparison-table";
 import { ChoiceChips, EducationHero, FieldLabel, ReasoningRefs } from "@/components/shared/education-primitives";
@@ -13,14 +13,102 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { requestPathPilot } from "@/features/pathpilot/api-client";
 import { createAcceptedDecision } from "@/features/pathpilot/decision-helpers";
 import type { DecisionRecord, DegreeAdvisorInput, DegreeAdvisorResult, DegreeComparison } from "@/features/pathpilot/schemas";
 import { usePathPilotStore } from "@/stores/pathpilot-store";
 
+type CatalogueItem = {
+  id: string;
+  name: string;
+  level: string;
+  stream: string;
+  scope: string;
+  source: string;
+  sourceUrl: string;
+  verificationNote: string;
+  relevance: number;
+  matchedSignals: string[];
+};
+
+type CatalogueResponse = {
+  result: {
+    items: CatalogueItem[];
+    filters: { levels: string[]; streams: string[] };
+    total: number;
+  };
+  disclaimer: string;
+};
+
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0, notation: "compact" }).format(value);
 }
+
+function EducationCataloguePanel() {
+  const profile = usePathPilotStore((state) => state.profile);
+  const discovery = usePathPilotStore((state) => state.careerDiscovery);
+  const selectedCareerKey = usePathPilotStore((state) => state.selectedCareerKey);
+  const journey = usePathPilotStore((state) => state.studentJourney);
+  const career = discovery?.matches.find((item) => item.careerKey === selectedCareerKey) ?? discovery?.matches[0];
+  const [type, setType] = useState<"degrees" | "courses">("degrees");
+  const [search, setSearch] = useState("");
+  const [level, setLevel] = useState("all");
+  const [stream, setStream] = useState("all");
+  const deferredSearch = useDeferredValue(search);
+  const params = useMemo(() => {
+    const values = new URLSearchParams({
+      type,
+      q: deferredSearch,
+      level,
+      stream,
+      interests: profile?.interests.join(",") ?? "",
+      subjects: profile?.favoriteSubjects.join(",") ?? "",
+      strengths: profile?.strengths.join(",") ?? "",
+      career: career?.careerName ?? "",
+      journey: journey ?? "",
+      limit: "12",
+    });
+    return values.toString();
+  }, [career?.careerName, deferredSearch, journey, level, profile?.favoriteSubjects, profile?.interests, profile?.strengths, stream, type]);
+  const catalogue = useQuery({
+    queryKey: ["education-catalogue", params],
+    queryFn: () => requestPathPilot<CatalogueResponse>(`/api/education/catalogue?${params}`),
+    staleTime: 1000 * 60 * 10,
+  });
+  const filters = catalogue.data?.result.filters;
+
+  return (
+    <section className="mt-7" aria-labelledby="programme-catalogue-title">
+      <Card className="overflow-hidden p-5 sm:p-6">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-2xl">
+            <div className="flex flex-wrap items-center gap-2"><Badge variant="success"><BookOpenCheck className="size-3" /> Filterable catalogue</Badge><Badge variant="outline">{catalogue.data?.result.total ?? "…"} supplied records</Badge></div>
+            <h2 id="programme-catalogue-title" className="mt-3 text-xl font-semibold tracking-[-0.03em]">Find programmes that fit your assessment</h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">Ranked from your interests, favourite subjects, strengths, selected career, and student journey. This catalogue only identifies programme titles—it does not claim that a particular college offers them.</p>
+          </div>
+          <div className="flex shrink-0 gap-2" role="group" aria-label="Catalogue type">
+            <Button size="sm" variant={type === "degrees" ? "default" : "secondary"} onClick={() => { setType("degrees"); setLevel("all"); setStream("all"); }} aria-pressed={type === "degrees"}>Degrees</Button>
+            <Button size="sm" variant={type === "courses" ? "default" : "secondary"} onClick={() => { setType("courses"); setLevel("all"); setStream("all"); }} aria-pressed={type === "courses"}>Courses</Button>
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-2 md:grid-cols-[minmax(0,1fr)_150px_220px]">
+          <div className="relative"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="pl-10" placeholder={`Search ${type} by name or stream`} aria-label={`Search ${type}`} /></div>
+          <Select value={level} onChange={(event) => setLevel(event.target.value)} aria-label="Filter by level"><option value="all">All levels</option>{filters?.levels.map((item) => <option key={item} value={item}>{item}</option>)}</Select>
+          <Select value={stream} onChange={(event) => setStream(event.target.value)} aria-label="Filter by stream"><option value="all">All streams</option>{filters?.streams.map((item) => <option key={item} value={item}>{item}</option>)}</Select>
+        </div>
+        <p className="mt-3 rounded-md border border-warning/20 bg-warning/5 p-3 text-xs leading-5 text-muted-foreground">{catalogue.data?.disclaimer ?? "Loading programme source and verification notes."}</p>
+
+        {catalogue.isPending ? <div className="mt-5"><LoadingSkeleton variant="list" /></div> : null}
+        {catalogue.isError ? <div className="mt-5"><ErrorBanner message={catalogue.error.message} onRetry={() => catalogue.refetch()} /></div> : null}
+        {catalogue.isSuccess && catalogue.data.result.items.length === 0 ? <div className="mt-5 rounded-lg border border-border p-6 text-center"><p className="font-medium">No programmes match these filters.</p><Button className="mt-3" size="sm" variant="secondary" onClick={() => { setSearch(""); setLevel("all"); setStream("all"); }}>Clear filters</Button></div> : null}
+        {catalogue.data?.result.items.length ? <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">{catalogue.data.result.items.map((item) => <article className="rounded-lg border border-border bg-black/[0.08] p-4" key={item.id}><div className="flex items-start justify-between gap-3"><div><p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{item.stream}</p><h3 className="mt-1 font-semibold leading-5">{item.name}</h3></div><Badge variant="success">{item.relevance}% fit</Badge></div><div className="mt-3 flex flex-wrap gap-1.5"><Badge variant="outline">{item.level}</Badge><Badge variant="outline">{item.scope}</Badge>{item.matchedSignals.map((signal) => <Badge variant="outline" key={signal}>{signal}</Badge>)}</div><p className="mt-3 text-xs leading-5 text-muted-foreground">{item.verificationNote}</p><a href={item.sourceUrl} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-10 items-center gap-2 text-xs font-medium text-primary hover:underline">View source <ExternalLink className="size-3.5" /></a></article>)}</div> : null}
+      </Card>
+    </section>
+  );
+}
+
 export function DegreeAdvisorScreen() {
   const discovery = usePathPilotStore((state) => state.careerDiscovery);
   const selectedCareerKey = usePathPilotStore((state) => state.selectedCareerKey);
@@ -69,6 +157,7 @@ export function DegreeAdvisorScreen() {
         </div>
       </Card>
       <div className="mt-5 rounded-lg border border-warning/20 bg-warning/6 p-3 text-xs leading-5 text-[#ead58f]">Costs and salary bands are illustrative planning data—not quotes, guarantees, or live institution figures. Verify actual fees and outcomes before deciding.</div>
+      <EducationCataloguePanel />
       {compare.isError ? <div className="mt-5"><ErrorBanner message={compare.error.message} onRetry={() => compare.mutate()} /></div> : null}
       {syncDecision.isError ? <div className="mt-5"><ErrorBanner message="Your selected path is saved locally but could not sync yet." /></div> : null}
 

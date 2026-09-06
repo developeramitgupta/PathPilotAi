@@ -26,7 +26,7 @@ export const moduleRegistry: ModuleDefinition[] = [
   { slug: "simulator", title: "Career Simulator", purpose: "Translate a target role into gaps, time, transparent readiness bands, and a mission.", stage: "mvp", status: "available", milestone: 4 },
   { slug: "what-if", title: "What-If Simulator", purpose: "Compare two or three paths using auditable formulas.", stage: "mvp", status: "planned", milestone: 6 },
   { slug: "future-twin", title: "AI Future Twin", purpose: "Show clearly framed 2, 5, and 10-year trajectory scenarios.", stage: "mvp", status: "planned", milestone: 6 },
-  { slug: "opportunities", title: "Opportunity Finder", purpose: "Rank clearly labeled demo opportunities against the profile.", stage: "mvp", status: "planned", milestone: 6 },
+  { slug: "opportunities", title: "Opportunity Finder", purpose: "Search official internships alongside clearly labelled demo listings, ranked to the profile.", stage: "mvp", status: "available", milestone: 5 },
   { slug: "radar", title: "Opportunity Radar", purpose: "Surface relevant programs, events, and challenges.", stage: "mvp", status: "available", milestone: 3 },
   { slug: "financial-planner", title: "Financial Reality Planner", purpose: "Model illustrative cost, EMI, and breakeven scenarios.", stage: "mvp", status: "planned", milestone: 6 },
   { slug: "journal", title: "Confidence Journal", purpose: "Compare self-rating with measured readiness over time.", stage: "mvp", status: "planned", milestone: 6 },

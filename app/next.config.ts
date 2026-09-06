@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
     process.env.NEXT_DIST_DIR ??
     (process.env.NODE_ENV === "development" ? ".next-dev" : ".next"),
   outputFileTracingRoot: process.cwd(),
+  // These reviewed catalogues are read by server routes at runtime. Keep the
+  // source files in a Vercel function bundle instead of relying on the build
+  // machine's filesystem after deployment.
+  outputFileTracingIncludes: {
+    "/api/education/catalogue": ["./src/data/india_180_plus_courses.csv", "./src/data/india_300_plus_degrees_programmes.csv"],
+    "/api/radar": ["./src/data/india_100_plus_scholarships.csv"],
+  },
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {

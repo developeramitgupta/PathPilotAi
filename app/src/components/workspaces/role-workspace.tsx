@@ -6,6 +6,7 @@ import { ArrowRight, Bell, BriefcaseBusiness, CheckCircle2, ChevronRight, Handsh
 import { type FormEvent, useEffect, useMemo, useState } from "react";
 
 import { Logo } from "@/components/shared/logo";
+import { InstitutionWorkspace } from "@/components/workspaces/institution-workspace";
 import { Drawer, Modal } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,6 +48,11 @@ function People({ people, industry, onOpen, onShortlist }: { people: WorkspaceSt
 }
 
 export function RoleWorkspace({ role, displayName, workspaceName }: { role: Exclude<WorkspaceRole, "student">; displayName?: string; workspaceName?: string }) {
+  if (role === "institution") return <InstitutionWorkspace displayName={displayName} workspaceName={workspaceName} />;
+  return <IndustryWorkspace role={role} displayName={displayName} workspaceName={workspaceName} />;
+}
+
+function IndustryWorkspace({ role, displayName, workspaceName }: { role: Exclude<WorkspaceRole, "student">; displayName?: string; workspaceName?: string }) {
   const config = workspaceRoleConfig[role]; const Icon = config.icon;
   const router = useRouter(); const clearLocalSession = usePathPilotStore((state) => state.clearLocalSession);
   const [tab, setTab] = useState<string>("Overview"); const [createMode, setCreateMode] = useState<"cohort" | "partner" | "opportunity" | null>(null); const [draft, setDraft] = useState("");

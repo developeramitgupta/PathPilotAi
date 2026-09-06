@@ -463,7 +463,7 @@ export const radarOpportunitySchema = z.object({
 
 export const radarResultSchema = z.object({
   opportunities: z.array(radarOpportunitySchema),
-  mode: z.enum(["official-live", "static-ranked-demo", "official-empty"]),
+  mode: z.enum(["official-live", "mixed-catalogue", "static-ranked-demo", "official-empty"]),
   generatedAt: z.iso.datetime(),
   disclaimer: z.string().min(1),
 });

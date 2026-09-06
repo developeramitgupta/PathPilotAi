@@ -9,7 +9,9 @@ import type {
 import {
   verifiedCollegeRecords,
   verifiedInternshipRecords,
+  syntheticInternshipRecords,
 } from "@/lib/verified-data/local-dataset";
+import { getScholarshipCatalogue } from "@/features/verified-data/server/education-catalogue";
 
 function ownership(value: string): "government" | "private" {
   return value.toLowerCase().includes("private") || value.toLowerCase().includes("deemed")
@@ -95,20 +97,40 @@ export function getLocalCollegeMatches(input: CollegeFinderInput): CollegeFinder
 }
 
 function formatFor(mode: string | null): RadarOpportunity["format"] {
-  if (mode?.toLowerCase() === "online") return "online";
+  if (["online", "remote"].includes(mode?.toLowerCase() ?? "")) return "online";
   if (mode?.toLowerCase() === "hybrid") return "hybrid";
   return "in-person";
+}
+
+function formatSyntheticDeadline(value: string) {
+  const [day, month, year] = value.split("-").map(Number);
+  if (!day || !month || !year) return null;
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function stipendFrom(value: string) {
+  const digits = value.replace(/[^0-9]/g, "");
+  return digits ? Number(digits) : null;
+}
+
+function scoreInternship(input: { terms: Set<string>; searchableText: string; index: number }) {
+  const overlaps = [...input.terms].filter((term) => input.searchableText.includes(term)).length;
+  return {
+    overlaps,
+    relevance: Math.max(55, Math.min(95, 70 + overlaps * 7 - (input.index % 8))),
+  };
 }
 
 export function getLocalInternships(input: { interests: string[]; skills: string[]; careerName?: string }): RadarResult {
   const terms = new Set([...input.interests, ...input.skills, input.careerName ?? ""]
     .join(" ").toLocaleLowerCase("en-IN").split(/[^a-z0-9]+/).filter((term) => term.length > 2));
   const now = new Date();
-  const opportunities = verifiedInternshipRecords
+  const officialOpportunities = verifiedInternshipRecords
     .filter((record) => !record.application_deadline || new Date(`${record.application_deadline}T23:59:59.999Z`) >= now)
     .map((record, index) => {
       const recordTerms = `${record.internship_title} ${record.eligibility}`.toLocaleLowerCase("en-IN");
-      const overlaps = [...terms].filter((term) => recordTerms.includes(term)).length;
+      const { overlaps, relevance } = scoreInternship({ terms, searchableText: recordTerms, index });
       const deadline = record.application_deadline
         ? `Deadline: ${new Date(`${record.application_deadline}T00:00:00.000Z`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}`
         : "Check the official portal for the current application window.";
@@ -123,7 +145,7 @@ export function getLocalInternships(input: { interests: string[]; skills: string
         typicalTiming: deadline,
         description: record.eligibility,
         tags: ["official internship", record.mode ?? "mode not published", record.duration],
-        relevance: Math.max(55, Math.min(95, 70 + overlaps * 7 - index)),
+        relevance,
         whyRelevant: overlaps
           ? `Matches ${overlaps} profile signal${overlaps === 1 ? "" : "s"}; verify the official eligibility before applying.`
           : "A verified government internship record with an official application path.",
@@ -139,12 +161,85 @@ export function getLocalInternships(input: { interests: string[]; skills: string
     })
     .sort((left, right) => right.relevance - left.relevance || left.title.localeCompare(right.title));
 
+  const syntheticOpportunities = syntheticInternshipRecords
+    .map((record, index) => ({ record, deadline: formatSyntheticDeadline(record.application_deadline), index }))
+    .filter(({ deadline }) => deadline !== null && deadline.getTime() >= now.getTime())
+    .map(({ record, deadline, index }) => {
+      const searchableText = [record.role, record.domain, record.industry, record.eligibility, record.experience, ...record.required_skills].join(" ").toLocaleLowerCase("en-IN");
+      const { overlaps, relevance } = scoreInternship({ terms, searchableText, index });
+      return {
+        id: record.internship_id,
+        title: record.role,
+        category: "internship" as const,
+        organizerLabel: record.company,
+        format: formatFor(record.work_mode === "On-site" ? "Offline" : record.work_mode),
+        location: record.location,
+        skillLevel: "all-levels" as const,
+        typicalTiming: `Demo deadline: ${deadline.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })}`,
+        description: `${record.domain} · ${record.eligibility}`,
+        tags: [record.domain, record.industry, ...record.required_skills.slice(0, 3)],
+        relevance,
+        whyRelevant: overlaps
+          ? `Matches ${overlaps} profile signal${overlaps === 1 ? "" : "s"}. This is synthetic demo data, so verify a real opening before acting.`
+          : "Synthetic demo listing for exploring internship filters. Verify a real opening before acting.",
+        reasoningRefs: overlaps ? ["profile.interests", "selectedCareer"] : ["demoDataset"],
+        isDemo: true,
+        sourceUrl: null,
+        applicationUrl: null,
+        deadlineAt: deadline.toISOString(),
+        lastVerifiedAt: null,
+        stipendInr: stipendFrom(record.stipend),
+        duration: record.duration,
+      } satisfies RadarOpportunity;
+    })
+    .sort((left, right) => right.relevance - left.relevance || left.title.localeCompare(right.title));
+
+  const scholarshipOpportunities = getScholarshipCatalogue()
+    .map((record, index) => {
+      const searchableText = `${record.name} ${record.provider} ${record.category} ${record.scope}`.toLocaleLowerCase("en-IN");
+      const { overlaps, relevance } = scoreInternship({ terms, searchableText, index });
+      return {
+        id: record.id,
+        title: record.name,
+        category: "scholarship" as const,
+        organizerLabel: record.provider,
+        format: "online" as const,
+        location: `${record.scope} · India`,
+        skillLevel: "all-levels" as const,
+        typicalTiming: `${record.academicYear} cycle · verify the current deadline on the official portal.`,
+        description: `${record.category} scholarship. ${record.notes}`,
+        tags: [record.category, record.scope, "2026–27"],
+        relevance: Math.max(50, relevance),
+        whyRelevant: overlaps
+          ? `Matches ${overlaps} profile signal${overlaps === 1 ? "" : "s"}. Check the official scheme page for current eligibility, amount, participating institutions, and deadline.`
+          : "A supplied scholarship catalogue record linked to its official portal. Confirm current eligibility, amount, and deadline before applying.",
+        reasoningRefs: overlaps ? ["profile.interests", "selectedCareer", "officialSource"] : ["officialSource"],
+        isDemo: false,
+        sourceUrl: record.sourceUrl,
+        applicationUrl: record.sourceUrl,
+        deadlineAt: null,
+        lastVerifiedAt: null,
+        stipendInr: null,
+        duration: null,
+      } satisfies RadarOpportunity;
+    })
+    .sort((left, right) => right.relevance - left.relevance || left.title.localeCompare(right.title));
+
+  const opportunities = [...officialOpportunities, ...scholarshipOpportunities, ...syntheticOpportunities]
+    .sort((left, right) => right.relevance - left.relevance || Number(left.isDemo) - Number(right.isDemo) || left.title.localeCompare(right.title));
+
   return {
     opportunities,
-    mode: opportunities.length ? "official-live" : "official-empty",
+    mode: officialOpportunities.length && syntheticOpportunities.length
+      ? "mixed-catalogue"
+      : officialOpportunities.length
+        ? "official-live"
+        : opportunities.length
+          ? "static-ranked-demo"
+          : "official-empty",
     generatedAt: new Date().toISOString(),
     disclaimer: opportunities.length
-      ? "Official internship records with application links. Records with a passed published deadline are automatically excluded; records without a deadline remain visible only as a source to verify."
+      ? "Official internship and scholarship records retain their published source links. Scholarship catalogue entries require you to confirm live eligibility, value, deadlines, and participating institutions on the official portal. Synthetic listings are clearly marked, have no application link, and are for filter and matching demonstrations only. Records with passed published internship deadlines are automatically excluded."
       : "No internship record currently has an unexpired published deadline. Check the official source portals for new calls.",
   };
 }
