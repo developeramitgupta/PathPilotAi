@@ -1,8 +1,18 @@
 import { createHash } from "node:crypto";
-import { config } from "dotenv";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import postgres from "postgres";
 
-config({ path: "../.env.local", quiet: true });
+const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+
+for (const filename of [".env.local", ".env"]) {
+  try {
+    process.loadEnvFile(resolve(projectRoot, filename));
+    break;
+  } catch {
+    // Production injects variables directly; local environments use .env.local.
+  }
+}
 
 const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) throw new Error("DATABASE_URL is required. Run `vercel env pull .env.local` first.");

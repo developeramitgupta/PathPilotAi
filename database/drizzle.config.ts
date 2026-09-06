@@ -1,8 +1,21 @@
-import { config } from "dotenv";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "drizzle-kit";
 
-config({ path: "../.env.local", quiet: true });
-config({ path: "../.env", quiet: true });
+const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+function loadDatabaseEnvironment() {
+  for (const filename of [".env.local", ".env"]) {
+    try {
+      process.loadEnvFile(resolve(projectRoot, filename));
+      return;
+    } catch {
+      // A local environment file is optional when the platform injects variables.
+    }
+  }
+}
+
+loadDatabaseEnvironment();
 
 const migrationUrl =
   process.env.DIRECT_URL ??

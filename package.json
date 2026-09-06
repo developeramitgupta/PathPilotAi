@@ -13,5 +13,9 @@
     "db:migrate": "npm --prefix app run db:migrate",
     "db:seed:official": "npm --prefix app run db:seed:official",
     "db:studio": "npm --prefix app run db:studio"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.10",
+    "postgres": "3.4.9"
   }
 }
