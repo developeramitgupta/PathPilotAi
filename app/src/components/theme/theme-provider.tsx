@@ -26,14 +26,16 @@ function applyTheme(theme: AppTheme) {
 
 function readStoredTheme(): AppTheme {
   try {
-    return window.localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
+    // Light is the first-visit experience. A user must explicitly choose dark
+    // mode in Settings before it is restored on a later visit.
+    return window.localStorage.getItem(THEME_STORAGE_KEY) === "dark" ? "dark" : "light";
   } catch {
-    return "dark";
+    return "light";
   }
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<AppTheme>("dark");
+  const [theme, setThemeState] = useState<AppTheme>("light");
 
   useEffect(() => {
     const storedTheme = readStoredTheme();
