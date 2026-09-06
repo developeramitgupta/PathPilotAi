@@ -14,7 +14,8 @@ import {
 import { getScholarshipCatalogue } from "@/features/verified-data/server/education-catalogue";
 
 function ownership(value: string): "government" | "private" {
-  return value.toLowerCase().includes("private") || value.toLowerCase().includes("deemed")
+  const normalized = String(value ?? "").toLowerCase();
+  return normalized.includes("private") || normalized.includes("deemed")
     ? "private"
     : "government";
 }
@@ -27,7 +28,11 @@ function rankFrom(value: string | null) {
 function courseMatches(courses: string[], query: string) {
   if (query === "Any programme") return true;
   const normalized = query.toLocaleLowerCase("en-IN");
-  return courses.some((course) => course.toLocaleLowerCase("en-IN").includes(normalized));
+  return (courses ?? []).some((course) => String(course ?? "").toLocaleLowerCase("en-IN").includes(normalized));
+}
+
+function compareText(left: string | null | undefined, right: string | null | undefined) {
+  return String(left ?? "").localeCompare(String(right ?? ""), "en-IN");
 }
 
 /** Uses the reviewed JSON catalogue before a Supabase import has published it. */
@@ -35,7 +40,7 @@ export function getLocalCollegeMatches(input: CollegeFinderInput): CollegeFinder
   const city = input.city.trim().toLocaleLowerCase("en-IN");
   const matches = verifiedCollegeRecords
     .filter((college) => input.state === "All India" || college.state === input.state)
-    .filter((college) => !city || college.city.toLocaleLowerCase("en-IN").includes(city))
+    .filter((college) => !city || String(college.city ?? "").toLocaleLowerCase("en-IN").includes(city))
     .filter((college) => input.ownership === "any" || ownership(college.college_type) === input.ownership)
     // A budget is a hard filter: unknown fees never masquerade as affordable.
     .filter((college) => college.annual_fees !== null && college.annual_fees <= input.annualBudget)
@@ -129,22 +134,22 @@ export function getLocalInternships(input: { interests: string[]; skills: string
   const officialOpportunities = verifiedInternshipRecords
     .filter((record) => !record.application_deadline || new Date(`${record.application_deadline}T23:59:59.999Z`) >= now)
     .map((record, index) => {
-      const recordTerms = `${record.internship_title} ${record.eligibility}`.toLocaleLowerCase("en-IN");
+      const recordTerms = `${record.internship_title ?? ""} ${record.eligibility ?? ""}`.toLocaleLowerCase("en-IN");
       const { overlaps, relevance } = scoreInternship({ terms, searchableText: recordTerms, index });
       const deadline = record.application_deadline
         ? `Deadline: ${new Date(`${record.application_deadline}T00:00:00.000Z`).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}`
         : "Check the official portal for the current application window.";
       return {
         id: record.internship_id,
-        title: record.internship_title,
+        title: record.internship_title ?? "Untitled internship",
         category: "internship" as const,
-        organizerLabel: record.organization_name,
+        organizerLabel: record.organization_name ?? "Official organization",
         format: formatFor(record.mode),
         location: record.mode ?? "Mode not published",
         skillLevel: "all-levels" as const,
         typicalTiming: deadline,
-        description: record.eligibility,
-        tags: ["official internship", record.mode ?? "mode not published", record.duration],
+        description: record.eligibility ?? "Check the official source for eligibility details.",
+        tags: ["official internship", record.mode ?? "mode not published", record.duration ?? "duration not published"],
         relevance,
         whyRelevant: overlaps
           ? `Matches ${overlaps} profile signal${overlaps === 1 ? "" : "s"}; verify the official eligibility before applying.`
@@ -156,10 +161,10 @@ export function getLocalInternships(input: { interests: string[]; skills: string
         deadlineAt: record.application_deadline ? new Date(`${record.application_deadline}T00:00:00.000Z`).toISOString() : null,
         lastVerifiedAt: new Date(`${record.last_verified_date}T00:00:00.000Z`).toISOString(),
         stipendInr: record.stipend,
-        duration: record.duration,
+        duration: record.duration ?? null,
       };
     })
-    .sort((left, right) => right.relevance - left.relevance || left.title.localeCompare(right.title));
+    .sort((left, right) => right.relevance - left.relevance || compareText(left.title, right.title));
 
   const syntheticOpportunities = syntheticInternshipRecords
     .map((record, index) => ({ record, deadline: formatSyntheticDeadline(record.application_deadline), index }))
@@ -192,7 +197,7 @@ export function getLocalInternships(input: { interests: string[]; skills: string
         duration: record.duration,
       } satisfies RadarOpportunity;
     })
-    .sort((left, right) => right.relevance - left.relevance || left.title.localeCompare(right.title));
+    .sort((left, right) => right.relevance - left.relevance || compareText(left.title, right.title));
 
   const scholarshipOpportunities = getScholarshipCatalogue()
     .map((record, index) => {
@@ -223,10 +228,10 @@ export function getLocalInternships(input: { interests: string[]; skills: string
         duration: null,
       } satisfies RadarOpportunity;
     })
-    .sort((left, right) => right.relevance - left.relevance || left.title.localeCompare(right.title));
+    .sort((left, right) => right.relevance - left.relevance || compareText(left.title, right.title));
 
   const opportunities = [...officialOpportunities, ...scholarshipOpportunities, ...syntheticOpportunities]
-    .sort((left, right) => right.relevance - left.relevance || Number(left.isDemo) - Number(right.isDemo) || left.title.localeCompare(right.title));
+    .sort((left, right) => right.relevance - left.relevance || Number(left.isDemo) - Number(right.isDemo) || compareText(left.title, right.title));
 
   return {
     opportunities,
